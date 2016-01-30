@@ -1,6 +1,12 @@
 package org.usfirst.frc.team2526.robot;
 
+
+
+import org.usfirst.frc.team2526.robot.commands.SwitchDrive;
+
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.buttons.Button;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
 //import edu.wpi.first.wpilibj.buttons.Button;
 
 /**
@@ -15,10 +21,18 @@ public class OI {
     // Joystick stick = new Joystick(port);
     // Button button = new JoystickButton(stick, buttonNumber);
 	Joystick primaryStick = new Joystick(0);
+	Joystick secondaryStick = new Joystick(1);
+	Joystick thirdStick = new Joystick(2);
+	Joystick fourthStick = new Joystick(3);
+	
+	public Button primaryTwo = new JoystickButton(primaryStick, 2);
+	public Button thirdTwo = new JoystickButton(thirdStick, 2);
     
     // There are a few additional built in buttons you can use. Additionally,
     // by subclassing Button you can create custom triggers and bind those to
     // commands the same as any other Button.
+	
+	
     
     //// TRIGGERING COMMANDS WITH BUTTONS
     // Once you have a button, it's trivial to bind it to a button in one of
@@ -27,10 +41,55 @@ public class OI {
 	public Joystick getPrimaryStick() {
 		return primaryStick;
 	}
+	
+	public Joystick getSecondaryStick() {
+		return secondaryStick;
+	}
+	
+	public Joystick getThirdStick() {
+		return thirdStick;
+	}
     
+	public Joystick getFourthStick() {
+		return fourthStick;
+	}
+	
+	Button primaryStickOne = new JoystickButton(primaryStick,1);
+	
+	
+	Button thirdStickOne = new JoystickButton(thirdStick, 1);
+	
+
+	
+	public Joystick getPrimaryValue() {
+		return primaryStick;
+	}
+	
+	public Joystick getSecondaryValue() {
+		return secondaryStick;
+	}
+	
+	public Joystick getThirdValue() {
+		return thirdStick;
+	}
+	
+	public Joystick getFourthValue() {
+		return fourthStick;
+	}
+	
+	public OI() {
+	
+//		primaryStickOne.whenPressed(new SwitchDrive());
+//		primaryStickOne.whenReleased(new Nothing());
+//		primaryStickFive.whenPressed(new SwitchDrive());
+		thirdStickOne.whenPressed(new SwitchDrive());
+		thirdStickOne.whenReleased(new SwitchDrive());		
+	}
     // Start the command when the button is pressed and let it run the command
     // until it is finished as determined by it's isFinished method.
     // button.whenPressed(new ExampleCommand());
+	
+	
     
     // Run the command while the button is being held down and interrupt it once
     // the button is released.

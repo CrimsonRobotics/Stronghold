@@ -21,7 +21,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 public class Robot extends IterativeRobot {
 
 	public static OI oi;
-	public static DriveTrain driveTrain = new DriveTrain();
+	public static DriveTrain driveTrain;
 
     Command autonomousCommand;
     SendableChooser chooser;
@@ -33,6 +33,7 @@ public class Robot extends IterativeRobot {
     public void robotInit() {
 		oi = new OI();
        chooser = new SendableChooser();
+       driveTrain = new DriveTrain();
 //        chooser.addDefault("Default Auto", new ExampleCommand());
 //        chooser.addObject("My Auto", new MyAutoCommand());
 //        SmartDashboard.putData("Auto mode", chooser);

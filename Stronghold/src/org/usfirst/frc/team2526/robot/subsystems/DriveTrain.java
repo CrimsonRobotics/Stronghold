@@ -5,7 +5,9 @@ import org.usfirst.frc.team2526.robot.RobotMap;
 import org.usfirst.frc.team2526.robot.commands.Drive;
 
 import edu.wpi.first.wpilibj.CANTalon;
+
 import edu.wpi.first.wpilibj.RobotDrive;
+
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -19,7 +21,8 @@ public class DriveTrain extends Subsystem {
 	
 	public CANTalon lMotorOne, lMotorTwo, rMotorOne, rMotorTwo;
 	
-	RobotDrive drive;
+	RobotDrive crane;
+
 
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
@@ -34,12 +37,23 @@ public class DriveTrain extends Subsystem {
     	rMotorOne = new CANTalon(RobotMap.rMotorOne);
     	rMotorTwo = new CANTalon(RobotMap.rMotorTwo);
     	
-    	drive = new RobotDrive(RobotMap.lMotorOne, RobotMap.lMotorTwo, RobotMap.rMotorOne, RobotMap.rMotorTwo);
+    	crane = new RobotDrive(RobotMap.lMotorOne, RobotMap.lMotorTwo, RobotMap.rMotorOne, RobotMap.rMotorTwo);
+    	
+    	
     	
     }
     
     public void arcadeDrive() {
-    	drive.arcadeDrive(Robot.oi.getPrimaryStick().getY(), -Robot.oi.getPrimaryStick().getX());
+
+    	if (RobotMap.primaryControl) {
+    		// Main driver
+    		crane.arcadeDrive(Robot.oi.getPrimaryValue().getY(), -Robot.oi.getSecondaryValue().getX());
+    	} else {
+    		// Co Driver
+        	crane.arcadeDrive(-Robot.oi.getThirdValue().getY() * RobotMap.secondaryWeight, -Robot.oi.getFourthValue().getX() * RobotMap.secondaryWeight);
+    	}
+    	
+    			
     	
     	SmartDashboard.putNumber("Left Motor One Voltage", lMotorOne.getOutputVoltage());
     	SmartDashboard.putNumber("Left Motor Two Voltage", lMotorTwo.getOutputVoltage());
@@ -47,6 +61,8 @@ public class DriveTrain extends Subsystem {
     	SmartDashboard.putNumber("Right Motor Two Voltage", rMotorTwo.getOutputVoltage());
     	
     }
+    
+
     
 }
 
