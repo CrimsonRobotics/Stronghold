@@ -1,7 +1,10 @@
 
 package org.usfirst.frc.team2526.robot;
 
+import org.usfirst.frc.team2526.robot.subsystems.Catapult;
 import org.usfirst.frc.team2526.robot.subsystems.DriveTrain;
+import org.usfirst.frc.team2526.robot.subsystems.GrabberFrame;
+import org.usfirst.frc.team2526.robot.subsystems.GrabberIntake;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -22,6 +25,9 @@ public class Robot extends IterativeRobot {
 
 	public static OI oi;
 	public static DriveTrain driveTrain;
+	public static Catapult catapult;
+	public static GrabberFrame grabberFrame;
+	public static GrabberIntake grabberIntake;
 
     Command autonomousCommand;
     SendableChooser chooser;
@@ -34,6 +40,9 @@ public class Robot extends IterativeRobot {
 		oi = new OI();
        chooser = new SendableChooser();
        driveTrain = new DriveTrain();
+       catapult = new Catapult();
+       grabberFrame = new GrabberFrame();
+       grabberIntake = new GrabberIntake();
 //        chooser.addDefault("Default Auto", new ExampleCommand());
 //        chooser.addObject("My Auto", new MyAutoCommand());
 //        SmartDashboard.putData("Auto mode", chooser);

@@ -37,7 +37,7 @@ public class DriveTrain extends Subsystem {
     	rMotorOne = new CANTalon(RobotMap.rMotorOne);
     	rMotorTwo = new CANTalon(RobotMap.rMotorTwo);
     	
-    	crane = new RobotDrive(RobotMap.lMotorOne, RobotMap.lMotorTwo, RobotMap.rMotorOne, RobotMap.rMotorTwo);
+    	crane = new RobotDrive(lMotorOne, lMotorTwo, rMotorOne, rMotorTwo);
     	
     	
     	

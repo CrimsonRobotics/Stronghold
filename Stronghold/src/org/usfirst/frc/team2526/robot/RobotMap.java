@@ -11,10 +11,31 @@ public class RobotMap {
     // public static int leftMotor = 1;
     // public static int rightMotor = 2;
 	
+	/******************
+     ** CAN DEVICES ** 
+     ******************/  
+	
 	public static int lMotorOne = 1;
 	public static int lMotorTwo = 2;
 	public static int rMotorOne = 3;
 	public static int rMotorTwo = 4;
+	// DriveTrain Motors
+	
+	public static int PCM_MAIN = 5;
+	// Pneumatics Controller
+	
+	/******************
+     ** PNEUMATICS ** 
+     ******************/  
+	
+	
+	
+	
+	
+	
+	/******************
+     ** DRIVER CONTROLS ** 
+     ******************/  
 	
 	public static boolean primaryControl = true;
 	public static boolean secondaryControl = false;
