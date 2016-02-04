@@ -21,7 +21,7 @@ public class DriveTrain extends Subsystem {
 	
 	public CANTalon lMotorOne, lMotorTwo, rMotorOne, rMotorTwo;
 	
-	RobotDrive crane;
+	RobotDrive drive;
 
 
     public void initDefaultCommand() {
@@ -37,7 +37,7 @@ public class DriveTrain extends Subsystem {
     	rMotorOne = new CANTalon(RobotMap.rMotorOne);
     	rMotorTwo = new CANTalon(RobotMap.rMotorTwo);
     	
-    	crane = new RobotDrive(lMotorOne, lMotorTwo, rMotorOne, rMotorTwo);
+    	drive = new RobotDrive(lMotorOne, lMotorTwo, rMotorOne, rMotorTwo);
     	
     	
     	
@@ -47,10 +47,10 @@ public class DriveTrain extends Subsystem {
 
     	if (RobotMap.primaryControl) {
     		// Main driver
-    		crane.arcadeDrive(Robot.oi.getPrimaryValue().getY(), -Robot.oi.getSecondaryValue().getX());
+    		drive.arcadeDrive(Robot.oi.getPrimaryValue().getY(), -Robot.oi.getSecondaryValue().getX());
     	} else {
     		// Co Driver
-        	crane.arcadeDrive(-Robot.oi.getThirdValue().getY() * RobotMap.secondaryWeight, -Robot.oi.getFourthValue().getX() * RobotMap.secondaryWeight);
+        	drive.arcadeDrive(-Robot.oi.getThirdValue().getY() * RobotMap.secondaryWeight, -Robot.oi.getFourthValue().getX() * RobotMap.secondaryWeight);
     	}
     	
     			
