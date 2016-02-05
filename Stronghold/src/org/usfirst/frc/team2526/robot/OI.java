@@ -2,6 +2,9 @@ package org.usfirst.frc.team2526.robot;
 
 
 
+import org.usfirst.frc.team2526.robot.commands.CaptureBall;
+import org.usfirst.frc.team2526.robot.commands.ExtendGrabber;
+import org.usfirst.frc.team2526.robot.commands.RetractGrabber;
 import org.usfirst.frc.team2526.robot.commands.SwitchDrive;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -24,9 +27,6 @@ public class OI {
 	Joystick secondaryStick = new Joystick(1);
 	Joystick thirdStick = new Joystick(2);
 	Joystick fourthStick = new Joystick(3);
-	
-	public Button primaryTwo = new JoystickButton(primaryStick, 2);
-	public Button thirdTwo = new JoystickButton(thirdStick, 2);
     
     // There are a few additional built in buttons you can use. Additionally,
     // by subclassing Button you can create custom triggers and bind those to
@@ -37,6 +37,8 @@ public class OI {
     //// TRIGGERING COMMANDS WITH BUTTONS
     // Once you have a button, it's trivial to bind it to a button in one of
     // three ways:
+	
+	// Joystick get Commands
 	
 	public Joystick getPrimaryStick() {
 		return primaryStick;
@@ -54,10 +56,21 @@ public class OI {
 		return fourthStick;
 	}
 	
-	Button primaryStickOne = new JoystickButton(primaryStick,1);
+	// Primary Stick Buttons
 	
+	Button primaryStickOne = new JoystickButton(primaryStick,1);
+	Button primaryStickThree = new JoystickButton(primaryStick,3);
+	Button primaryStickFour = new JoystickButton(primaryStick,4);
+	
+	// Secondary Stick Buttons
+	
+	Button secondaryStickTwo = new JoystickButton(secondaryStick,2);
+	
+	// Third Stick Buttons
 	
 	Button thirdStickOne = new JoystickButton(thirdStick, 1);
+	
+	// Fourth Stick Buttons
 	
 
 	
@@ -79,11 +92,13 @@ public class OI {
 	
 	public OI() {
 	
-//		primaryStickOne.whenPressed(new SwitchDrive());
-//		primaryStickOne.whenReleased(new Nothing());
-//		primaryStickFive.whenPressed(new SwitchDrive());
 		thirdStickOne.whenPressed(new SwitchDrive());
-		thirdStickOne.whenReleased(new SwitchDrive());		
+		thirdStickOne.whenReleased(new SwitchDrive());	
+		
+		// Grabber Commands
+		primaryStickOne.whileHeld(new CaptureBall());
+		primaryStickThree.whenPressed(new ExtendGrabber());
+		primaryStickFour.whenPressed(new RetractGrabber());
 	}
     // Start the command when the button is pressed and let it run the command
     // until it is finished as determined by it's isFinished method.

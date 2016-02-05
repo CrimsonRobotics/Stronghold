@@ -21,6 +21,11 @@ public class RobotMap {
 	public static int rMotorTwo = 4;
 	// DriveTrain Motors
 	
+	public static int grabberMotorOne = 6;
+	public static int grabberMotorTwo = 7;
+	// Grabber Roller Motors
+	
+	
 	public static int PCM_MAIN = 5;
 	// Pneumatics Controller
 	
@@ -28,7 +33,8 @@ public class RobotMap {
      ** PNEUMATICS ** 
      ******************/  
 	
-	
+	public static int grabberPiston_A= 0;
+	public static int grabberPiston_B = 1;
 	
 	
 	
