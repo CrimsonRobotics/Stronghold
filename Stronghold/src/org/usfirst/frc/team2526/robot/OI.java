@@ -2,10 +2,12 @@ package org.usfirst.frc.team2526.robot;
 
 
 
-import org.usfirst.frc.team2526.robot.commands.CaptureBall;
-import org.usfirst.frc.team2526.robot.commands.ExtendGrabber;
-import org.usfirst.frc.team2526.robot.commands.RetractGrabber;
 import org.usfirst.frc.team2526.robot.commands.SwitchDrive;
+import org.usfirst.frc.team2526.robot.commands.loader.RollBallIn;
+import org.usfirst.frc.team2526.robot.commands.loader.ExtendLoader;
+import org.usfirst.frc.team2526.robot.commands.loader.LoaderIn;
+import org.usfirst.frc.team2526.robot.commands.loader.LoaderOut;
+import org.usfirst.frc.team2526.robot.commands.loader.RetractLoader;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
@@ -64,6 +66,7 @@ public class OI {
 	
 	// Secondary Stick Buttons
 	
+	Button secondaryStickOne = new JoystickButton(secondaryStick,1);
 	Button secondaryStickTwo = new JoystickButton(secondaryStick,2);
 	
 	// Third Stick Buttons
@@ -96,9 +99,12 @@ public class OI {
 		thirdStickOne.whenReleased(new SwitchDrive());	
 		
 		// Grabber Commands
-		primaryStickOne.whileHeld(new CaptureBall());
-		primaryStickThree.whenPressed(new ExtendGrabber());
-		primaryStickFour.whenPressed(new RetractGrabber());
+		primaryStickOne.whenPressed(new LoaderIn());
+		primaryStickOne.whenReleased(new RetractLoader());
+		
+		secondaryStickOne.whenPressed(new LoaderOut());
+		secondaryStickOne.whenReleased(new RetractLoader());
+		
 	}
     // Start the command when the button is pressed and let it run the command
     // until it is finished as determined by it's isFinished method.

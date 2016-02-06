@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 /**
  *
  */
-public class GrabberFrame extends Subsystem {
+public class LoaderFrame extends Subsystem {
     
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
@@ -22,7 +22,7 @@ public class GrabberFrame extends Subsystem {
     	
     }
     
-    public GrabberFrame () {
+    public LoaderFrame () {
     	super("GrabberFrame");
     	// This subsystem is for our Grabber's frame mechanism.
     	

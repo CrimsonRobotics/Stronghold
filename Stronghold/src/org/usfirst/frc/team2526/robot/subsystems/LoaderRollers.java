@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 /**
  *
  */
-public class GrabberIntake extends Subsystem {
+public class LoaderRollers extends Subsystem {
     
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
@@ -21,7 +21,7 @@ public class GrabberIntake extends Subsystem {
         //setDefaultCommand(new MySpecialCommand());
     }
     
-    public GrabberIntake() {
+    public LoaderRollers() {
     	super("GrabberIntake");
     	// This subsystem is for our Grabber's Intake Mechanism.
     	
@@ -36,6 +36,11 @@ public class GrabberIntake extends Subsystem {
     	grabberOne.set(.5);
     	grabberTwo.set(-.5);
     	
+    }
+    
+    public void ballOut() {
+    	grabberOne.set(-.5);
+    	grabberTwo.set(.5);
     }
     
 }

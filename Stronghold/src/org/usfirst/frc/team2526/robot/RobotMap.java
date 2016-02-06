@@ -25,6 +25,8 @@ public class RobotMap {
 	public static int grabberMotorTwo = 7;
 	// Grabber Roller Motors
 	
+	public static int catapultMotor = 8;
+	
 	
 	public static int PCM_MAIN = 5;
 	// Pneumatics Controller
@@ -36,6 +38,16 @@ public class RobotMap {
 	public static int grabberPiston_A= 0;
 	public static int grabberPiston_B = 1;
 	
+	
+	/******************
+   ** CATAPULT CONTROLS ** 
+     ******************/  
+	
+	
+	public static boolean hold = true;
+	public static boolean run = false;
+	
+	public boolean getLimitSwitch;
 	
 	
 	
@@ -69,6 +81,19 @@ public class RobotMap {
 	public void setSecondaryControl(boolean set) {
 		secondaryControl = set;
 	}
+	
+	/******************
+  ** PID/ENCODER VALUES ** 
+     ******************/  
+	
+	public static double catapultP = 1.0;
+	public static double catapultI = 0;
+	public static double catapultD = 0;
+	// Catapult PID Values
+	
+	public static double armPosition = 85;
+	public static double firePosition = 5;
+	// Catapult Position Values
 
     
     // If you are using multiple modules, make sure to define both the port

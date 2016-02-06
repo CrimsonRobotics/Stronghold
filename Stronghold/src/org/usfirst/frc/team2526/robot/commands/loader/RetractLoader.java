@@ -1,4 +1,4 @@
-package org.usfirst.frc.team2526.robot.commands;
+package org.usfirst.frc.team2526.robot.commands.loader;
 
 import org.usfirst.frc.team2526.robot.Robot;
 
@@ -7,12 +7,12 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class CaptureBall extends Command {
+public class RetractLoader extends Command {
 
-    public CaptureBall() {
+    public RetractLoader() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	requires(Robot.grabberIntake);
+    	requires(Robot.grabberFrame);
     }
 
     // Called just before this Command runs the first time
@@ -21,7 +21,7 @@ public class CaptureBall extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.grabberIntake.ballIn();
+    	Robot.grabberFrame.RetractGrabber();
     }
 
     // Make this return true when this Command no longer needs to run execute()

@@ -1,4 +1,4 @@
-package org.usfirst.frc.team2526.robot.commands;
+package org.usfirst.frc.team2526.robot.commands.loader;
 
 import org.usfirst.frc.team2526.robot.Robot;
 
@@ -7,9 +7,9 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class ExtendGrabber extends Command {
+public class ExtendLoader extends Command {
 
-    public ExtendGrabber() {
+    public ExtendLoader() {
     	// Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(Robot.grabberFrame);
