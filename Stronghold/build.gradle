@@ -1,0 +1,22 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+
+// project info
+group = 'org.usfirst.frc.team2526'
+archivesBaseName = project.name
+version = 'SNAPSHOT'
+
+repositories {
+    // Use 'jcenter' for resolving your dependencies.
+    // You can declare any Maven/Ivy/file repository here.
+    jcenter()
+    maven { url "http://first.wpi.edu/FRC/roborio/maven/release/" }
+}
+
+dependencies {
+    compile('edu.wpi.first.wpilib.networktables.java:NetworkTables:3.0.0-SNAPSHOT')
+    compile('edu.wpi.first.wpilibj:wpilibJavaFinal:0.1.0-SNAPSHOT')
+}
+
+
