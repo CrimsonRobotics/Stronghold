@@ -40,6 +40,17 @@ def robotManifest = {
   attributes 'Robot-Class': gradlerio.robotClass
 }
 
+sourceSets {
+    main {
+        java {
+            srcDir 'src'
+        }
+        resources {
+            srcDir 'resources'
+        }
+    }
+}
+
 jar {
   from configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
   manifest robotManifest
