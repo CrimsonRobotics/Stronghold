@@ -1,3 +1,4 @@
+// define gradle plugins:
 buildscript {
   repositories {
 	mavenCentral()
@@ -7,60 +8,69 @@ buildscript {
 	}
   }
   dependencies {
+  	// see https://github.com/Open-RIO/GradleRIO
     classpath group: 'jaci.openrio.gradle', name: 'GradleRIO', version: '+'			//Change this line if you wish to Update GradleRIO
   }
 }
 
-apply plugin: 'java'
-apply plugin: 'eclipse'
-apply plugin: 'idea'
-apply plugin: 'GradleRIO'  
+// apply gradle plugins:
+apply plugin: 'java'        // builtin: compiles java
+apply plugin: 'eclipse'     // builtin: provides tasks to create or clean eclipse project
+apply plugin: 'idea'        // builtin: provides tasks to create of clean idea project
+apply plugin: 'GradleRIO'   // downloaded: provides tasks to interact with roborio
 
+// define where to download library jars:
 repositories {
-    // Use 'jcenter' for resolving your dependencies.
-    // You can declare any Maven/Ivy/file repository here.
-    jcenter()
-    maven { url "http://first.wpi.edu/FRC/roborio/maven/release/" }
+    jcenter()   // just about anything can be found here
+    maven { url "http://first.wpi.edu/FRC/roborio/maven/release/" }  // the official wpi release libs
 }
 
+// define which jars to download:
 dependencies {
     compile('edu.wpi.first.wpilib.networktables.java:NetworkTables:3.0.0-SNAPSHOT')
     compile('edu.wpi.first.wpilibj:wpilibJavaFinal:0.1.0-SNAPSHOT')
 }
 
 // project info
-group = 'org.usfirst.frc.team2526'
-archivesBaseName = 'FRCUserProgram'
-version = ''
+group = 'org.usfirst.frc.team2526'   // top level package
+archivesBaseName = 'FRCUserProgram'  // base name of the jar
+version = ''                         // version of the jar - will be appended to the jar name
 gradlerio.robotClass = "org.usfirst.frc.team2526.robot.Robot"   //The class for the main Robot Class. Used in manifest
 gradlerio.team = "2526"                                   //Your FRC team number (e.g. 5333 for team 'Can't C#', or 47 for Chief Delphi)
 
+// Roborio manifest
 def robotManifest = {
   attributes 'Main-Class': 'edu.wpi.first.wpilibj.RobotBase'
   attributes 'Robot-Class': gradlerio.robotClass
 }
 
+// location of source code.  
 sourceSets {
     main {
         java {
+        	// override source folder - by default java plugin will look in src/main/java
             srcDir 'src'
         }
         resources {
+        	// override resource folder - by default java plugin will look in src/main/resources
             srcDir 'resources'
         }
     }
 }
 
+// jar attributes
 jar {
   from configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
   manifest robotManifest
 }
 
+// something to do with generating javadocs
 task genJavadoc(type: Jar, dependsOn: javadoc) {
   classifier = 'javadoc'
   from javadoc.destinationDir
 }
 
+// something to do with generating javadocs
 artifacts {
   archives genJavadoc
 }
