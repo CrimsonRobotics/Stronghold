@@ -4,8 +4,8 @@ apply plugin: 'idea'
 
 // project info
 group = 'org.usfirst.frc.team2526'
-archivesBaseName = project.name
-version = 'SNAPSHOT'
+archivesBaseName = 'FRCUserProgram'
+version = ''
 
 repositories {
     // Use 'jcenter' for resolving your dependencies.

@@ -3,3 +3,5 @@ Stronghold/build
 Stronghold/.settings
 .classpath
 .project
+/build/
+.settings
