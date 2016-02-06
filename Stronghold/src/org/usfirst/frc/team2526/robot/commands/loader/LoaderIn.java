@@ -14,7 +14,7 @@ public class LoaderIn extends CommandGroup {
         // these will run in order.
     	
     	addParallel(new ExtendLoader());
-    	addSequential(new RollBallIn());
+    	addParallel(new RollBallIn());
 
         // To run multiple commands at the same time,
         // use addParallel()
