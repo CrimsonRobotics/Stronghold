@@ -27,6 +27,8 @@ public class RobotMap {
 	
 	public static int catapultMotor = 8;
 	
+	public static int climberWinch = 9;
+	
 	
 	public static int PCM_MAIN = 5;
 	// Pneumatics Controller
@@ -35,8 +37,11 @@ public class RobotMap {
      ** PNEUMATICS ** 
      ******************/  
 	
-	public static int grabberPiston_A= 0;
+	public static int grabberPiston_A = 0;
 	public static int grabberPiston_B = 1;
+	
+	public static int climberPiston_A = 2;
+	public static int climberPiston_B = 3;
 	
 	
 	/******************
@@ -90,6 +95,10 @@ public class RobotMap {
 	public static double catapultI = 0;
 	public static double catapultD = 0;
 	// Catapult PID Values
+	
+	public static double climberP = 1.0;
+	public static double climberI = 0;
+	public static double climberD = 0;
 	
 	public static double armPosition = 85;
 	public static double firePosition = 5;

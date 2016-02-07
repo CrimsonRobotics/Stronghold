@@ -2,6 +2,7 @@
 package org.usfirst.frc.team2526.robot;
 
 import org.usfirst.frc.team2526.robot.subsystems.Catapult;
+import org.usfirst.frc.team2526.robot.subsystems.Climber;
 import org.usfirst.frc.team2526.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team2526.robot.subsystems.LoaderFrame;
 import org.usfirst.frc.team2526.robot.subsystems.LoaderRollers;
@@ -28,6 +29,7 @@ public class Robot extends IterativeRobot {
 	public static Catapult catapult;
 	public static LoaderFrame grabberFrame;
 	public static LoaderRollers grabberIntake;
+	public static Climber climber;
 
     Command autonomousCommand;
     SendableChooser chooser;
@@ -43,6 +45,7 @@ public class Robot extends IterativeRobot {
        catapult = new Catapult();
        grabberFrame = new LoaderFrame();
        grabberIntake = new LoaderRollers();
+       climber = new Climber();
 //        chooser.addDefault("Default Auto", new ExampleCommand());
 //        chooser.addObject("My Auto", new MyAutoCommand());
 //        SmartDashboard.putData("Auto mode", chooser);

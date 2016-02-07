@@ -56,6 +56,10 @@ public class Catapult extends Subsystem {
     	return catapultMotor.getEncPosition();
     }
     
+    public void setCurrent() {
+    	goal = catapultMotor.getEncPosition();
+    }
+    
     public void setCatapultHold() {
     	catapultMotor.setEncPosition(0);
     	goal = 0;
@@ -73,6 +77,7 @@ public class Catapult extends Subsystem {
     
     public void resetGoal() {
     	catapultMotor.setEncPosition(0);
+    	goal = 0;
     	updateGoal();
     }
     
