@@ -37,6 +37,11 @@ public class DriveTrain extends Subsystem {
     	rMotorOne = new CANTalon(RobotMap.rMotorOne);
     	rMotorTwo = new CANTalon(RobotMap.rMotorTwo);
     	
+    	lMotorOne.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
+    	lMotorTwo.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
+    	rMotorOne.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
+    	rMotorTwo.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
+    	
     	drive = new RobotDrive(lMotorOne, lMotorTwo, rMotorOne, rMotorTwo);
     	
     	
@@ -60,6 +65,27 @@ public class DriveTrain extends Subsystem {
     	SmartDashboard.putNumber("Right Motor One Voltage", rMotorOne.getOutputVoltage());
     	SmartDashboard.putNumber("Right Motor Two Voltage", rMotorTwo.getOutputVoltage());
     	
+    }
+    
+    public void driveStraight(double distance) {
+    	lMotorOne.set(distance);
+    	lMotorTwo.set(distance);
+    	rMotorOne.set(-distance);
+    	rMotorTwo.set(-distance);
+    }
+    
+    public void stopDriving() {
+    	lMotorOne.set(0);
+    	lMotorTwo.set(0);
+    	rMotorOne.set(0);
+    	rMotorTwo.set(0);
+    }
+    
+    public void turnAngle(double angle) {
+    	lMotorOne.set(Robot.imu.getAngleZ() + angle);
+    	lMotorTwo.set(Robot.imu.getAngleZ() + angle);
+    	rMotorOne.set(-Robot.imu.getAngleZ() + angle);
+    	rMotorTwo.set(-Robot.imu.getAngleZ() + angle);
     }
     
 

@@ -1,6 +1,7 @@
 
 package org.usfirst.frc.team2526.robot;
 
+import org.usfirst.frc.team2526.robot.commands.autonomous.DriveStraightThroughLowbar;
 import org.usfirst.frc.team2526.robot.subsystems.Catapult;
 import org.usfirst.frc.team2526.robot.subsystems.Climber;
 import org.usfirst.frc.team2526.robot.subsystems.DriveTrain;
@@ -8,11 +9,14 @@ import org.usfirst.frc.team2526.robot.subsystems.LoaderFrame;
 import org.usfirst.frc.team2526.robot.subsystems.LoaderRollers;
 import org.usfirst.frc.team2526.robot.subsystems.SonicShifters;
 
+import com.analog.adis16448.frc.ADIS16448_IMU;
+
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 //import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
@@ -32,9 +36,11 @@ public class Robot extends IterativeRobot {
 	public static LoaderRollers grabberIntake;
 	public static Climber climber;
 	public static SonicShifters sonic;
+	public static ADIS16448_IMU imu;
 
     Command autonomousCommand;
-    SendableChooser chooser;
+    SendableChooser auto;
+    SendableChooser defense;
 
     /**
      * This function is run when the robot is first started up and should be
@@ -42,16 +48,27 @@ public class Robot extends IterativeRobot {
      */
     public void robotInit() {
 		oi = new OI();
-       chooser = new SendableChooser();
+       auto = new SendableChooser();
        driveTrain = new DriveTrain();
        catapult = new Catapult();
        grabberFrame = new LoaderFrame();
        grabberIntake = new LoaderRollers();
        climber = new Climber();
        sonic = new SonicShifters();
-//        chooser.addDefault("Default Auto", new ExampleCommand());
-//        chooser.addObject("My Auto", new MyAutoCommand());
-//        SmartDashboard.putData("Auto mode", chooser);
+       defense = new SendableChooser();
+       imu = new ADIS16448_IMU();
+       
+        auto.addDefault("Drive Through Lowbar", new DriveStraightThroughLowbar());
+    //    auto.addObject("My Auto", new MyAutoCommand());
+        SmartDashboard.putData("Auto mode", auto);
+        
+        defense.addDefault("At Lowbar", 0);
+        defense.addObject("1", 1);
+        defense.addObject("2", 2);
+        defense.addObject("3", 3);
+        defense.addObject("4", 4);
+        defense.addObject("5", 5);
+        SmartDashboard.putData("Defense Number", defense);
     }
 	
 	/**
@@ -77,16 +94,16 @@ public class Robot extends IterativeRobot {
 	 * or additional comparisons to the switch structure below with additional strings & commands.
 	 */
     public void autonomousInit() {
-        autonomousCommand = (Command) chooser.getSelected();
+        autonomousCommand = (Command) auto.getSelected();
         
-		/* String autoSelected = SmartDashboard.getString("Auto Selector", "Default");
+	/*	 String autoSelected = SmartDashboard.getString("Auto Selector", "Default");
 		switch(autoSelected) {
 		case "My Auto":
 			autonomousCommand = new MyAutoCommand();
 			break;
 		case "Default Auto":
 		default:
-			autonomousCommand = new ExampleCommand();
+			autonomousCommand = new DriveStraightThroughLowbar();
 			break;
 		} */
     	
