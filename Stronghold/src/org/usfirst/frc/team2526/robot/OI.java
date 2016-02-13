@@ -3,6 +3,7 @@ package org.usfirst.frc.team2526.robot;
 
 
 import org.usfirst.frc.team2526.robot.commands.SwitchDrive;
+import org.usfirst.frc.team2526.robot.commands.catapult.FireGroup;
 import org.usfirst.frc.team2526.robot.commands.loader.LoaderIn;
 import org.usfirst.frc.team2526.robot.commands.loader.LoaderOut;
 import org.usfirst.frc.team2526.robot.commands.loader.RetractLoader;
@@ -61,6 +62,7 @@ public class OI {
 	Button primaryStickOne = new JoystickButton(primaryStick,1);
 	Button primaryStickThree = new JoystickButton(primaryStick,3);
 	Button primaryStickFour = new JoystickButton(primaryStick,4);
+	Button primaryStickSeven = new JoystickButton(primaryStick,7);
 	
 	// Secondary Stick Buttons
 	
@@ -102,6 +104,8 @@ public class OI {
 		
 		secondaryStickOne.whenPressed(new LoaderOut());
 		secondaryStickOne.whenReleased(new RetractLoader());
+		
+		primaryStickSeven.whenPressed(new FireGroup());
 		
 	}
     // Start the command when the button is pressed and let it run the command

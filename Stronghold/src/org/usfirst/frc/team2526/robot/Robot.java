@@ -6,6 +6,7 @@ import org.usfirst.frc.team2526.robot.subsystems.Climber;
 import org.usfirst.frc.team2526.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team2526.robot.subsystems.LoaderFrame;
 import org.usfirst.frc.team2526.robot.subsystems.LoaderRollers;
+import org.usfirst.frc.team2526.robot.subsystems.SonicShifters;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -30,6 +31,7 @@ public class Robot extends IterativeRobot {
 	public static LoaderFrame grabberFrame;
 	public static LoaderRollers grabberIntake;
 	public static Climber climber;
+	public static SonicShifters sonic;
 
     Command autonomousCommand;
     SendableChooser chooser;
@@ -46,6 +48,7 @@ public class Robot extends IterativeRobot {
        grabberFrame = new LoaderFrame();
        grabberIntake = new LoaderRollers();
        climber = new Climber();
+       sonic = new SonicShifters();
 //        chooser.addDefault("Default Auto", new ExampleCommand());
 //        chooser.addObject("My Auto", new MyAutoCommand());
 //        SmartDashboard.putData("Auto mode", chooser);

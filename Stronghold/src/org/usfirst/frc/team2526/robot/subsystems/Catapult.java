@@ -35,7 +35,8 @@ public class Catapult extends Subsystem {
     	catapultMotor.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
     	
     	catapultMotor.setPID(RobotMap.catapultP, RobotMap.catapultI, RobotMap.catapultD);
-    	catapultMotor.set(6);
+    	catapultMotor.enableControl();
+    	//catapultMotor.set(6);
     	
     	limitSwitch = new DigitalInput(0);
     	
