@@ -1,6 +1,5 @@
 package org.usfirst.frc.team2526.robot.commands.catapult;
 
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
