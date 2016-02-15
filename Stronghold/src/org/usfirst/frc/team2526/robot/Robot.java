@@ -29,14 +29,17 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Robot extends IterativeRobot {
 
-	public static OI oi;
 	public static DriveTrain driveTrain;
+	public static ADIS16448_IMU imu;
 	public static Catapult catapult;
 	public static LoaderFrame grabberFrame;
 	public static LoaderRollers grabberIntake;
 	public static Climber climber;
 	public static SonicShifters sonic;
-	public static ADIS16448_IMU imu;
+
+	
+	public static OI oi;
+
 
     Command autonomousCommand;
     SendableChooser auto;
@@ -47,8 +50,8 @@ public class Robot extends IterativeRobot {
      * used for any initialization code.
      */
     public void robotInit() {
-		oi = new OI();
        auto = new SendableChooser();
+       imu = new ADIS16448_IMU();
        driveTrain = new DriveTrain();
        catapult = new Catapult();
        grabberFrame = new LoaderFrame();
@@ -56,7 +59,8 @@ public class Robot extends IterativeRobot {
        climber = new Climber();
        sonic = new SonicShifters();
        defense = new SendableChooser();
-       imu = new ADIS16448_IMU();
+       
+       oi = new OI();
        
         auto.addDefault("Drive Through Lowbar", new DriveStraightThroughLowbar());
     //    auto.addObject("My Auto", new MyAutoCommand());
