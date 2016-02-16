@@ -9,7 +9,6 @@ import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.RobotDrive;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -58,12 +57,6 @@ public class DriveTrain extends Subsystem {
         	drive.arcadeDrive(-Robot.oi.getThirdValue().getY() * RobotMap.secondaryWeight, -Robot.oi.getFourthValue().getX() * RobotMap.secondaryWeight);
     	}
     	
-    			
-    	
-    	SmartDashboard.putNumber("Left Motor One Voltage", lMotorOne.getOutputVoltage());
-    	SmartDashboard.putNumber("Left Motor Two Voltage", lMotorTwo.getOutputVoltage());
-    	SmartDashboard.putNumber("Right Motor One Voltage", rMotorOne.getOutputVoltage());
-    	SmartDashboard.putNumber("Right Motor Two Voltage", rMotorTwo.getOutputVoltage());
     	
     }
     

@@ -43,7 +43,7 @@ public class Catapult extends Subsystem {
     }
     
     public boolean getLimitSwitchStatus() {
-    	if(catapultLimit.getValue() == 6) {
+    	if(catapultLimit.getValue() <= 100.0 && catapultLimit.getValue() >= -100.0) {
     		return true;
     		}
     	else {
