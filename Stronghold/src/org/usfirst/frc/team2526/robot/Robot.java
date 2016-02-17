@@ -8,6 +8,7 @@ import org.usfirst.frc.team2526.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team2526.robot.subsystems.LoaderFrame;
 import org.usfirst.frc.team2526.robot.subsystems.LoaderRollers;
 import org.usfirst.frc.team2526.robot.subsystems.SonicShifters;
+import org.usfirst.frc.team2526.robot.subsystems.WheelieBar;
 
 import com.analog.adis16448.frc.ADIS16448_IMU;
 
@@ -36,6 +37,7 @@ public class Robot extends IterativeRobot {
 	public static LoaderRollers grabberIntake;
 	public static Climber climber;
 	public static SonicShifters sonic;
+	public static WheelieBar wheelieBar;
 
 	
 	public static OI oi;
@@ -58,6 +60,7 @@ public class Robot extends IterativeRobot {
        grabberIntake = new LoaderRollers();
        climber = new Climber();
        sonic = new SonicShifters();
+       wheelieBar = new WheelieBar();
        defense = new SendableChooser();
        
        oi = new OI();

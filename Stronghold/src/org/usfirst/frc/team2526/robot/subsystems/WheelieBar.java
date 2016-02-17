@@ -8,33 +8,30 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 /**
  *
  */
-public class LoaderFrame extends Subsystem {
+public class WheelieBar extends Subsystem {
     
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 	
-	DoubleSolenoid pistonOne;
+	DoubleSolenoid piston;
 
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
-    	
     }
     
-    public LoaderFrame () {
-    	super("GrabberFrame");
-    	// This subsystem is for our Grabber's frame mechanism.
+    public WheelieBar() {
+    	super("Wheelie Bar");
     	
-    	pistonOne = new DoubleSolenoid(RobotMap.PCM_MAIN, RobotMap.grabberPiston_A, RobotMap.grabberPiston_B);
-    	
+    	piston = new DoubleSolenoid(RobotMap.PCM_MAIN, RobotMap.wheelie_A, RobotMap.wheelie_B);
     }
     
-    public void ExtendGrabber () {
-    	pistonOne.set(DoubleSolenoid.Value.kForward);
+    public void extendWheelie() {
+    	piston.set(DoubleSolenoid.Value.kForward);
     }
     
-    public void RetractGrabber () {
-    	pistonOne.set(DoubleSolenoid.Value.kReverse);
+    public void retractWheelie() {
+    	piston.set(DoubleSolenoid.Value.kReverse);
     }
 }
 

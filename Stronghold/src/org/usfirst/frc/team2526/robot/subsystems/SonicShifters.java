@@ -13,8 +13,7 @@ public class SonicShifters extends Subsystem {
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 	
-	DoubleSolenoid leftShifter;
-	DoubleSolenoid rightShifter;
+	DoubleSolenoid shifter;
 
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
@@ -24,18 +23,15 @@ public class SonicShifters extends Subsystem {
     public SonicShifters() {
     	super("SonicShifters");
     	
-    	leftShifter = new DoubleSolenoid(RobotMap.PCM_MAIN, RobotMap.leftSonic_A, RobotMap.leftSonic_B);
-    	rightShifter = new DoubleSolenoid(RobotMap.PCM_MAIN, RobotMap.rightSonic_A, RobotMap.rightSonic_B);
+    	shifter = new DoubleSolenoid(RobotMap.PCM_MAIN, RobotMap.sonic_A, RobotMap.sonic_B);
     }
     
     public void shiftDown() {
-    	leftShifter.set(DoubleSolenoid.Value.kForward);
-    	rightShifter.set(DoubleSolenoid.Value.kForward);
+    	shifter.set(DoubleSolenoid.Value.kForward);
     }
     
     public void shiftUp() {
-    	leftShifter.set(DoubleSolenoid.Value.kReverse);
-    	rightShifter.set(DoubleSolenoid.Value.kReverse);
+    	shifter.set(DoubleSolenoid.Value.kReverse);
     }
     
 }
