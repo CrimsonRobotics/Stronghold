@@ -3,8 +3,8 @@ package org.usfirst.frc.team2526.robot.subsystems;
 import org.usfirst.frc.team2526.robot.RobotMap;
 import org.usfirst.frc.team2526.robot.commands.catapult.HoldCatapult;
 
-import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.CANTalon;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -16,7 +16,7 @@ public class Catapult extends Subsystem {
     // here. Call these from Commands.
 	
 	CANTalon catapultMotor;
-	AnalogInput catapultLimit;
+	DigitalInput catapultLimit;
 	double goal;
 
     public void initDefaultCommand() {
@@ -38,17 +38,12 @@ public class Catapult extends Subsystem {
     	catapultMotor.enableControl();
     	//catapultMotor.set(6);
     	
-    	catapultLimit = new AnalogInput(0);
+    	catapultLimit = new DigitalInput(0);
     	
     }
     
     public boolean getLimitSwitchStatus() {
-    	if(catapultLimit.getValue() <= 100.0 && catapultLimit.getValue() >= -100.0) {
-    		return true;
-    		}
-    	else {
-    		return false;
-    	}
+    	return catapultLimit.get();
     		
     }
 

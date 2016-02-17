@@ -26,8 +26,13 @@ public class ArmCatapult extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	return Robot.catapult.getLimitSwitchStatus();
-        }
+    	if(Robot.catapult.getLimitSwitchStatus()) {
+    		return false;
+    	} else {
+    		return true;
+    	}
+    	
+    }
 
     // Called once after isFinished returns true
     protected void end() {
