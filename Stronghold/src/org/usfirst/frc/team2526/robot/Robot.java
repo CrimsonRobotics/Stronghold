@@ -46,7 +46,8 @@ public class Robot extends IterativeRobot {
     Command autonomousCommand;
     SendableChooser auto;
     SendableChooser defense;
-
+    SendableChooser target;
+    
     /**
      * This function is run when the robot is first started up and should be
      * used for any initialization code.
@@ -62,6 +63,7 @@ public class Robot extends IterativeRobot {
        sonic = new SonicShifters();
        wheelieBar = new WheelieBar();
        defense = new SendableChooser();
+       target = new SendableChooser();
        
        oi = new OI();
        
@@ -76,6 +78,13 @@ public class Robot extends IterativeRobot {
         defense.addObject("4", 4);
         defense.addObject("5", 5);
         SmartDashboard.putData("Defense Number", defense);
+        
+        //Should we use Enums ?
+        target.addDefault("Center", 2); // center goal
+        target.addObject("Left", 1); //left goal
+        target.addObject("Right", 3); // right goal
+        target.addObject("None", 4); // no goal :(
+        SmartDashboard.putData("Goal Number", target);
     }
 	
 	/**
