@@ -12,7 +12,10 @@ import org.usfirst.frc.team2526.robot.subsystems.WheelieBar;
 
 import com.analog.adis16448.frc.ADIS16448_IMU;
 
+import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.DigitalOutput;
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.Ultrasonic;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -38,7 +41,7 @@ public class Robot extends IterativeRobot {
 	public static Climber climber;
 	public static SonicShifters sonic;
 	public static WheelieBar wheelieBar;
-
+	public static Ultrasonic ultraSonic;
 	
 	public static OI oi;
 
@@ -64,7 +67,8 @@ public class Robot extends IterativeRobot {
        wheelieBar = new WheelieBar();
        defence = new SendableChooser();
        target = new SendableChooser();
-       
+       ultraSonic = new Ultrasonic(new DigitalOutput(RobotMap.ultrasonicDriveOutputChanel),new DigitalInput(RobotMap.ultrasonicDriveInputChannel));
+
        oi = new OI();
        
         auto.addDefault("Drive Through Lowbar", new DriveStraightThroughLowbar());
