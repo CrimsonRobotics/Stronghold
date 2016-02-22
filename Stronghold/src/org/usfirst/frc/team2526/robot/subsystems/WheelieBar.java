@@ -14,6 +14,7 @@ public class WheelieBar extends Subsystem {
     // here. Call these from Commands.
 	
 	DoubleSolenoid piston;
+	public boolean wheelieState;
 
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
@@ -28,10 +29,16 @@ public class WheelieBar extends Subsystem {
     
     public void extendWheelie() {
     	piston.set(DoubleSolenoid.Value.kForward);
+    	wheelieState = true;
     }
     
     public void retractWheelie() {
     	piston.set(DoubleSolenoid.Value.kReverse);
+    	wheelieState = false;
+    }
+    
+    public boolean getWheelieState() {
+    	return wheelieState;
     }
 }
 

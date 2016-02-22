@@ -2,6 +2,7 @@ package org.usfirst.frc.team2526.robot.subsystems;
 
 import org.usfirst.frc.team2526.robot.RobotMap;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -15,6 +16,7 @@ public class LoaderFrame extends Subsystem {
     // here. Call these from Commands.
 	
 	DoubleSolenoid piston;
+	DigitalInput loaderSensor;
 
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
@@ -27,6 +29,7 @@ public class LoaderFrame extends Subsystem {
     	// This subsystem is for our Grabber's frame mechanism.
     	
     	piston = new DoubleSolenoid(RobotMap.PCM_MAIN, RobotMap.loaderPiston_A, RobotMap.loaderPiston_B);
+    	loaderSensor = new DigitalInput(RobotMap.loaderSensor);
     	
     }
     
@@ -41,6 +44,10 @@ public class LoaderFrame extends Subsystem {
     public void ExtendLoaderWait() {
     	Timer.delay(0);
     	piston.set(DoubleSolenoid.Value.kForward);
+    }
+    
+    public boolean getLoaderState() {
+    	return loaderSensor.get();
     }
 }
 

@@ -10,6 +10,8 @@ import org.usfirst.frc.team2526.robot.commands.loader.RetractLoader;
 import org.usfirst.frc.team2526.robot.commands.loader.RollersIn;
 import org.usfirst.frc.team2526.robot.commands.loader.RollersOut;
 import org.usfirst.frc.team2526.robot.commands.loader.UnloadBall;
+import org.usfirst.frc.team2526.robot.commands.wheeliebar.ExtendWheelie;
+import org.usfirst.frc.team2526.robot.commands.wheeliebar.RetractWheelie;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
@@ -56,6 +58,7 @@ public class OI {
 	
 	Button secondaryStickOne = new JoystickButton(secondaryStick,1);
 	Button secondaryStickTwo = new JoystickButton(secondaryStick,2);
+	Button secondaryStickThree = new JoystickButton(secondaryStick,3);
 	// Secondary Stick Buttons
 	
 	Button thirdStickOne = new JoystickButton(thirdStick, 1);
@@ -89,6 +92,11 @@ public class OI {
 		
 		primaryStickSeven.whenPressed(new FireGroup());
 		// Catapult Commands
+		
+		secondaryStickThree.whenPressed(new ExtendWheelie());
+		secondaryStickThree.whenReleased(new RetractWheelie());
+		
+		
 		
 	}
     // Start the command when the button is pressed and let it run the command

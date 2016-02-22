@@ -41,7 +41,7 @@ public class Catapult extends Subsystem {
     	catapultMotorOne.enableControl();
     	//catapultMotor.set(6);
     	
-    	catapultLimit = new DigitalInput(0);
+    	catapultLimit = new DigitalInput(RobotMap.catapultSensor);
     	
     }
     

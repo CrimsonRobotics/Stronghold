@@ -7,9 +7,9 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class ClimbDown extends Command {
+public class ReleaseHook extends Command {
 
-    public ClimbDown() {
+    public ReleaseHook() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(Robot.climber);
@@ -17,11 +17,11 @@ public class ClimbDown extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	Robot.climber.closePneumatics();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.climber.winchDown();
     }
 
     // Make this return true when this Command no longer needs to run execute()

@@ -42,8 +42,7 @@ public class RobotMap {
 	public static int loaderPiston_A = 0;
 	public static int loaderPiston_B = 1;
 	
-	public static int climberPiston_A = 2;
-	public static int climberPiston_B = 3;
+	public static int climberPiston = 2;
 	
 	public static int sonic_A = 4;
 	public static int sonic_B = 5;
@@ -105,13 +104,15 @@ public class RobotMap {
 	public static double catapultD = 0;
 	// Catapult PID Values
 	
-	public static double climberP = 1.0;
-	public static double climberI = 0;
-	public static double climberD = 0;
-	
 	public static double armPosition = 85;
 	public static double firePosition = 5;
 	// Catapult Position Values
+	
+	/******************
+ ** DIGITAL SENSOR INPUTS ** 
+     ******************/  
+	public static int catapultSensor = 0;
+	public static int loaderSensor = 1;
 
     
     // If you are using multiple modules, make sure to define both the port

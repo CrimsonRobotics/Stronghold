@@ -147,6 +147,7 @@ public class Robot extends IterativeRobot {
      */
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
+        SmartDashboard.putBoolean("Wheelie Bar State", Robot.wheelieBar.getWheelieState());
     }
     
     /**
