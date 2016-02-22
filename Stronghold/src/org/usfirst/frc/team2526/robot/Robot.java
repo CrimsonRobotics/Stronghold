@@ -76,7 +76,6 @@ public class Robot extends IterativeRobot {
         defence.addObject("2", 2);
         defence.addObject("3", 3);
         defence.addObject("4", 4);
-        defence.addObject("5", 5);
         SmartDashboard.putData("Defence Number", defence);
         
         //Should we use Enums ?
