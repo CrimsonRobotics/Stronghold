@@ -45,7 +45,7 @@ public class Robot extends IterativeRobot {
 
     Command autonomousCommand;
     SendableChooser auto;
-    SendableChooser defense;
+    SendableChooser defence;
     SendableChooser target;
     
     /**
@@ -62,7 +62,7 @@ public class Robot extends IterativeRobot {
        climber = new Climber();
        sonic = new SonicShifters();
        wheelieBar = new WheelieBar();
-       defense = new SendableChooser();
+       defence = new SendableChooser();
        target = new SendableChooser();
        
        oi = new OI();
@@ -71,13 +71,13 @@ public class Robot extends IterativeRobot {
     //    auto.addObject("My Auto", new MyAutoCommand());
         SmartDashboard.putData("Auto mode", auto);
         
-        defense.addDefault("At Lowbar", 0);
-        defense.addObject("1", 1);
-        defense.addObject("2", 2);
-        defense.addObject("3", 3);
-        defense.addObject("4", 4);
-        defense.addObject("5", 5);
-        SmartDashboard.putData("Defense Number", defense);
+        defence.addDefault("At Lowbar", 0);
+        defence.addObject("1", 1);
+        defence.addObject("2", 2);
+        defence.addObject("3", 3);
+        defence.addObject("4", 4);
+        defence.addObject("5", 5);
+        SmartDashboard.putData("Defence Number", defence);
         
         //Should we use Enums ?
         target.addDefault("Center", 2); // center goal
