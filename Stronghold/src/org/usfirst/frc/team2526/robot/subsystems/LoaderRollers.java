@@ -46,6 +46,10 @@ public class LoaderRollers extends Subsystem {
     	loaderMotor.set(0);
     	
     }
+    
+    public void rollersStop() {
+    	loaderMotor.set(0);
+    }
 
     
 }

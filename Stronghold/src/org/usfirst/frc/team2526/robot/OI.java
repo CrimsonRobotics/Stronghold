@@ -54,6 +54,7 @@ public class OI {
 	Button primaryStickFour = new JoystickButton(primaryStick,4);
 	Button primaryStickSeven = new JoystickButton(primaryStick,7);
 	Button primaryStickEight = new JoystickButton(primaryStick,8);
+	Button primaryStickNine = new JoystickButton(primaryStick,9);
 	// Primary Stick Buttons
 	
 	Button secondaryStickOne = new JoystickButton(secondaryStick,1);
@@ -66,6 +67,10 @@ public class OI {
 	
 	
 	// Fourth Stick Buttons
+	
+	public Button getPortcullisButton() {
+		return primaryStickNine;
+	}
 	
 
 	
