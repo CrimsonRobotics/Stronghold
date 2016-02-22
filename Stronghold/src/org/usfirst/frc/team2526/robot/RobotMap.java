@@ -21,9 +21,8 @@ public class RobotMap {
 	public static int rMotorTwo = 4;
 	// DriveTrain Motors
 	
-	public static int grabberMotorOne = 6;
-	public static int grabberMotorTwo = 7;
-	// Grabber Roller Motors
+	public static int loaderTalon = 6;
+	// Loader Talon
 	
 	public static int catapultMotor = 8;
 	

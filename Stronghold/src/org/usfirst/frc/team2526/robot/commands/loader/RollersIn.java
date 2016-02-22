@@ -7,20 +7,21 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class RollBallOut extends Command {
+public class RollersIn extends Command {
 
-    public RollBallOut() {
+    public RollersIn() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
+    	requires(Robot.loaderRollers);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	Robot.loaderRollers.rollersIn();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.grabberIntake.ballOut();
     }
 
     // Make this return true when this Command no longer needs to run execute()

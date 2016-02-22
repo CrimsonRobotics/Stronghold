@@ -1,8 +1,11 @@
 package org.usfirst.frc.team2526.robot.subsystems;
 
 import org.usfirst.frc.team2526.robot.RobotMap;
+import org.usfirst.frc.team2526.robot.Statics;
 
 import edu.wpi.first.wpilibj.CANTalon;
+import edu.wpi.first.wpilibj.CANTalon.TalonControlMode;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -13,8 +16,7 @@ public class LoaderRollers extends Subsystem {
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 	
-	CANTalon grabberOne;
-	CANTalon grabberTwo;
+	CANTalon loaderMotor;
 
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
@@ -25,23 +27,26 @@ public class LoaderRollers extends Subsystem {
     	super("GrabberIntake");
     	// This subsystem is for our Grabber's Intake Mechanism.
     	
-    	grabberOne = new CANTalon(RobotMap.grabberMotorOne);
-    	grabberTwo = new CANTalon(RobotMap.grabberMotorTwo);
+    	loaderMotor = new CANTalon(RobotMap.loaderTalon);
     	
-    	grabberOne.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
-    	grabberTwo.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
+    	loaderMotor.changeControlMode(TalonControlMode.PercentVbus);
+    }
+    
+    public void rollersIn() {
+    	loaderMotor.set(Statics.LOADER_SPEED_IN);
+    }
+    
+    public void rollersOut() {
+    	loaderMotor.set(Statics.LOADER_SPEED_OUT);
     }
     
     public void ballIn() {
-    	grabberOne.set(.5);
-    	grabberTwo.set(-.5);
+    	loaderMotor.set(Statics.LOADER_SPEED_IN);
+    	Timer.delay(Statics.LOADER_IN_DELAY);
+    	loaderMotor.set(0);
     	
     }
-    
-    public void ballOut() {
-    	grabberOne.set(-.5);
-    	grabberTwo.set(.5);
-    }
+
     
 }
 

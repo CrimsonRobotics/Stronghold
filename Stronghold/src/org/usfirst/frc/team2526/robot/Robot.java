@@ -33,8 +33,8 @@ public class Robot extends IterativeRobot {
 	public static DriveTrain driveTrain;
 	public static ADIS16448_IMU imu;
 	public static Catapult catapult;
-	public static LoaderFrame grabberFrame;
-	public static LoaderRollers grabberIntake;
+	public static LoaderFrame loaderFrame;
+	public static LoaderRollers loaderRollers;
 	public static Climber climber;
 	public static SonicShifters sonic;
 	public static WheelieBar wheelieBar;
@@ -57,8 +57,8 @@ public class Robot extends IterativeRobot {
        imu = new ADIS16448_IMU();
        driveTrain = new DriveTrain();
        catapult = new Catapult();
-       grabberFrame = new LoaderFrame();
-       grabberIntake = new LoaderRollers();
+       loaderFrame = new LoaderFrame();
+       loaderRollers = new LoaderRollers();
        climber = new Climber();
        sonic = new SonicShifters();
        wheelieBar = new WheelieBar();

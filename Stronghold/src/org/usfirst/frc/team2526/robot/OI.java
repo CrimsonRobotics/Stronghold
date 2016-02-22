@@ -4,9 +4,12 @@ package org.usfirst.frc.team2526.robot;
 
 import org.usfirst.frc.team2526.robot.commands.SwitchDrive;
 import org.usfirst.frc.team2526.robot.commands.catapult.FireGroup;
-import org.usfirst.frc.team2526.robot.commands.loader.LoaderIn;
-import org.usfirst.frc.team2526.robot.commands.loader.LoaderOut;
+import org.usfirst.frc.team2526.robot.commands.loader.ExtendLoader;
+import org.usfirst.frc.team2526.robot.commands.loader.LoadBall;
 import org.usfirst.frc.team2526.robot.commands.loader.RetractLoader;
+import org.usfirst.frc.team2526.robot.commands.loader.RollersIn;
+import org.usfirst.frc.team2526.robot.commands.loader.RollersOut;
+import org.usfirst.frc.team2526.robot.commands.loader.UnloadBall;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
@@ -18,28 +21,13 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {
-    //// CREATING BUTTONS
-    // One type of button is a joystick button which is any button on a joystick.
-    // You create one by telling it which joystick it's on and which button
-    // number it is.
-    // Joystick stick = new Joystick(port);
-    // Button button = new JoystickButton(stick, buttonNumber);
+	
 	Joystick primaryStick = new Joystick(0);
 	Joystick secondaryStick = new Joystick(1);
 	Joystick thirdStick = new Joystick(2);
 	Joystick fourthStick = new Joystick(3);
-    
-    // There are a few additional built in buttons you can use. Additionally,
-    // by subclassing Button you can create custom triggers and bind those to
-    // commands the same as any other Button.
-	
-	
-    
-    //// TRIGGERING COMMANDS WITH BUTTONS
-    // Once you have a button, it's trivial to bind it to a button in one of
-    // three ways:
-	
-	// Joystick get Commands
+	// Joysticks
+ 
 	
 	public Joystick getPrimaryStick() {
 		return primaryStick;
@@ -57,55 +45,50 @@ public class OI {
 		return fourthStick;
 	}
 	
-	// Primary Stick Buttons
+
 	
 	Button primaryStickOne = new JoystickButton(primaryStick,1);
 	Button primaryStickThree = new JoystickButton(primaryStick,3);
 	Button primaryStickFour = new JoystickButton(primaryStick,4);
 	Button primaryStickSeven = new JoystickButton(primaryStick,7);
-	
-	// Secondary Stick Buttons
+	Button primaryStickEight = new JoystickButton(primaryStick,8);
+	// Primary Stick Buttons
 	
 	Button secondaryStickOne = new JoystickButton(secondaryStick,1);
 	Button secondaryStickTwo = new JoystickButton(secondaryStick,2);
-	
-	// Third Stick Buttons
+	// Secondary Stick Buttons
 	
 	Button thirdStickOne = new JoystickButton(thirdStick, 1);
+	// Third Stick Buttons
+	
 	
 	// Fourth Stick Buttons
 	
 
 	
-	public Joystick getPrimaryValue() {
-		return primaryStick;
-	}
-	
-	public Joystick getSecondaryValue() {
-		return secondaryStick;
-	}
-	
-	public Joystick getThirdValue() {
-		return thirdStick;
-	}
-	
-	public Joystick getFourthValue() {
-		return fourthStick;
-	}
-	
 	public OI() {
 	
 		thirdStickOne.whenPressed(new SwitchDrive());
 		thirdStickOne.whenReleased(new SwitchDrive());	
+		// Driver Control Commands
 		
-		// Grabber Commands
-		primaryStickOne.whenPressed(new LoaderIn());
-		primaryStickOne.whenReleased(new RetractLoader());
+//		primaryStickOne.whenPressed(new LoadBall());
+//		primaryStickOne.whenReleased(new RetractLoader());
+//		secondaryStickOne.whenPressed(new LoaderOut());
+//		secondaryStickOne.whenReleased(new RetractLoader());
 		
-		secondaryStickOne.whenPressed(new LoaderOut());
-		secondaryStickOne.whenReleased(new RetractLoader());
+		primaryStickOne.whileHeld(new RollersIn());
+		primaryStickOne.whenPressed(new ExtendLoader());
+		primaryStickOne.whenReleased(new LoadBall());
+		
+		primaryStickEight.whileHeld(new RollersOut());
+		primaryStickEight.whenPressed(new UnloadBall());
+		primaryStickEight.whenReleased(new RetractLoader());
+		// Loader Commands
+
 		
 		primaryStickSeven.whenPressed(new FireGroup());
+		// Catapult Commands
 		
 	}
     // Start the command when the button is pressed and let it run the command

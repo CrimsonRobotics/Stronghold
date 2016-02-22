@@ -5,15 +5,15 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 /**
  *
  */
-public class LoaderIn extends CommandGroup {
+public class LoadBall extends CommandGroup {
     
-    public  LoaderIn() {
+    public  LoadBall() {
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
         // these will run in order.
     	
-    	addParallel(new ExtendLoader());
+    	addParallel(new RetractLoader());
     	addParallel(new RollBallIn());
 
         // To run multiple commands at the same time,

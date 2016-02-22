@@ -7,17 +7,17 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class RetractLoader extends Command {
+public class RollersOut extends Command {
 
-    public RetractLoader() {
+    public RollersOut() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	requires(Robot.loaderFrame);
+    	requires(Robot.loaderRollers);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.loaderFrame.RetractLoader();
+    	Robot.loaderRollers.rollersOut();
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -36,5 +36,6 @@ public class RetractLoader extends Command {
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+    	end();
     }
 }
