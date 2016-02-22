@@ -1,7 +1,7 @@
 
 package org.usfirst.frc.team2526.robot;
 
-import org.usfirst.frc.team2526.robot.commands.autonomous.DriveStraightThroughLowbar;
+import org.usfirst.frc.team2526.robot.commands.autonomous.DriveStraightThroughDefense;
 import org.usfirst.frc.team2526.robot.subsystems.Catapult;
 import org.usfirst.frc.team2526.robot.subsystems.Climber;
 import org.usfirst.frc.team2526.robot.subsystems.DriveTrain;
@@ -67,7 +67,7 @@ public class Robot extends IterativeRobot {
        
        oi = new OI();
        
-        auto.addDefault("Drive Through Lowbar", new DriveStraightThroughLowbar());
+        auto.addDefault("Drive Through Lowbar", new DriveStraightThroughDefense());
     //    auto.addObject("My Auto", new MyAutoCommand());
         SmartDashboard.putData("Auto mode", auto);
         

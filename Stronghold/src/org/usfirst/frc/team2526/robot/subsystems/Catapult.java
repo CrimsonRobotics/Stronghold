@@ -1,10 +1,12 @@
 package org.usfirst.frc.team2526.robot.subsystems;
 
 import org.usfirst.frc.team2526.robot.RobotMap;
+import org.usfirst.frc.team2526.robot.Statics;
 import org.usfirst.frc.team2526.robot.commands.catapult.HoldCatapult;
 
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.CANTalon.TalonControlMode;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -34,7 +36,7 @@ public class Catapult extends Subsystem {
     	catapultMotorTwo = new CANTalon(RobotMap.catapultTalonTwo);
     	
     	catapultMotorOne.changeControlMode(TalonControlMode.Position);
-    	catapultMotorTwo.changeControlMode(TalonControlMode.Follower);
+    	catapultMotorTwo.changeControlMode(TalonControlMode.Position);
     	catapultMotorOne.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
     	
     	catapultMotorOne.setPID(RobotMap.catapultP, RobotMap.catapultI, RobotMap.catapultD);
@@ -48,6 +50,27 @@ public class Catapult extends Subsystem {
     public boolean getLimitSwitchStatus() {
     	return catapultLimit.get();
     		
+    }
+    
+    public void catapultFire() {
+    	catapultMotorOne.set(1);
+    	catapultMotorTwo.set(1);
+    }
+    
+    public void armCatapult() {
+    	catapultMotorOne.set(.7);
+    	catapultMotorTwo.set(.7);
+    }
+    
+    public void stopCatapult() {
+    	catapultMotorOne.set(0);
+    	catapultMotorTwo.set(0);
+    }
+    
+    public void holdCatapult() {
+    	catapultMotorOne.set(0);
+    	catapultMotorTwo.set(0);
+    	Timer.delay(Statics.CATAPULT_HOLD_DELAY);
     }
 
     

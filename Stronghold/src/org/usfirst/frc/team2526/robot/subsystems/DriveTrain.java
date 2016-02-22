@@ -2,13 +2,19 @@ package org.usfirst.frc.team2526.robot.subsystems;
 
 import org.usfirst.frc.team2526.robot.Robot;
 import org.usfirst.frc.team2526.robot.RobotMap;
+import org.usfirst.frc.team2526.robot.Statics;
 import org.usfirst.frc.team2526.robot.commands.Drive;
 
+import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.CANTalon;
-
+import edu.wpi.first.wpilibj.CANTalon.TalonControlMode;
+import edu.wpi.first.wpilibj.PIDController;
+import edu.wpi.first.wpilibj.PIDOutput;
+import edu.wpi.first.wpilibj.PIDSource;
+import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.RobotDrive;
-
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -18,12 +24,22 @@ public class DriveTrain extends Subsystem {
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 	
-	public CANTalon lMotorOne, lMotorTwo, rMotorOne, rMotorTwo;
+	public CANTalon lMotor, lMotorTwo, rMotor, rMotorTwo;
 	
+	PIDOutputValues pidValues;
+
 	RobotDrive drive;
+	PIDController drivePID, turnPID; // Even though the talons can run PID, I am using my own controllers to avoid switching modes all the time.
 
-
-    public void initDefaultCommand() {
+	AnalogInput ultraSonic;
+	
+	double sumSensor = 0;
+	double averageCount = 0;
+	
+	public static final double pDrive = 0.013, iDrive = 0, dDrive = 0.010;
+	public static final double pTurn = 0.030, iTurn = 0, dTurn = 0.010;
+	
+    public void initDefaultCommand() { 
         // Set the default command for a subsystem here.
         setDefaultCommand(new Drive());
     }
@@ -31,57 +47,185 @@ public class DriveTrain extends Subsystem {
     public DriveTrain (){
     	super("DriveTrain");
     	
-    	lMotorOne = new CANTalon(RobotMap.lMotorOne);
-    	lMotorTwo = new CANTalon(RobotMap.lMotorTwo);
-    	rMotorOne = new CANTalon(RobotMap.rMotorOne);
+    	
+    	pidValues = new PIDOutputValues();
+    	
+    	ultraSonic = new AnalogInput(1);
+    	
+    	lMotor = new CANTalon(RobotMap.lMotorOne);
+    	lMotorTwo = new CANTalon(RobotMap.lMotorTwo); //Defaults are quad encoder and percentVBus. No need to add them again.
+    	rMotor = new CANTalon(RobotMap.rMotorOne);
     	rMotorTwo = new CANTalon(RobotMap.rMotorTwo);
     	
-    	lMotorOne.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
-    	lMotorTwo.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
-    	rMotorOne.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
-    	rMotorTwo.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
+    	lMotorTwo.changeControlMode(TalonControlMode.Follower);
+    	rMotorTwo.changeControlMode(TalonControlMode.Follower);
+    	lMotorTwo.set(RobotMap.lMotorOne);
+    	rMotorTwo.set(RobotMap.rMotorOne);
     	
-    	drive = new RobotDrive(lMotorOne, lMotorTwo, rMotorOne, rMotorTwo);
+    	drivePID = new PIDController(pDrive, iDrive, dDrive, new PIDSource() {
+    		PIDSourceType type = PIDSourceType.kDisplacement;
+			
+    		public void setPIDSourceType(PIDSourceType pidSource) {
+				type = pidSource;
+			}
+			
+			public PIDSourceType getPIDSourceType() {
+				return type;
+			}
+
+			public double pidGet() {
+				return -Robot.driveTrain.getRawLeftEncoder()/10.0;
+			}
+    		
+    	}, new PIDOutput() {
+
+			public void pidWrite(double output) {
+				pidValues.setMagnitudeValue(output);
+			}
+    		
+    	});
+    	
+    	turnPID = new PIDController(pTurn, iTurn, dTurn, new PIDSource() {
+    		PIDSourceType type = PIDSourceType.kDisplacement;
+			public void setPIDSourceType(PIDSourceType pidSource) {
+				type = pidSource;
+			}
+
+			public PIDSourceType getPIDSourceType() {
+				return type;
+			}
+
+			public double pidGet() {
+				return Robot.imu.getAngleZ();
+			}
+    		
+    	}, new PIDOutput() {
+
+			public void pidWrite(double output) {
+				pidValues.setTurnValue(output);
+			}
+    		
+    	});
+    	
+    	turnPID.setAbsoluteTolerance(3.0);
+    	drivePID.setAbsoluteTolerance(5);
     	
     	
+    	drive = new RobotDrive(lMotor, rMotor);
     	
     }
     
-    public void arcadeDrive() {
-
+    
+    public boolean onDriveTarget() {
+    	return drivePID.onTarget();
+    }
+    
+    public boolean onTurnTarget() {
+    	return turnPID.onTarget();
+    }
+    
+    public void freeArcadeDrive() {
+    	drivePID.disable();
+    	turnPID.disable();
+    	
     	if (RobotMap.primaryControl) {
     		// Main driver
-    		drive.arcadeDrive(Robot.oi.getPrimaryStick().getY(), -Robot.oi.getSecondaryStick().getX());
+    		drive.arcadeDrive(Robot.oi.getPrimaryStick().getY(), Robot.oi.getSecondaryStick().getX());
     	} else {
     		// Co Driver
-        	drive.arcadeDrive(-Robot.oi.getThirdStick().getY() * RobotMap.secondaryWeight, -Robot.oi.getFourthStick().getX() * RobotMap.secondaryWeight);
+        	drive.arcadeDrive(-Robot.oi.getThirdStick().getY() * RobotMap.secondaryWeight, Robot.oi.getFourthStick().getX() * RobotMap.secondaryWeight);
     	}
-    	
     	
     }
     
-    public void driveStraight(double distance) {
-    	lMotorOne.set(distance);
-    	lMotorTwo.set(distance);
-    	rMotorOne.set(-distance);
-    	rMotorTwo.set(-distance);
+    public void setDriveStraight(double inches, double startingAngle) {
+    	double ticks = Statics.Inches.inchesToTicks(inches);
+    	
+    	lMotor.setEncPosition(0);
+    	rMotor.setEncPosition(0);
+    	
+    	turnPID.setSetpoint(startingAngle);
+    	drivePID.setSetpoint(-ticks);
+    }
+    
+    public void setDriveAbsStraight(double absoluteTicks) {
+    	drivePID.setSetpoint(-absoluteTicks);
+    }
+    
+    public void setDriveRelativeStraight(double relativeTicks) {
+    	lMotor.setEncPosition(0);
+    	rMotor.setEncPosition(0);
+    	Robot.imu.reset();
+    	turnPID.setSetpoint(0);
+    	drivePID.setSetpoint(-relativeTicks);
     }
     
     public void stopDriving() {
-    	lMotorOne.set(0);
-    	lMotorTwo.set(0);
-    	rMotorOne.set(0);
-    	rMotorTwo.set(0);
+    	drivePID.disable();
+    	turnPID.disable();
+    	
+    	lMotor.set(0);
+    	rMotor.set(0);
     }
     
-    public void turnAngle(double angle) {
-    	lMotorOne.set(Robot.imu.getAngleZ() + angle);
-    	lMotorTwo.set(Robot.imu.getAngleZ() + angle);
-    	rMotorOne.set(-Robot.imu.getAngleZ() + angle);
-    	rMotorTwo.set(-Robot.imu.getAngleZ() + angle);
+    public void setAngle(double angle) {
+    	turnPID.setSetpoint(angle);
     }
     
-
+    public double getRawLeftEncoder() {
+    	return lMotor.getEncPosition();
+    }
     
+    public double getRawRightEncoder() {
+    	return rMotor.getEncPosition();
+    }
+    
+    public double getDistanceAwayFromFront() {
+    	return ultraSonic.getAverageValue()*0.393701;
+    }
+    
+    public void enableDrivePIDValues() {
+    	drivePID.enable();
+    }
+    
+    public void enableTurnPIDValues() {
+    	turnPID.enable();
+    }
+    
+    public void disableDrivePIDValues() {
+    	drivePID.disable();
+    }
+    
+    public void disableTurnPIDValues() {
+    	turnPID.disable();
+    }
+    
+    public void updatePIDValues() {
+    	pidValues.updateSpeed(drive);
+    }
+    
+    public void update() {
+    	sumSensor += ultraSonic.getValue();
+    	averageCount++; 
+    	
+    	if (averageCount > 100) {
+    		SmartDashboard.putNumber("UltraOut", sumSensor/averageCount);
+    		averageCount = 0;
+    		
+    		sumSensor = 0;
+    	}
+    	
+    	SmartDashboard.putData("DrivePID", drivePID);
+    	SmartDashboard.putData("TurnPID", turnPID);
+    	
+    	SmartDashboard.putNumber("Raw Left Encoder", getRawLeftEncoder());
+    	SmartDashboard.putNumber("Raw Right Encoder", getRawRightEncoder());
+    	
+    	SmartDashboard.putNumber("Angle Y", Robot.imu.getAngleY());
+    	SmartDashboard.putNumber("Angle X", Robot.imu.getAngleX());
+    	SmartDashboard.putNumber("Angle Z", Robot.imu.getAngleZ());
+    	
+    	SmartDashboard.putNumber("Ultrasonic Internal Average Value", ultraSonic.getAverageValue()* 0.393701);
+    }
 }
 

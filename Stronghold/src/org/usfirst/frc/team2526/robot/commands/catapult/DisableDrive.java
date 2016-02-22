@@ -1,4 +1,4 @@
-package org.usfirst.frc.team2526.robot.commands;
+package org.usfirst.frc.team2526.robot.commands.catapult;
 
 import org.usfirst.frc.team2526.robot.Robot;
 
@@ -7,9 +7,9 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class RotateNinty extends Command {
+public class DisableDrive extends Command {
 
-    public RotateNinty() {
+    public DisableDrive() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(Robot.driveTrain);
@@ -21,7 +21,7 @@ public class RotateNinty extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.driveTrain.turnAngle(90);
+    	Robot.driveTrain.stopDriving();
     }
 
     // Make this return true when this Command no longer needs to run execute()
