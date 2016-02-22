@@ -5,6 +5,7 @@ import org.usfirst.frc.team2526.robot.commands.catapult.HoldCatapult;
 
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.CANTalon.TalonControlMode;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -15,7 +16,7 @@ public class Catapult extends Subsystem {
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 	
-	CANTalon catapultMotor;
+	CANTalon catapultMotorOne, catapultMotorTwo;
 	DigitalInput catapultLimit;
 	double goal;
 
@@ -29,13 +30,15 @@ public class Catapult extends Subsystem {
     	super("Catapult");
     	// This susbsystem is for our catapult.
     	
-    	catapultMotor = new CANTalon(RobotMap.catapultMotor);
+    	catapultMotorOne = new CANTalon(RobotMap.catapultTalonOne);
+    	catapultMotorTwo = new CANTalon(RobotMap.catapultTalonTwo);
     	
-    	catapultMotor.changeControlMode(CANTalon.TalonControlMode.Position);
-    	catapultMotor.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
+    	catapultMotorOne.changeControlMode(TalonControlMode.Position);
+    	catapultMotorTwo.changeControlMode(TalonControlMode.Follower);
+    	catapultMotorOne.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
     	
-    	catapultMotor.setPID(RobotMap.catapultP, RobotMap.catapultI, RobotMap.catapultD);
-    	catapultMotor.enableControl();
+    	catapultMotorOne.setPID(RobotMap.catapultP, RobotMap.catapultI, RobotMap.catapultD);
+    	catapultMotorOne.enableControl();
     	//catapultMotor.set(6);
     	
     	catapultLimit = new DigitalInput(0);
@@ -55,15 +58,15 @@ public class Catapult extends Subsystem {
     
     
     public double getPosition() {
-    	return catapultMotor.getEncPosition();
+    	return catapultMotorOne.getEncPosition();
     }
     
     public void setCurrent() {
-    	goal = catapultMotor.getEncPosition();
+    	goal = catapultMotorOne.getEncPosition();
     }
     
     public void setCatapultHold() {
-    	catapultMotor.setEncPosition(0);
+    	catapultMotorOne.setEncPosition(0);
     	goal = 0;
     	updateGoal();
     }
@@ -74,11 +77,11 @@ public class Catapult extends Subsystem {
     }
     
     public void updateGoal() {
-    	catapultMotor.setPosition(goal);
+    	catapultMotorOne.setPosition(goal);
     }
     
     public void resetGoal() {
-    	catapultMotor.setEncPosition(0);
+    	catapultMotorOne.setEncPosition(0);
     	goal = 0;
     	updateGoal();
     }

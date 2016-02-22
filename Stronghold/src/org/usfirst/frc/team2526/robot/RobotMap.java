@@ -24,9 +24,12 @@ public class RobotMap {
 	public static int loaderTalon = 6;
 	// Loader Talon
 	
-	public static int catapultMotor = 8;
+	public static int catapultTalonOne = 8;
+	public static int catapultTalonTwo = 9;
+	// Catapult Talons
 	
-	public static int climberWinch = 9;
+	public static int climberWinchOne = 10;
+	public static int climberWinchTwo = 11;
 	
 	
 	public static int PCM_MAIN = 5;
@@ -36,8 +39,8 @@ public class RobotMap {
      ** PNEUMATICS ** 
      ******************/  
 	
-	public static int grabberPiston_A = 0;
-	public static int grabberPiston_B = 1;
+	public static int loaderPiston_A = 0;
+	public static int loaderPiston_B = 1;
 	
 	public static int climberPiston_A = 2;
 	public static int climberPiston_B = 3;
@@ -47,6 +50,8 @@ public class RobotMap {
 
 	public static int wheelie_A = 6;
 	public static int wheelie_B = 7;
+	
+	public static int hookPiston = 8;
 	
 	/******************
    ** CATAPULT CONTROLS ** 

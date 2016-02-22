@@ -26,7 +26,7 @@ public class LoaderFrame extends Subsystem {
     	super("GrabberFrame");
     	// This subsystem is for our Grabber's frame mechanism.
     	
-    	piston = new DoubleSolenoid(RobotMap.PCM_MAIN, RobotMap.grabberPiston_A, RobotMap.grabberPiston_B);
+    	piston = new DoubleSolenoid(RobotMap.PCM_MAIN, RobotMap.loaderPiston_A, RobotMap.loaderPiston_B);
     	
     }
     

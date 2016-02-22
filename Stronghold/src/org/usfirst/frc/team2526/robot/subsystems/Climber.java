@@ -4,6 +4,7 @@ import org.usfirst.frc.team2526.robot.RobotMap;
 import org.usfirst.frc.team2526.robot.commands.climber.HoldWinch;
 
 import edu.wpi.first.wpilibj.CANTalon;
+import edu.wpi.first.wpilibj.CANTalon.TalonControlMode;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -16,18 +17,21 @@ public class Climber extends Subsystem {
     // here. Call these from Commands.
 	
 	DoubleSolenoid climber;
-	CANTalon winch;
+	CANTalon winchOne;
+	CANTalon winchTwo;
 	double goal;
 	
 	public Climber() {
 		super("Climber");
 		
 		climber = new DoubleSolenoid(RobotMap.PCM_MAIN, RobotMap.climberPiston_A, RobotMap.climberPiston_B);
-		winch = new CANTalon(RobotMap.climberWinch);
+		winchOne = new CANTalon(RobotMap.climberWinchOne);
+		winchTwo = new CANTalon(RobotMap.climberWinchTwo);
 		
-		winch.changeControlMode(CANTalon.TalonControlMode.Position);
-		winch.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
-		winch.setPID(RobotMap.climberP, RobotMap.climberI, RobotMap.climberD);
+		winchOne.changeControlMode(TalonControlMode.Position);
+		winchTwo.changeControlMode(TalonControlMode.Follower);
+		winchOne.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
+		winchOne.setPID(RobotMap.climberP, RobotMap.climberI, RobotMap.climberD);
 	}
 
     public void initDefaultCommand() {
@@ -41,26 +45,26 @@ public class Climber extends Subsystem {
     }
     
     public void getCurrentPosition() {
-    	goal = winch.getEncPosition();
+    	goal = winchOne.getEncPosition();
     }
     
     public void holdWinch() {
-    	goal = winch.getEncPosition();
+    	goal = winchOne.getEncPosition();
     	updateGoal();
     }
     
     public void winchUp() {
-    	goal = winch.getEncPosition() + 100;
+    	goal = winchOne.getEncPosition() + 100;
     	updateGoal();
     }
     
     public void winchDown() {
-    	goal = winch.getEncPosition() - 100;
+    	goal = winchOne.getEncPosition() - 100;
     	updateGoal();
     }
     
     public void updateGoal() {
-    	winch.set(goal);
+    	winchOne.set(goal);
     }
 }
 
