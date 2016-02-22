@@ -12,7 +12,10 @@ import org.usfirst.frc.team2526.robot.subsystems.WheelieBar;
 
 import com.analog.adis16448.frc.ADIS16448_IMU;
 
+import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.DigitalOutput;
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.Ultrasonic;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -38,14 +41,14 @@ public class Robot extends IterativeRobot {
 	public static Climber climber;
 	public static SonicShifters sonic;
 	public static WheelieBar wheelieBar;
-
+	public static Ultrasonic ultraSonic;
 	
 	public static OI oi;
 
 
     Command autonomousCommand;
     SendableChooser auto;
-    SendableChooser defense;
+    SendableChooser defence;
     SendableChooser target;
     
     /**
@@ -62,22 +65,22 @@ public class Robot extends IterativeRobot {
        climber = new Climber();
        sonic = new SonicShifters();
        wheelieBar = new WheelieBar();
-       defense = new SendableChooser();
+       defence = new SendableChooser();
        target = new SendableChooser();
-       
+       ultraSonic = new Ultrasonic(new DigitalOutput(RobotMap.ultrasonicDriveOutputChanel),new DigitalInput(RobotMap.ultrasonicDriveInputChannel));
+
        oi = new OI();
        
         auto.addDefault("Drive Through Lowbar", new DriveStraightThroughLowbar());
     //    auto.addObject("My Auto", new MyAutoCommand());
         SmartDashboard.putData("Auto mode", auto);
         
-        defense.addDefault("At Lowbar", 0);
-        defense.addObject("1", 1);
-        defense.addObject("2", 2);
-        defense.addObject("3", 3);
-        defense.addObject("4", 4);
-        defense.addObject("5", 5);
-        SmartDashboard.putData("Defense Number", defense);
+        defence.addDefault("At Lowbar", 0);
+        defence.addObject("1", 1);
+        defence.addObject("2", 2);
+        defence.addObject("3", 3);
+        defence.addObject("4", 4);
+        SmartDashboard.putData("Defence Number", defence);
         
         //Should we use Enums ?
         target.addDefault("Center", 2); // center goal

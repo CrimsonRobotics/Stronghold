@@ -113,7 +113,12 @@ public class RobotMap {
 	public static double firePosition = 5;
 	// Catapult Position Values
 
-    
+    /********************
+     * Ultrasonic Values*
+     ********************/
+	public static final int ultrasonicDriveInputChannel = 1; // (dummy val) for recieving data from sensor
+	public static final int ultrasonicDriveOutputChanel = 2; // (dummy val) for pinging sensor
+	
     // If you are using multiple modules, make sure to define both the port
     // number and the module. For example you with a rangefinder:
     // public static int rangefinderPort = 1;

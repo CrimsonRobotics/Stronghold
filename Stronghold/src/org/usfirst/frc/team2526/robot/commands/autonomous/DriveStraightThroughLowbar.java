@@ -4,12 +4,17 @@ import org.usfirst.frc.team2526.robot.commands.DriveTime;
 import org.usfirst.frc.team2526.robot.commands.RotateNinty;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
  */
 public class DriveStraightThroughLowbar extends CommandGroup {
     
+	//defence position and the desired goal
+	private int defence = SmartDashboard.getInt("Defence Number");
+	private int goal = SmartDashboard.getInt("Goal Number");
+	
     public  DriveStraightThroughLowbar() {
         // Add Commands here:
         // e.g. addSequential(new Command1());
@@ -29,5 +34,53 @@ public class DriveStraightThroughLowbar extends CommandGroup {
         // e.g. if Command1 requires chassis, and Command2 requires arm,
         // a CommandGroup containing them would require both the chassis and the
         // arm.
+    	
+    	// any steps you always want to run such as breaching the defense and alignment with the gyro
+    	
+    	if(defence == 0 && goal == 1){
+    		
+    	}else if(defence == 0 && goal == 2){
+    		
+    	}else if(defence == 0 && goal == 3){
+    		
+    	}else if(defence == 0 && goal == 4){
+    		// probably not needed since we want to shoot the boulder into the goal
+    	}else if(defence == 1 && goal == 1){
+    		
+    	}else if(defence == 1 && goal == 2){
+    		
+    	}else if(defence == 1 && goal == 3){
+    		
+    	}else if(defence == 1 && goal == 4){
+    		// probably not needed since we want to shoot the boulder into the goal
+    	}else if(defence == 2 && goal == 1){
+    		
+    	}else if(defence == 2 && goal == 2){
+    		
+    	}else if(defence == 2 && goal == 3){
+    		
+    	}else if(defence == 2 && goal == 4){
+    		// probably not needed since we want to shoot the boulder into the goal
+    	}else if(defence == 3 && goal == 1){
+    		
+    	}else if(defence == 3 && goal == 2){
+    		
+    	}else if(defence == 3 && goal == 3){
+    		
+    	}else if(defence == 3 && goal == 4){
+    		// probably not needed since we want to shoot the boulder into the goal
+    	}else if(defence == 4 && goal == 1){
+    		
+    	}else if(defence == 4 && goal == 2){
+    		
+    	}else if(defence == 4 && goal == 3){
+    		
+    	}else if(defence == 4 && goal == 4){
+    		// probably not needed since we want to shoot the boulder into the goal
+    	}else{
+    		// unexpected values from smart dashboard WHAT DO WE DO!!!!!
+    	}
+    	
+    	// final steps you want to run in all cases if you leave all cases with goal==4 undefined you can shoot for example
     }
 }
