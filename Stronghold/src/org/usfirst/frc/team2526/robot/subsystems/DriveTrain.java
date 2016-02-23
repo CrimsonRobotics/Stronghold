@@ -161,11 +161,21 @@ public class DriveTrain extends Subsystem {
     }
     
     public void stopDriving() {
-    	drivePID.disable();
-    	turnPID.disable();
+    	drivePID.reset();
+    	turnPID.reset();
     	
-    	lMotor.set(0);
-    	rMotor.set(0);
+    	lMotor.disable();
+    	rMotor.disable();
+    	lMotorTwo.disable();
+    	rMotorTwo.disable();
+    	
+    }
+    
+    public void startDriving() {
+    	lMotor.enable();
+    	rMotor.enable();
+    	lMotorTwo.enable();
+    	rMotorTwo.enable();
     }
     
     public void setAngle(double angle) {

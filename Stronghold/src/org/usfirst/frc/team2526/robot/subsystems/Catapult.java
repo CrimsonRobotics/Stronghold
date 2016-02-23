@@ -53,13 +53,13 @@ public class Catapult extends Subsystem {
     }
     
     public void catapultFire() {
-    	catapultMotorOne.set(1);
-    	catapultMotorTwo.set(1);
+    	catapultMotorOne.set(-1);
+    	catapultMotorTwo.set(-1);
     }
     
     public void armCatapult() {
-    	catapultMotorOne.set(.7);
-    	catapultMotorTwo.set(.7);
+    	catapultMotorOne.set(-1);
+    	catapultMotorTwo.set(-1);
     }
     
     public void stopCatapult() {

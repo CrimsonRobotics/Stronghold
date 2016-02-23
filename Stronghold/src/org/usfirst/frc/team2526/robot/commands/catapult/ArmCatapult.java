@@ -17,21 +17,17 @@ public class ArmCatapult extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.catapult.moveCatapult();
     }
 
     // Called repeatedly when this Command is scheduled to run
-    protected void execute() {
+    protected void execute() {    	
+    	Robot.catapult.moveCatapult();
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	if(Robot.catapult.getLimitSwitchStatus()) {
-    		return false;
-    	} else {
-    		return true;
-    	}
-    	
+    	return !Robot.catapult.getLimitSwitchStatus();
+
     }
 
     // Called once after isFinished returns true
