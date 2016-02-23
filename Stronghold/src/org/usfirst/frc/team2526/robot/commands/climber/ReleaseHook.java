@@ -9,15 +9,19 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class ReleaseHook extends Command {
 
+	boolean isFinished;
+	
     public ReleaseHook() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(Robot.climber);
+    	isFinished = false;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
     	Robot.climber.closePneumatics();
+    	isFinished = true;
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -26,7 +30,7 @@ public class ReleaseHook extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return isFinished;
     }
 
     // Called once after isFinished returns true

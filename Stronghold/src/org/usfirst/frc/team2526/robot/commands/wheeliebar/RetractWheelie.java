@@ -15,7 +15,6 @@ public class RetractWheelie extends Command {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(Robot.wheelieBar);
-    	
     	isFinished = false;
     }
 
