@@ -42,6 +42,7 @@ public class Climber extends Subsystem {
     
     public void closePneumatics() {
     	hookPiston.set(true);
+    	RobotMap.hookState = true;
     }
 
 }
