@@ -4,8 +4,8 @@ import org.usfirst.frc.team2526.robot.Statics;
 import org.usfirst.frc.team2526.robot.commands.loader.ExtendLoader;
 import org.usfirst.frc.team2526.robot.commands.wheeliebar.ExtendWheelie;
 
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import edu.wpi.first.wpilibj.command.WaitCommand;
 
 /**
  *
@@ -19,8 +19,8 @@ public class FireHook extends CommandGroup {
         // these will run in order.
     	
     	addParallel(new ExtendLoader());
-    	addParallel(new ExtendWheelie());
-    	Timer.delay(Statics.CLIMBER_EXTEND_LOADER_DELAY);
+    	addSequential(new ExtendWheelie());
+    	addSequential(new WaitCommand(Statics.CLIMBER_EXTEND_LOADER_DELAY));
 
         // To run multiple commands at the same time,
         // use addParallel()

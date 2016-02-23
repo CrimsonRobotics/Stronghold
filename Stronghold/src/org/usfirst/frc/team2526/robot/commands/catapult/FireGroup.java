@@ -1,7 +1,10 @@
 package org.usfirst.frc.team2526.robot.commands.catapult;
 
+import org.usfirst.frc.team2526.robot.commands.Drive;
 import org.usfirst.frc.team2526.robot.commands.loader.ExtendLoader;
+import org.usfirst.frc.team2526.robot.commands.loader.RetractLoader;
 import org.usfirst.frc.team2526.robot.commands.wheeliebar.ExtendWheelie;
+import org.usfirst.frc.team2526.robot.commands.wheeliebar.RetractWheelie;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
@@ -20,7 +23,10 @@ public class FireGroup extends CommandGroup {
     	addParallel(new ExtendLoader());
     	addSequential(new ExtendWheelie());
     	addSequential(new FireCatapult());
+    	addParallel(new Drive());
+    	addParallel(new RetractWheelie());
     	addSequential(new ArmCatapult());
+    	addSequential(new RetractLoader());
     	
 
         // To run multiple commands at the same time,
