@@ -9,20 +9,17 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class DisableDrive extends Command {
 
-	boolean isFinished;
 	
     public DisableDrive() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(Robot.driveTrain);
     	
-    	isFinished = false;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.driveTrain.beginDriveHold();;
-    	isFinished = true;
+    	Robot.driveTrain.beginDriveHold();
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -31,7 +28,7 @@ public class DisableDrive extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return isFinished;
+        return true;
     }
 
     // Called once after isFinished returns true
