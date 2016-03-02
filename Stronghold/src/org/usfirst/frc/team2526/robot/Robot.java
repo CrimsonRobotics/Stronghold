@@ -64,6 +64,7 @@ public class Robot extends IterativeRobot {
      * used for any initialization code.
      */
     public void robotInit() {
+    	Statics.getInstance();
        auto = new SendableChooser();
        imu = new ADIS16448_IMU();
        driveTrain = new DriveTrain();

@@ -1,5 +1,6 @@
 package org.usfirst.frc.team2526.robot.commands.catapult;
 
+import org.usfirst.frc.team2526.robot.commands.DynamicWait;
 import org.usfirst.frc.team2526.robot.commands.drive.DisableDrive;
 import org.usfirst.frc.team2526.robot.commands.drive.EnableDrive;
 import org.usfirst.frc.team2526.robot.commands.loader.ExtendLoader;
@@ -26,6 +27,7 @@ public class FireGroup extends CommandGroup {
     	addSequential(new ExtendWheelie());
     	addSequential(new WaitCommand(0.05));
     	addSequential(new FireCatapult());
+    	addSequential(new DynamicWait("Catapult Hold Delay"));
     	addParallel(new EnableDrive());
     	addParallel(new RetractWheelie());
     	addSequential(new ArmCatapult());
