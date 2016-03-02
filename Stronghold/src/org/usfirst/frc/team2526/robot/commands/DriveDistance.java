@@ -11,7 +11,8 @@ public class DriveDistance extends Command {
 	
 	double distance;
 	
-	public DriveDistance(double distance) {
+	public DriveDistance(double distance, double timeout) {
+		super(timeout);
 		requires(Robot.driveTrain);
     	
     	this.distance = distance;
@@ -29,13 +30,12 @@ public class DriveDistance extends Command {
     
  
     protected boolean isFinished() {
-        return Robot.driveTrain.onDriveTarget();
+        return Robot.driveTrain.onDriveTarget() || this.isTimedOut();
     }
 
     protected void end() {
     	Robot.driveTrain.disableDrivePIDValues();
     	Robot.driveTrain.disableTurnPIDValues();
-    	
     }
 
     protected void interrupted() {

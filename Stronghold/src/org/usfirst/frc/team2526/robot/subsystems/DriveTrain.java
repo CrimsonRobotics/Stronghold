@@ -24,7 +24,7 @@ public class DriveTrain extends Subsystem {
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 	
-	public CANTalon lMotor, lMotorTwo, rMotor, rMotorTwo;
+	public CANTalon lMotor, rMotor, lMotorTwo, rMotorTwo;
 	
 	PIDOutputValues pidValues;
 
@@ -53,14 +53,15 @@ public class DriveTrain extends Subsystem {
     	ultraSonic = new AnalogInput(1);
     	
     	lMotor = new CANTalon(RobotMap.lMotorOne);
-    	lMotorTwo = new CANTalon(RobotMap.lMotorTwo); //Defaults are quad encoder and percentVBus. No need to add them again.
-    	rMotor = new CANTalon(RobotMap.rMotorOne);
+    	rMotor = new CANTalon(RobotMap.rMotorOne); 
+    	lMotorTwo = new CANTalon(RobotMap.lMotorTwo);
     	rMotorTwo = new CANTalon(RobotMap.rMotorTwo);
     	
     	lMotorTwo.changeControlMode(TalonControlMode.Follower);
     	rMotorTwo.changeControlMode(TalonControlMode.Follower);
     	lMotorTwo.set(RobotMap.lMotorOne);
     	rMotorTwo.set(RobotMap.rMotorOne);
+    	
     	
     	drivePID = new PIDController(pDrive, iDrive, dDrive, new PIDSource() {
     		PIDSourceType type = PIDSourceType.kDisplacement;
@@ -106,6 +107,9 @@ public class DriveTrain extends Subsystem {
 			}
     		
     	});
+    	
+    	drivePID.setOutputRange(-0.5, 0.5);
+    	drivePID.setOutputRange(-0.5, 0.5);
     	
     	turnPID.setAbsoluteTolerance(3.0);
     	drivePID.setAbsoluteTolerance(5);
@@ -160,22 +164,31 @@ public class DriveTrain extends Subsystem {
     	drivePID.setSetpoint(-relativeTicks);
     }
     
-    public void stopDriving() {
-    	drivePID.reset();
-    	turnPID.reset();
-    	
-    	lMotor.disable();
-    	rMotor.disable();
-    	lMotorTwo.disable();
-    	rMotorTwo.disable();
-    	
+    public void driveConstantBack() {
+    	pidValues.setMagnitudeValue(.4);
+    	turnPID.setSetpoint(0);
     }
     
-    public void startDriving() {
+    public void stopDriving() {
+    	drivePID.disable();
+    	turnPID.disable();
+    	
+    	lMotor.set(0);
+    	rMotor.set(0);
+    }
+    
+    public void beginDriveHold() {
+    	lMotor.disable();
+    	rMotor.disable();
+    	rMotorTwo.disable();
+    	lMotorTwo.disable();
+    }
+    
+    public void releaseDriveHold() {
     	lMotor.enable();
     	rMotor.enable();
-    	lMotorTwo.enable();
     	rMotorTwo.enable();
+    	lMotorTwo.enable();
     }
     
     public void setAngle(double angle) {

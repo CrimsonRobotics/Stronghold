@@ -21,7 +21,7 @@ public class DisableDrive extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.driveTrain.stopDriving();
+    	Robot.driveTrain.beginDriveHold();;
     	isFinished = true;
     }
 

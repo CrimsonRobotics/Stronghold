@@ -15,8 +15,8 @@ public class DriveStraightThroughDefense extends CommandGroup {
     public  DriveStraightThroughDefense() {
         
     	addSequential(new ResetGyro());
-    	addSequential(new DriveDistance(Statics.getDouble("Straight Auto Distance Inches")));
-    	addSequential(new RotateTo(0));
+    	addSequential(new DriveDistance(Statics.getDouble("Straight Auto Distance Inches"), 3));
+    	addSequential(new RotateTo(0.0, 1.0));
     	
     }
 }

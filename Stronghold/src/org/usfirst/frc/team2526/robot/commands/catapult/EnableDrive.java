@@ -21,7 +21,7 @@ public class EnableDrive extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.driveTrain.startDriving();
+    	Robot.driveTrain.releaseDriveHold();;
     	isFinished = true;
     }
 

@@ -10,7 +10,8 @@ import edu.wpi.first.wpilibj.command.Command;
 public class RotateTo extends Command {
 	double degrees;
     
-	public RotateTo(double degrees) {
+	public RotateTo(double degrees, double timeout) {
+		super(timeout);
 		this.degrees = degrees;
     	requires(Robot.driveTrain);
     }
@@ -25,7 +26,7 @@ public class RotateTo extends Command {
     }
 
     protected boolean isFinished() {
-        return Robot.driveTrain.onTurnTarget();
+        return false;
     }
 
     protected void end() {

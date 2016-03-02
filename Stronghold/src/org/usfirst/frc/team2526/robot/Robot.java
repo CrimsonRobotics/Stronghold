@@ -1,6 +1,11 @@
 
 package org.usfirst.frc.team2526.robot;
 
+import org.usfirst.frc.team2526.robot.commands.CalibrateOffset;
+import org.usfirst.frc.team2526.robot.commands.ResetGyro;
+import org.usfirst.frc.team2526.robot.commands.RotateTo;
+import org.usfirst.frc.team2526.robot.commands.VisionShoot;
+import org.usfirst.frc.team2526.robot.commands.autonomous.BackUpIncline;
 import org.usfirst.frc.team2526.robot.commands.autonomous.DriveStraightThroughDefense;
 import org.usfirst.frc.team2526.robot.commands.catapult.FireCatapult;
 import org.usfirst.frc.team2526.robot.subsystems.Catapult;
@@ -9,6 +14,7 @@ import org.usfirst.frc.team2526.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team2526.robot.subsystems.LoaderFrame;
 import org.usfirst.frc.team2526.robot.subsystems.LoaderRollers;
 import org.usfirst.frc.team2526.robot.subsystems.SonicShifters;
+import org.usfirst.frc.team2526.robot.subsystems.VisionCamera;
 import org.usfirst.frc.team2526.robot.subsystems.WheelieBar;
 
 import com.analog.adis16448.frc.ADIS16448_IMU;
@@ -32,6 +38,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Robot extends IterativeRobot {
 
 	public static DriveTrain driveTrain;
+	public static VisionCamera camera;
 	public static ADIS16448_IMU imu;
 	public static Catapult catapult;
 	public static LoaderFrame loaderFrame;
@@ -45,6 +52,7 @@ public class Robot extends IterativeRobot {
 
 
     Command autonomousCommand;
+    SendableChooser chooser;
     SendableChooser auto;
     SendableChooser defense;
     SendableChooser target;
@@ -63,10 +71,37 @@ public class Robot extends IterativeRobot {
        climber = new Climber();
        sonic = new SonicShifters();
        wheelieBar = new WheelieBar();
+		camera = new VisionCamera();
        defense = new SendableChooser();
        target = new SendableChooser();
        
        oi = new OI();
+       
+       chooser = new SendableChooser();
+       chooser.addDefault("Right", new RotateTo(90, 2));
+       chooser.addObject("Left", new RotateTo(-90, 2));
+       SmartDashboard.putData("Auto Direction", chooser);
+       
+       
+       SmartDashboard.putNumber("distance-drive", 0);
+       SmartDashboard.putNumber("Defense Distance", 84);
+       SmartDashboard.putNumber("After Defense Distance", 96);
+       
+       SmartDashboard.putData(new BackUpIncline());
+       
+       SmartDashboard.putData(camera);
+       
+       SmartDashboard.putData(new ResetGyro());
+       SmartDashboard.putData(new CalibrateOffset());
+       
+       
+       SmartDashboard.putData(new VisionShoot());
+       
+       SmartDashboard.putData(new DriveStraightThroughDefense());
+       
+       SmartDashboard.putData(new RotateTo(90, 2));
+       
+       SmartDashboard.putBoolean("goal", false);
        
         auto.addDefault("Drive Through Lowbar", new DriveStraightThroughDefense());
     //    auto.addObject("My Auto", new MyAutoCommand());
