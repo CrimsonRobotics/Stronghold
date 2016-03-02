@@ -47,6 +47,7 @@ public class Statics {
 	 */
 	private void addConstant(String name, double value) {
 		constants.add(new Constant(name, value));
+		prefs.putDouble(name, value);
 	}
 	
 	public static double getDouble(String string) {
