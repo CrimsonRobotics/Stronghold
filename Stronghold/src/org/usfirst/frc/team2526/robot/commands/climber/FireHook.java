@@ -18,7 +18,7 @@ public class FireHook extends CommandGroup {
 
     	addParallel(new ExtendLoader());
     	addSequential(new ExtendWheelie());
-    	addSequential(new WaitCommand(Statics.CLIMBER_EXTEND_LOADER_DELAY));
+    	addSequential(new WaitCommand(Statics.getDouble("Climber Extend Loader Delay")));
     	addSequential(new ReleaseHook());
     	addSequential(new WaitCommand(0.05));
     	addParallel(new RetractWheelie());

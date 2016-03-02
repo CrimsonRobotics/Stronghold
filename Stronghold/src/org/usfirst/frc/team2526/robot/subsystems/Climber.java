@@ -36,8 +36,9 @@ public class Climber extends Subsystem {
     }
     
     public void climberUp() {
-    	winchOne.set(Statics.CLIMBER_UP_SPEED);
-    	winchTwo.set(Statics.CLIMBER_UP_SPEED);
+    	double climberUpSpeed = Statics.getDouble("Climber Up Speed");
+    	winchOne.set(climberUpSpeed);
+    	winchTwo.set(climberUpSpeed);
     }
     
     public void closePneumatics() {

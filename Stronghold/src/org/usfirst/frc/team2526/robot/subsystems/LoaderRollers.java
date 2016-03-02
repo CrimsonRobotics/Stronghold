@@ -33,16 +33,16 @@ public class LoaderRollers extends Subsystem {
     }
     
     public void rollersIn() {
-    	loaderMotor.set(Statics.LOADER_SPEED_IN);
+    	loaderMotor.set(Statics.getDouble("Loader Speed In"));
     }
     
     public void rollersOut() {
-    	loaderMotor.set(Statics.LOADER_SPEED_OUT);
+    	loaderMotor.set(Statics.getDouble("Loader Speed Out"));
     }
     
     public void ballIn() {
-    	loaderMotor.set(Statics.LOADER_SPEED_IN);
-    	Timer.delay(Statics.LOADER_IN_DELAY);
+    	loaderMotor.set(Statics.getDouble("Loader Speed In"));
+    	Timer.delay(Statics.getDouble("Loader In Delay"));
     	loaderMotor.set(0);
     	
     }

@@ -62,7 +62,7 @@ public class Catapult extends Subsystem {
     public void holdCatapult() {
     	catapultMotorOne.set(0);
     	catapultMotorTwo.set(0);
-    	Timer.delay(Statics.CATAPULT_HOLD_DELAY);
+    	Timer.delay(Statics.getDouble("Catapult Hold Delay"));
     }
 
     
