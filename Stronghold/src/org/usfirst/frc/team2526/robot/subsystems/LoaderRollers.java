@@ -2,6 +2,7 @@ package org.usfirst.frc.team2526.robot.subsystems;
 
 import org.usfirst.frc.team2526.robot.RobotMap;
 import org.usfirst.frc.team2526.robot.Statics;
+import org.usfirst.frc.team2526.robot.commands.loader.StopRollers;
 
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.CANTalon.TalonControlMode;
@@ -19,7 +20,7 @@ public class LoaderRollers extends Subsystem {
 
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
-        //setDefaultCommand(new MySpecialCommand());
+        setDefaultCommand(new StopRollers());
     }
     
     public LoaderRollers() {
