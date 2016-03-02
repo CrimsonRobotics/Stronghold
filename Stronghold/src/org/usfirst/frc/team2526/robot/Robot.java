@@ -20,6 +20,7 @@ import org.usfirst.frc.team2526.robot.subsystems.WheelieBar;
 import com.analog.adis16448.frc.ADIS16448_IMU;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -47,6 +48,7 @@ public class Robot extends IterativeRobot {
 	public static SonicShifters sonic;
 	public static WheelieBar wheelieBar;
 
+	public static Solenoid light;
 	
 	public static OI oi;
 
@@ -74,6 +76,8 @@ public class Robot extends IterativeRobot {
 		camera = new VisionCamera();
        defense = new SendableChooser();
        target = new SendableChooser();
+       
+       light = new Solenoid(RobotMap.PCM_MAIN, RobotMap.LIGHT_PORT); // light relay will be on main pcm
        
        oi = new OI();
        
@@ -160,7 +164,10 @@ public class Robot extends IterativeRobot {
 		} */
     	
     	// schedule the autonomous command (example)
-        if (autonomousCommand != null) autonomousCommand.start();
+        if (autonomousCommand != null){
+        	light.set(true); // enable light for autonomous period
+        	autonomousCommand.start();
+        }
     }
 
     /**
@@ -175,7 +182,10 @@ public class Robot extends IterativeRobot {
         // teleop starts running. If you want the autonomous to 
         // continue until interrupted by another command, remove
         // this line or comment it out.
-        if (autonomousCommand != null) autonomousCommand.cancel();
+        if (autonomousCommand != null){
+        	light.set(false); // disable light for teleop
+        	autonomousCommand.cancel();
+        }
     }
 
     /**
