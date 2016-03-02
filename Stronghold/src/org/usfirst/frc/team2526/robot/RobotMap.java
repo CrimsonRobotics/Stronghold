@@ -44,13 +44,13 @@ public class RobotMap {
 	
 	public static int climberPiston = 2;
 	
-	public static int sonic_A = 4;
-	public static int sonic_B = 5;
+	public static int sonic_A = 3;
+	public static int sonic_B = 4;
 
-	public static int wheelie_A = 6;
-	public static int wheelie_B = 7;
+	public static int wheelie_A = 5;
+	public static int wheelie_B = 6;
 	
-	public static int hookPiston = 8;
+	public static int hookPiston = 7;
 	
 	/******************
    ** CATAPULT CONTROLS ** 
