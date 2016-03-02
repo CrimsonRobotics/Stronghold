@@ -7,27 +7,31 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class HoldCatapult extends Command {
+public class EnableDrive extends Command {
 
-    public HoldCatapult() {
+	boolean isFinished;
+	
+    public EnableDrive() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	requires(Robot.catapult);
+    	requires(Robot.driveTrain);
+    	
+    	isFinished = false;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.catapult.setCurrent();
+    	Robot.driveTrain.startDriving();
+    	isFinished = true;
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.catapult.updateGoal();
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return isFinished;
     }
 
     // Called once after isFinished returns true

@@ -96,17 +96,11 @@ public class RobotMap {
 	}
 	
 	/******************
-  ** PID/ENCODER VALUES ** 
+	 ** HOOK BOOLEANS ** 
      ******************/  
 	
-	public static double catapultP = 1.0;
-	public static double catapultI = 0;
-	public static double catapultD = 0;
-	// Catapult PID Values
-	
-	public static double armPosition = 85;
-	public static double firePosition = 5;
-	// Catapult Position Values
+	public static boolean hookState = false;
+
 	
 	/******************
  ** DIGITAL SENSOR INPUTS ** 
