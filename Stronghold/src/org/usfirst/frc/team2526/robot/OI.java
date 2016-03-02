@@ -2,12 +2,13 @@ package org.usfirst.frc.team2526.robot;
 
 
 
+import org.usfirst.frc.team2526.robot.commands.ShiftDown;
+import org.usfirst.frc.team2526.robot.commands.ShiftUp;
 import org.usfirst.frc.team2526.robot.commands.SwitchDrive;
 import org.usfirst.frc.team2526.robot.commands.catapult.FireGroup;
-import org.usfirst.frc.team2526.robot.commands.loader.ExtendLoader;
-import org.usfirst.frc.team2526.robot.commands.loader.LoadBall;
+import org.usfirst.frc.team2526.robot.commands.climber.ClimbUp;
+import org.usfirst.frc.team2526.robot.commands.climber.ReleaseHook;
 import org.usfirst.frc.team2526.robot.commands.loader.RetractLoader;
-import org.usfirst.frc.team2526.robot.commands.loader.RollersIn;
 import org.usfirst.frc.team2526.robot.commands.loader.RollersOut;
 import org.usfirst.frc.team2526.robot.commands.loader.UnloadBall;
 import org.usfirst.frc.team2526.robot.commands.wheeliebar.ExtendWheelie;
@@ -50,8 +51,11 @@ public class OI {
 
 	
 	Button primaryStickOne = new JoystickButton(primaryStick,1);
+	Button primaryStickTwo = new JoystickButton(primaryStick,2);
 	Button primaryStickThree = new JoystickButton(primaryStick,3);
 	Button primaryStickFour = new JoystickButton(primaryStick,4);
+	Button primaryStickFive = new JoystickButton(primaryStick,5);
+	Button primaryStickSix = new JoystickButton(primaryStick,6);
 	Button primaryStickSeven = new JoystickButton(primaryStick,7);
 	Button primaryStickEight = new JoystickButton(primaryStick,8);
 	Button primaryStickNine = new JoystickButton(primaryStick,9);
@@ -85,21 +89,34 @@ public class OI {
 //		secondaryStickOne.whenPressed(new LoaderOut());
 //		secondaryStickOne.whenReleased(new RetractLoader());
 		
-		primaryStickOne.whileHeld(new RollersIn());
-		primaryStickOne.whenPressed(new ExtendLoader());
-		primaryStickOne.whenReleased(new LoadBall());
+//		primaryStickOne.whileHeld(new RollersIn());
+//		primaryStickOne.whenPressed(new ExtendLoader());
+//		primaryStickOne.whenReleased(new LoadBall());
 		
 		primaryStickEight.whileHeld(new RollersOut());
 		primaryStickEight.whenPressed(new UnloadBall());
 		primaryStickEight.whenReleased(new RetractLoader());
-		// Loader Commands
-
 		
-		primaryStickSeven.whenPressed(new FireGroup());
+		primaryStickSix.whileHeld(new RollersOut());
+		// Loader Commands
+		
+		primaryStickFour.whenPressed(new FireGroup());
 		// Catapult Commands
 		
 		secondaryStickThree.whenPressed(new ExtendWheelie());
 		secondaryStickThree.whenReleased(new RetractWheelie());
+		
+		if(primaryStick.getRawAxis(6) == 1) {
+			new ExtendWheelie();
+		} else if(primaryStick.getRawAxis(6) == -1) {
+			new RetractWheelie();
+		}
+
+		primaryStickThree.whenPressed(new ReleaseHook());
+		primaryStickTwo.whileHeld(new ClimbUp());
+		
+		primaryStickFive.whenPressed(new ShiftDown());
+		primaryStickFive.whenReleased(new ShiftUp());
 		
 		
 		
