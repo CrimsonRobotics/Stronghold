@@ -41,10 +41,6 @@ public class LoaderFrame extends Subsystem {
     	piston.set(DoubleSolenoid.Value.kReverse);
     }
     
-    public void ExtendLoaderWait() {
-    	Timer.delay(0);
-    	piston.set(DoubleSolenoid.Value.kForward);
-    }
     
     public boolean getLoaderState() {
     	return loaderSensor.get();
