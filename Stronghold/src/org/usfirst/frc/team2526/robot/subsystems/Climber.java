@@ -13,9 +13,6 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class Climber extends Subsystem {
     
-    // Put methods for controlling this subsystem
-    // here. Call these from Commands.
-	
 	Solenoid hookPiston;
 	CANTalon winchOne;
 	CANTalon winchTwo;
@@ -28,17 +25,14 @@ public class Climber extends Subsystem {
 		winchTwo = new CANTalon(RobotMap.climberWinchTwo);
 		
 		winchOne.changeControlMode(TalonControlMode.PercentVbus);
-		winchTwo.changeControlMode(TalonControlMode.PercentVbus);
+		winchTwo.changeControlMode(TalonControlMode.Follower);
+		winchTwo.set(RobotMap.climberWinchOne);
 	}
 
-    public void initDefaultCommand() {
-    	//setDefaultCommand(new HoldWinch());
-    }
+    public void initDefaultCommand() {}
     
     public void climberUp() {
-    	double climberUpSpeed = Statics.getDouble("Climber Up Speed");
-    	winchOne.set(climberUpSpeed);
-    	winchTwo.set(climberUpSpeed);
+    	winchOne.set(Statics.getDouble("Climber Up Speed"));
     }
     
     public void closePneumatics() {
