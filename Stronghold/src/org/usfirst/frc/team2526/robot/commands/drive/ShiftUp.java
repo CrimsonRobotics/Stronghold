@@ -1,4 +1,4 @@
-package org.usfirst.frc.team2526.robot.commands;
+package org.usfirst.frc.team2526.robot.commands.drive;
 
 import org.usfirst.frc.team2526.robot.Robot;
 
@@ -7,9 +7,9 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class ShiftDown extends Command {
+public class ShiftUp extends Command {
 
-    public ShiftDown() {
+    public ShiftUp() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(Robot.sonic);
@@ -21,7 +21,7 @@ public class ShiftDown extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.sonic.shiftDown();
+    	Robot.sonic.shiftUp();
     }
 
     // Make this return true when this Command no longer needs to run execute()

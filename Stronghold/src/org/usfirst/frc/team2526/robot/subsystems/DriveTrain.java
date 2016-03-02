@@ -3,7 +3,7 @@ package org.usfirst.frc.team2526.robot.subsystems;
 import org.usfirst.frc.team2526.robot.Robot;
 import org.usfirst.frc.team2526.robot.RobotMap;
 import org.usfirst.frc.team2526.robot.Statics;
-import org.usfirst.frc.team2526.robot.commands.Drive;
+import org.usfirst.frc.team2526.robot.commands.drive.Drive;
 
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.CANTalon;

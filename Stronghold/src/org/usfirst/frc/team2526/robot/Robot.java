@@ -1,13 +1,13 @@
 
 package org.usfirst.frc.team2526.robot;
 
-import org.usfirst.frc.team2526.robot.commands.CalibrateOffset;
 import org.usfirst.frc.team2526.robot.commands.ResetGyro;
-import org.usfirst.frc.team2526.robot.commands.RotateTo;
-import org.usfirst.frc.team2526.robot.commands.VisionShoot;
 import org.usfirst.frc.team2526.robot.commands.autonomous.BackUpIncline;
 import org.usfirst.frc.team2526.robot.commands.autonomous.DriveStraightThroughDefense;
 import org.usfirst.frc.team2526.robot.commands.catapult.FireCatapult;
+import org.usfirst.frc.team2526.robot.commands.drive.RotateTo;
+import org.usfirst.frc.team2526.robot.commands.vision.CalibrateOffset;
+import org.usfirst.frc.team2526.robot.commands.vision.VisionShoot;
 import org.usfirst.frc.team2526.robot.subsystems.Catapult;
 import org.usfirst.frc.team2526.robot.subsystems.Climber;
 import org.usfirst.frc.team2526.robot.subsystems.DriveTrain;

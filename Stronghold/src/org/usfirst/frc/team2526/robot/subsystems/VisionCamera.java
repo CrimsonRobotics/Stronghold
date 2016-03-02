@@ -1,6 +1,6 @@
 package org.usfirst.frc.team2526.robot.subsystems;
 
-import org.usfirst.frc.team2526.robot.commands.VisionRecordAngle;
+import org.usfirst.frc.team2526.robot.commands.vision.VisionRecordAngle;
 
 import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.command.Subsystem;

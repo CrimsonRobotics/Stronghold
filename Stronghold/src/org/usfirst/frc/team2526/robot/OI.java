@@ -2,12 +2,12 @@ package org.usfirst.frc.team2526.robot;
 
 
 
-import org.usfirst.frc.team2526.robot.commands.ShiftDown;
-import org.usfirst.frc.team2526.robot.commands.ShiftUp;
-import org.usfirst.frc.team2526.robot.commands.SwitchDrive;
 import org.usfirst.frc.team2526.robot.commands.catapult.FireGroup;
 import org.usfirst.frc.team2526.robot.commands.climber.ClimbUp;
 import org.usfirst.frc.team2526.robot.commands.climber.ReleaseHook;
+import org.usfirst.frc.team2526.robot.commands.drive.ShiftDown;
+import org.usfirst.frc.team2526.robot.commands.drive.ShiftUp;
+import org.usfirst.frc.team2526.robot.commands.drive.SwitchDrive;
 import org.usfirst.frc.team2526.robot.commands.loader.RetractLoader;
 import org.usfirst.frc.team2526.robot.commands.loader.RollersOut;
 import org.usfirst.frc.team2526.robot.commands.loader.UnloadBall;

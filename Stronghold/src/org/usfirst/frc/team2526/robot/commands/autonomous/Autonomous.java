@@ -1,7 +1,7 @@
 package org.usfirst.frc.team2526.robot.commands.autonomous;
 
-import org.usfirst.frc.team2526.robot.commands.DriveDistance;
-import org.usfirst.frc.team2526.robot.commands.RotateTo;
+import org.usfirst.frc.team2526.robot.commands.drive.DriveDistance;
+import org.usfirst.frc.team2526.robot.commands.drive.RotateTo;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.WaitCommand;
