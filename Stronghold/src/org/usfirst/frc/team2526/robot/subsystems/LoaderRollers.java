@@ -5,7 +5,6 @@ import org.usfirst.frc.team2526.robot.Statics;
 
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.CANTalon.TalonControlMode;
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -39,13 +38,7 @@ public class LoaderRollers extends Subsystem {
     public void rollersOut() {
     	loaderMotor.set(Statics.getDouble("Loader Speed Out"));
     }
-    
-    public void ballIn() {
-    	loaderMotor.set(Statics.getDouble("Loader Speed In"));
-    	Timer.delay(Statics.getDouble("Loader In Delay"));
-    	loaderMotor.set(0);
-    	
-    }
+
     
     public void rollersStop() {
     	loaderMotor.set(0);
