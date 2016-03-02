@@ -35,6 +35,11 @@ public class RobotMap {
 	public static int PCM_MAIN = 5;
 	// Pneumatics Controller
 	
+	/*******
+	 *Relay*
+	 *******/
+	public static final int LIGHT_PORT = 7; // dummy value for where the relay for the light will be on PCM
+	
 	/******************
      ** PNEUMATICS ** 
      ******************/  
