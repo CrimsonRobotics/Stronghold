@@ -25,7 +25,7 @@ public class FireGroup extends CommandGroup {
     	addSequential(new DisableDrive());
     	addParallel(new ExtendLoader());
     	addSequential(new ExtendWheelie());
-    	addSequential(new WaitCommand(0.05));
+    	addSequential(new DynamicWait("Loader to Catapult Delay"));
     	addSequential(new FireCatapult());
     	addSequential(new DynamicWait("Catapult Hold Delay"));
     	addParallel(new EnableDrive());
