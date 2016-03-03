@@ -1,8 +1,8 @@
 package org.usfirst.frc.team2526.robot.subsystems;
 
+import org.usfirst.frc.team2526.robot.Statics;
 import org.usfirst.frc.team2526.robot.commands.vision.VisionRecordAngle;
 
-import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -19,10 +19,10 @@ public class VisionCamera extends Subsystem {
 	ITable gripTable = NetworkTable.getTable("GRIP").getSubTable("contours");
 	
 	double raw_angle;
-
+	boolean updating;
     
     public double getAngle() {
-    	return raw_angle - Preferences.getInstance().getDouble("Camera_Angle_Offset", 0);
+    	return raw_angle - Statics.getDouble("Camera Angle Offset");
     }
     
     public double getRawAngle() {
@@ -41,18 +41,24 @@ public class VisionCamera extends Subsystem {
     	
     		SmartDashboard.putNumber("raw angle", raw_angle);
     		
-    		
+    		updating = true;
     	} else {
-    		raw_angle = Preferences.getInstance().getDouble("Camera_Angle_Offset", 0);
+    		raw_angle = Statics.getDouble("Camera Angle Offset");
+    		
+    		updating = false;
     	}
     }
     
     public static void setOffset(double offset) {
-    	Preferences.getInstance().putDouble("Camera_Angle_Offset", offset);
+    	Statics.putDouble("Camera Angle Offset", offset);
     }
 
 	protected void initDefaultCommand() {
 		this.setDefaultCommand(new VisionRecordAngle());
+	}
+	
+	public boolean isUpdating() {
+		return updating;
 	}
 }
 

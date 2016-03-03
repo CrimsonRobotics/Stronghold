@@ -4,6 +4,7 @@ package org.usfirst.frc.team2526.robot;
 import org.usfirst.frc.team2526.robot.commands.ResetGyro;
 import org.usfirst.frc.team2526.robot.commands.autonomous.BackUpIncline;
 import org.usfirst.frc.team2526.robot.commands.autonomous.DriveStraightThroughDefense;
+import org.usfirst.frc.team2526.robot.commands.autonomous.SmartAuto;
 import org.usfirst.frc.team2526.robot.commands.catapult.FireCatapult;
 import org.usfirst.frc.team2526.robot.commands.drive.RotateTo;
 import org.usfirst.frc.team2526.robot.commands.vision.CalibrateOffset;
@@ -54,9 +55,9 @@ public class Robot extends IterativeRobot {
 
 
     Command autonomousCommand;
-    SendableChooser chooser;
-    SendableChooser auto;
-    SendableChooser defense;
+//    SendableChooser chooser;
+//    SendableChooser auto;
+    SendableChooser startDefense;
     SendableChooser target;
     
     /**
@@ -65,7 +66,7 @@ public class Robot extends IterativeRobot {
      */
     public void robotInit() {
     	Statics.getInstance();
-       auto = new SendableChooser();
+//       auto = new SendableChooser();
        imu = new ADIS16448_IMU();
        driveTrain = new DriveTrain();
        catapult = new Catapult();
@@ -75,17 +76,17 @@ public class Robot extends IterativeRobot {
        sonic = new SonicShifters();
        wheelieBar = new WheelieBar();
 		camera = new VisionCamera();
-       defense = new SendableChooser();
+       startDefense = new SendableChooser();
        target = new SendableChooser();
        
        light = new Solenoid(RobotMap.PCM_MAIN, RobotMap.LIGHT_PORT); // light relay will be on main pcm
        
        oi = new OI();
        
-       chooser = new SendableChooser();
-       chooser.addDefault("Right", new RotateTo(90, 2));
-       chooser.addObject("Left", new RotateTo(-90, 2));
-       SmartDashboard.putData("Auto Direction", chooser);
+//       chooser = new SendableChooser();
+//       chooser.addDefault("Right", new RotateTo(90, 2));
+//       chooser.addObject("Left", new RotateTo(-90, 2));
+//       SmartDashboard.putData("Auto Direction", chooser);
        
        
        SmartDashboard.putNumber("distance-drive", 0);
@@ -106,25 +107,29 @@ public class Robot extends IterativeRobot {
        
        SmartDashboard.putData(new RotateTo(90, 2));
        
-       SmartDashboard.putBoolean("goal", false);
        
-        auto.addDefault("Drive Through Lowbar", new DriveStraightThroughDefense());
-    //    auto.addObject("My Auto", new MyAutoCommand());
-        SmartDashboard.putData("Auto mode", auto);
+//        auto.addDefault("Shoot Left Goal From 1", new Autonomous(0, true, 0));
+//        auto.addObject("Shoot Left Goal From 2", new Autonomous(1, false, 0));
+//        auto.addObject("Shoot Left Goal From 3", new Autonomous(2, false, 0));
+//        auto.addObject("Shoot Left Goal From 4", new Autonomous(3, false, 0));
+//        auto.addObject("Shoot Left Goal From 5", new Autonomous(4, false, 0));
+//        auto.addObject("Shoot Center Goal From 1", new Autonomous(0, false, 0));
+//        auto.addObject("Shoot Center Goal From 2", new Autonomous(1, false, 0));
+//        auto.addObject("Shoot Center Goal From 3", new Autonomous(2, false, 0));
+//        auto.addObject("Shoot Center Goal From 4", new Autonomous(3, false, 0));
+//        auto.addObject("Shoot Center Goal From 5", new Autonomous(4, false, 0));
+//        SmartDashboard.putData("Auto mode", auto);
         
-        defense.addDefault("At Lowbar", 0);
-        defense.addObject("1", 1);
-        defense.addObject("2", 2);
-        defense.addObject("3", 3);
-        defense.addObject("4", 4);
-        defense.addObject("5", 5);
-        SmartDashboard.putData("Defense Number", defense);
+        startDefense.addDefault("1", 1);
+        startDefense.addObject("2", 2);
+        startDefense.addObject("3", 3);
+        startDefense.addObject("4", 4);
+        startDefense.addObject("5", 5);
         
-        //Should we use Enums ?
-        target.addDefault("Center", 2); // center goal
-        target.addObject("Left", 1); //left goal
-        target.addObject("Right", 3); // right goal
-        target.addObject("None", 4); // no goal :(
+        SmartDashboard.putData("Defense Number", startDefense);
+        
+        target.addDefault("Center", true); // center goal
+        target.addObject("Left", false); //left goal
         SmartDashboard.putData("Goal Number", target);
     }
 	
@@ -151,7 +156,7 @@ public class Robot extends IterativeRobot {
 	 * or additional comparisons to the switch structure below with additional strings & commands.
 	 */
     public void autonomousInit() {
-        autonomousCommand = (Command) auto.getSelected();
+        autonomousCommand = new SmartAuto((int)startDefense.getSelected(), (boolean)target.getSelected());
         
 	/*	 String autoSelected = SmartDashboard.getString("Auto Selector", "Default");
 		switch(autoSelected) {

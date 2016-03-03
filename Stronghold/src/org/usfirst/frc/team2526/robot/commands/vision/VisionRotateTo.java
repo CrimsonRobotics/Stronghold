@@ -32,7 +32,7 @@ public class VisionRotateTo extends Command {
     }
 
     protected boolean isFinished() {
-    	return /*Robot.driveTrain.onTurnTarget() || */ this.isTimedOut();
+    	return Robot.driveTrain.onTurnTarget() || this.isTimedOut() || !Robot.camera.isUpdating();
     }
 
     protected void end() {

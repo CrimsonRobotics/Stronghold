@@ -30,6 +30,19 @@ public class Statics {
 		addConstant("Distance To Shoot Inches", 144);
 		addConstant("Ticks Per Inch", 13.889);
 		
+		addConstant("Camera Angle Offset", 0);
+		addConstant("Distance between defenses", 48);
+		addConstant("Side Goal Move Forward", 48);
+		addConstant("Side Goal Turn Ballpark", 30);
+		
+		addConstant("Auto Distance to Drive Off Defense", 24);
+		addConstant("Auto Distance to Drive to Left Goal", 56);
+		addConstant("Auto Rotation to Left Goal", -135);
+		addConstant("Auto Rotation to Drive to Center", 90);
+		addConstant("Auto Distance to Center", 60);
+		addConstant("Auto Rotation to Center Goal", -90);
+		
+		
 	}
 	/**
 	 * Just making sure we are all on the same page here
@@ -63,6 +76,12 @@ public class Statics {
 			
 		
 		return stat.prefs.getDouble(string, defaultValue);
+	}
+	
+	public static void putDouble(String string, double value) {
+		Statics stat = getInstance();
+		
+		stat.prefs.putDouble(string, value);
 	}
 	
 	private class Constant
