@@ -8,9 +8,8 @@ import org.usfirst.frc.team2526.robot.commands.climber.ReleaseHook;
 import org.usfirst.frc.team2526.robot.commands.drive.ShiftDown;
 import org.usfirst.frc.team2526.robot.commands.drive.ShiftUp;
 import org.usfirst.frc.team2526.robot.commands.drive.SwitchDrive;
-import org.usfirst.frc.team2526.robot.commands.loader.RetractLoader;
+import org.usfirst.frc.team2526.robot.commands.loader.ExtendLoader;
 import org.usfirst.frc.team2526.robot.commands.loader.RollersOut;
-import org.usfirst.frc.team2526.robot.commands.loader.UnloadBall;
 import org.usfirst.frc.team2526.robot.commands.wheeliebar.ExtendWheelie;
 import org.usfirst.frc.team2526.robot.commands.wheeliebar.RetractWheelie;
 
@@ -25,15 +24,15 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
  */
 public class OI {
 	
-	Joystick primaryStick = new Joystick(0);
+	Joystick gamePad = new Joystick(0);
 	Joystick secondaryStick = new Joystick(1);
 	Joystick thirdStick = new Joystick(2);
-	Joystick fourthStick = new Joystick(3);
+	
 	// Joysticks
  
 	
-	public Joystick getPrimaryStick() {
-		return primaryStick;
+	public Joystick getGamePad() {
+		return gamePad;
 	}
 	
 	public Joystick getSecondaryStick() {
@@ -44,22 +43,18 @@ public class OI {
 		return thirdStick;
 	}
     
-	public Joystick getFourthStick() {
-		return fourthStick;
-	}
 	
-
-	
-	Button primaryStickOne = new JoystickButton(primaryStick,1);
-	Button primaryStickTwo = new JoystickButton(primaryStick,2);
-	Button primaryStickThree = new JoystickButton(primaryStick,3);
-	Button primaryStickFour = new JoystickButton(primaryStick,4);
-	Button primaryStickFive = new JoystickButton(primaryStick,5);
-	Button primaryStickSix = new JoystickButton(primaryStick,6);
-	Button primaryStickSeven = new JoystickButton(primaryStick,7);
-	Button primaryStickEight = new JoystickButton(primaryStick,8);
-	Button primaryStickNine = new JoystickButton(primaryStick,9);
-	// Primary Stick Buttons
+	Button gamePadA = new JoystickButton(gamePad,1);
+	Button gamePadB = new JoystickButton(gamePad,2);
+	Button gamePadX = new JoystickButton(gamePad,3);
+	Button gamePadY = new JoystickButton(gamePad,4);
+	Button gamePadLB = new JoystickButton(gamePad,5);
+	Button gamePadRB = new JoystickButton(gamePad,6);
+	Button gamePadBack = new JoystickButton(gamePad,7);
+	Button gamePadStart = new JoystickButton(gamePad,8);
+	Button gamePadLeftThumb = new JoystickButton(gamePad,9);
+	Button gamePadRightThumb = new JoystickButton(gamePad,10);
+	// Gamepad Buttons
 	
 	Button secondaryStickOne = new JoystickButton(secondaryStick,1);
 	Button secondaryStickTwo = new JoystickButton(secondaryStick,2);
@@ -72,8 +67,13 @@ public class OI {
 	
 	// Fourth Stick Buttons
 	
-	public Button getPortcullisButton() {
-		return primaryStickNine;
+	
+	public double getGamePadLTrigger() {
+		return gamePad.getRawAxis(2);
+	}
+	
+	public double getGamePadRTrigger() {
+		return gamePad.getRawAxis(3);
 	}
 	
 
@@ -93,30 +93,22 @@ public class OI {
 //		primaryStickOne.whenPressed(new ExtendLoader());
 //		primaryStickOne.whenReleased(new LoadBall());
 		
-		primaryStickEight.whileHeld(new RollersOut());
-		primaryStickEight.whenPressed(new UnloadBall());
-		primaryStickEight.whenReleased(new RetractLoader());
-		
-		primaryStickSix.whileHeld(new RollersOut());
+		gamePadRB.whileHeld(new RollersOut());
+		gamePadLB.whenPressed(new ExtendLoader());
 		// Loader Commands
 		
-		primaryStickFour.whenPressed(new FireGroup());
+		gamePadRightThumb.whenPressed(new ExtendWheelie());
+		gamePadRightThumb.whenReleased(new RetractWheelie());
+		
+		gamePadY.whenPressed(new FireGroup());
 		// Catapult Commands
 		
 		secondaryStickThree.whenPressed(new ExtendWheelie());
 		secondaryStickThree.whenReleased(new RetractWheelie());
-		
-		if(primaryStick.getRawAxis(6) == 1) {
-			new ExtendWheelie();
-		} else if(primaryStick.getRawAxis(6) == -1) {
-			new RetractWheelie();
-		}
 
-		primaryStickThree.whenPressed(new ReleaseHook());
-		primaryStickTwo.whileHeld(new ClimbUp());
 		
-		primaryStickFive.whenPressed(new ShiftDown());
-		primaryStickFive.whenReleased(new ShiftUp());
+		gamePadLeftThumb.whenPressed(new ShiftDown());
+		gamePadLeftThumb.whenReleased(new ShiftUp());
 		
 		
 		
