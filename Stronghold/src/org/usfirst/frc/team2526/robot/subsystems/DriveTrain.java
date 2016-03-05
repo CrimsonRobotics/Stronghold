@@ -139,6 +139,10 @@ public class DriveTrain extends Subsystem {
     	
     }
     
+    public void driveThroughDefense() {
+    	
+    }
+    
     public void setDriveStraight(double inches, double startingAngle) {
     	double ticks = Statics.Inches.inchesToTicks(inches);
     	
