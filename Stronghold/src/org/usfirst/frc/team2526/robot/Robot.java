@@ -3,7 +3,6 @@ package org.usfirst.frc.team2526.robot;
 
 import org.usfirst.frc.team2526.robot.commands.ResetGyro;
 import org.usfirst.frc.team2526.robot.commands.autonomous.BackUpIncline;
-import org.usfirst.frc.team2526.robot.commands.autonomous.DriveStraightThroughDefense;
 import org.usfirst.frc.team2526.robot.commands.catapult.ArmCatapult;
 import org.usfirst.frc.team2526.robot.commands.catapult.FireCatapult;
 import org.usfirst.frc.team2526.robot.commands.catapult.FireGroup;
@@ -11,7 +10,6 @@ import org.usfirst.frc.team2526.robot.commands.catapult.FireLaunch;
 import org.usfirst.frc.team2526.robot.commands.catapult.FireReset;
 import org.usfirst.frc.team2526.robot.commands.climber.ClimbUp;
 import org.usfirst.frc.team2526.robot.commands.drive.ConstantDrive;
-import org.usfirst.frc.team2526.robot.commands.drive.EnablePID;
 import org.usfirst.frc.team2526.robot.commands.drive.ResetEncoders;
 import org.usfirst.frc.team2526.robot.commands.drive.RotateTo;
 import org.usfirst.frc.team2526.robot.commands.loader.ExtendLoader;
@@ -108,7 +106,6 @@ public class Robot extends IterativeRobot {
        SmartDashboard.putData(new ResetGyro());
        SmartDashboard.putData(new CalibrateOffset());
        SmartDashboard.putData(new VisionShoot());
-       SmartDashboard.putData(new DriveStraightThroughDefense());
        SmartDashboard.putData(new RotateTo(90, 2));
        SmartDashboard.putData(new ExtendLoader());
        SmartDashboard.putData(new RetractLoader());
@@ -120,7 +117,6 @@ public class Robot extends IterativeRobot {
        SmartDashboard.putData(new FireLaunch());
        SmartDashboard.putData(new FireReset());
        
-       SmartDashboard.putData(new EnablePID());
        SmartDashboard.putData(new ResetEncoders());
        
        SmartDashboard.putData(new ClimbUp());

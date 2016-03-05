@@ -32,7 +32,9 @@ public class Statics {
 		addConstant("Ticks Per Inch", 13.889);
 		
 		addConstant("Auto Time", 7);
+		addConstant("Auto Distance", 4000);
 		addConstant("Auto Speed", 1);
+		addConstant("Auto Speed Back To Incline", -0.4);
 		
 		addConstant("Camera Angle Offset", 0);
 		addConstant("Distance between defenses", 48);

@@ -8,7 +8,6 @@ import org.usfirst.frc.team2526.robot.commands.drive.Drive;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.CANTalon.TalonControlMode;
-import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -23,7 +22,6 @@ public class DriveTrain extends Subsystem {
 	
 
 	RobotDrive drive;
-	PIDController drivePID, turnPID; // Even though the talons can run PID, I am using my own controllers to avoid switching modes all the time.
 
 	AnalogInput ultraSonic;
 	
@@ -76,6 +74,16 @@ public class DriveTrain extends Subsystem {
     public void driveForward() {
     	lMotor.set(1);
     	rMotor.set(-1);
+    }
+    
+    public void driveBackToDefense() {
+    	lMotor.set(-0.4);
+    	rMotor.set(0.4);
+    }
+    
+    public void driveConstant(double speed) {
+    	lMotor.set(speed);
+    	rMotor.set(-speed);
     }
     
     public void setDriveStraight(double inches, double startingAngle) {
@@ -137,8 +145,6 @@ public class DriveTrain extends Subsystem {
     		sumSensor = 0;
     	}
     	
-    	SmartDashboard.putData("DrivePID", drivePID);
-    	SmartDashboard.putData("TurnPID", turnPID);
     	
     	SmartDashboard.putNumber("Left Encoder", getRawLeftEncoder());
     	SmartDashboard.putNumber("Right Encoder", getRawRightEncoder());

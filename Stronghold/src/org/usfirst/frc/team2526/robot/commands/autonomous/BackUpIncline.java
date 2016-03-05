@@ -2,6 +2,7 @@ package org.usfirst.frc.team2526.robot.commands.autonomous;
 
 
 import org.usfirst.frc.team2526.robot.Robot;
+import org.usfirst.frc.team2526.robot.Statics;
 
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -14,13 +15,11 @@ public class BackUpIncline extends Command {
 	double startAngle;
 	protected void initialize() {
 		startAngle = Robot.imu.getAngleZ();
-		
-		Robot.driveTrain.driveConstant(-0.4);
-		Robot.driveTrain.enableTurnPIDValues();
+
 	}
 
 	protected void execute() {
-		Robot.driveTrain.updatePIDValues();
+		Robot.driveTrain.driveConstant(Statics.getDouble("Auto Speed Back To Incline"));
 	}
 
 	protected boolean isFinished() {
