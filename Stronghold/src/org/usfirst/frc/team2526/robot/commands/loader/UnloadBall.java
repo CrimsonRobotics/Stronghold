@@ -1,43 +1,22 @@
 package org.usfirst.frc.team2526.robot.commands.loader;
 
-import org.usfirst.frc.team2526.robot.Robot;
-import org.usfirst.frc.team2526.robot.Statics;
+import org.usfirst.frc.team2526.robot.commands.DynamicWait;
 
-import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
  *
  */
-public class UnloadBall extends Command {
+public class UnloadBall extends CommandGroup {
+    
+    public  UnloadBall() {
+    	
+    	addParallel(new RollersOut());
+    	addSequential(new DynamicWait("Loader Out Delay"));
+    	addParallel(new RollersOut());
+    	addParallel(new ExtendLoader());
+    	addSequential(new DynamicWait("Loader Out Delay Second"));
+    	addSequential(new StopRollers());
 
-    public UnloadBall() {
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
-    	requires(Robot.loaderFrame);
-    }
-
-    // Called just before this Command runs the first time
-    protected void initialize() {
-    	setTimeout(Statics.getDouble("Loader Out Delay"));
-    	Robot.loaderFrame.ExtendLoader();
-    }
-
-    // Called repeatedly when this Command is scheduled to run
-    protected void execute() {
-    }
-
-    // Make this return true when this Command no longer needs to run execute()
-    protected boolean isFinished() {
-        return isTimedOut();
-    }
-
-    // Called once after isFinished returns true
-    protected void end() {
-    }
-
-    // Called when another command which requires one or more of the same
-    // subsystems is scheduled to run
-    protected void interrupted() {
-    	end();
     }
 }

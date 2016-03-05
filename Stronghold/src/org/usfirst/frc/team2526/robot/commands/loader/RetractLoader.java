@@ -14,7 +14,6 @@ public class RetractLoader extends SimpleCommand {
     	requires(Robot.loaderFrame);
     }
 
-    // Called just before this Command runs the first time
     protected void initialize() {
     	Robot.loaderFrame.RetractLoader();
     }

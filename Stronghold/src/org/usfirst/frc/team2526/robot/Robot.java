@@ -4,9 +4,20 @@ package org.usfirst.frc.team2526.robot;
 import org.usfirst.frc.team2526.robot.commands.ResetGyro;
 import org.usfirst.frc.team2526.robot.commands.autonomous.BackUpIncline;
 import org.usfirst.frc.team2526.robot.commands.autonomous.DriveStraightThroughDefense;
-import org.usfirst.frc.team2526.robot.commands.autonomous.SmartAuto;
+import org.usfirst.frc.team2526.robot.commands.catapult.ArmCatapult;
 import org.usfirst.frc.team2526.robot.commands.catapult.FireCatapult;
+import org.usfirst.frc.team2526.robot.commands.catapult.FireGroup;
+import org.usfirst.frc.team2526.robot.commands.catapult.FireLaunch;
+import org.usfirst.frc.team2526.robot.commands.catapult.FireReset;
+import org.usfirst.frc.team2526.robot.commands.climber.ClimbUp;
+import org.usfirst.frc.team2526.robot.commands.drive.ConstantDrive;
+import org.usfirst.frc.team2526.robot.commands.drive.EnablePID;
+import org.usfirst.frc.team2526.robot.commands.drive.ResetEncoders;
 import org.usfirst.frc.team2526.robot.commands.drive.RotateTo;
+import org.usfirst.frc.team2526.robot.commands.loader.ExtendLoader;
+import org.usfirst.frc.team2526.robot.commands.loader.RetractLoader;
+import org.usfirst.frc.team2526.robot.commands.loader.RollersIn;
+import org.usfirst.frc.team2526.robot.commands.loader.RollersOut;
 import org.usfirst.frc.team2526.robot.commands.vision.CalibrateOffset;
 import org.usfirst.frc.team2526.robot.commands.vision.VisionShoot;
 import org.usfirst.frc.team2526.robot.subsystems.Catapult;
@@ -20,8 +31,8 @@ import org.usfirst.frc.team2526.robot.subsystems.WheelieBar;
 
 import com.analog.adis16448.frc.ADIS16448_IMU;
 
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.IterativeRobot;
-import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -49,7 +60,6 @@ public class Robot extends IterativeRobot {
 	public static SonicShifters sonic;
 	public static WheelieBar wheelieBar;
 
-	public static Solenoid light;
 	
 	public static OI oi;
 
@@ -65,6 +75,7 @@ public class Robot extends IterativeRobot {
      * used for any initialization code.
      */
     public void robotInit() {
+    	new Compressor(RobotMap.PCM_MAIN).start();
     	Statics.getInstance();
 //       auto = new SendableChooser();
        imu = new ADIS16448_IMU();
@@ -79,7 +90,6 @@ public class Robot extends IterativeRobot {
        startDefense = new SendableChooser();
        target = new SendableChooser();
        
-       light = new Solenoid(RobotMap.PCM_MAIN, RobotMap.LIGHT_PORT); // light relay will be on main pcm
        
        oi = new OI();
        
@@ -94,18 +104,26 @@ public class Robot extends IterativeRobot {
        SmartDashboard.putNumber("After Defense Distance", 96);
        
        SmartDashboard.putData(new BackUpIncline());
-       
        SmartDashboard.putData(camera);
-       
        SmartDashboard.putData(new ResetGyro());
        SmartDashboard.putData(new CalibrateOffset());
-       
-       
        SmartDashboard.putData(new VisionShoot());
-       
        SmartDashboard.putData(new DriveStraightThroughDefense());
-       
        SmartDashboard.putData(new RotateTo(90, 2));
+       SmartDashboard.putData(new ExtendLoader());
+       SmartDashboard.putData(new RetractLoader());
+       SmartDashboard.putData(new FireCatapult());
+       SmartDashboard.putData(new ArmCatapult());
+       SmartDashboard.putData(new RollersIn());
+       SmartDashboard.putData(new RollersOut());
+       SmartDashboard.putData(new FireGroup());
+       SmartDashboard.putData(new FireLaunch());
+       SmartDashboard.putData(new FireReset());
+       
+       SmartDashboard.putData(new EnablePID());
+       SmartDashboard.putData(new ResetEncoders());
+       
+       SmartDashboard.putData(new ClimbUp());
        
        
 //        auto.addDefault("Shoot Left Goal From 1", new Autonomous(0, true, 0));
@@ -156,8 +174,8 @@ public class Robot extends IterativeRobot {
 	 * or additional comparisons to the switch structure below with additional strings & commands.
 	 */
     public void autonomousInit() {
-        autonomousCommand = new SmartAuto((int)startDefense.getSelected(), (boolean)target.getSelected());
-        
+       // autonomousCommand = new SmartAuto((int)startDefense.getSelected(), (boolean)target.getSelected());
+        autonomousCommand = new ConstantDrive(Statics.getDouble("Auto Time"));
 	/*	 String autoSelected = SmartDashboard.getString("Auto Selector", "Default");
 		switch(autoSelected) {
 		case "My Auto":
@@ -171,7 +189,6 @@ public class Robot extends IterativeRobot {
     	
     	// schedule the autonomous command (example)
         if (autonomousCommand != null){
-        	light.set(true); // enable light for autonomous period
         	autonomousCommand.start();
         }
     }
@@ -189,7 +206,6 @@ public class Robot extends IterativeRobot {
         // continue until interrupted by another command, remove
         // this line or comment it out.
         if (autonomousCommand != null){
-        	light.set(false); // disable light for teleop
         	autonomousCommand.cancel();
         }
     }
@@ -201,6 +217,16 @@ public class Robot extends IterativeRobot {
         Scheduler.getInstance().run();
         SmartDashboard.putBoolean("Wheelie Bar State", Robot.wheelieBar.getWheelieState());
         SmartDashboard.putData(new FireCatapult());
+        SmartDashboard.putNumber("X-Axis", imu.getAngleX());
+        SmartDashboard.putNumber("Y-Axis", imu.getAngleY());
+        SmartDashboard.putNumber("Z-Axis", imu.getAngleZ());
+        
+        
+   //     DriverStation.getInstance();
+        
+        loaderFrame.update();
+        driveTrain.update();
+        
     }
     
     /**

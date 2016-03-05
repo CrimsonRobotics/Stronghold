@@ -15,7 +15,6 @@ public class CancelEverything extends SimpleCommand {
         
     }
 
-    // Called just before this Command runs the first time
     protected void initialize() {
     	
     	disableSubsystem(Robot.driveTrain);

@@ -18,17 +18,21 @@ public class Statics {
 		
 		// Add the constants here, name followed by its default
 		addConstant("Loader Speed In", 0.5);
-		addConstant("Loader Speed Out", -0.5);
+		addConstant("Loader Speed Out", -1);
 		addConstant("Loader In Delay", 1);
 		addConstant("Loader Out Delay", 1);
-		addConstant("Climber Up Speed", 0.5);
+		addConstant("Loader Out Delay Second", 1);
+		addConstant("Climber Up Speed", 0.3);
 		addConstant("Climber Extend Loader Delay", 1);
-		addConstant("Loader to Catapult Delay", 0.5);
-		addConstant("Catapult Hold Delay", 0.5);
-		addConstant("Catapult Arm Speed", -0.7);
+		addConstant("Loader to Catapult Delay", 3);
+		addConstant("Catapult Hold Delay", 1);
+		addConstant("Catapult Arm Speed", -0.5);
 		addConstant("Straight Auto Distance Inches", 72);
 		addConstant("Distance To Shoot Inches", 144);
 		addConstant("Ticks Per Inch", 13.889);
+		
+		addConstant("Auto Time", 7);
+		addConstant("Auto Speed", 1);
 		
 		addConstant("Camera Angle Offset", 0);
 		addConstant("Distance between defenses", 48);

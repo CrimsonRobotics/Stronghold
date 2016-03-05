@@ -13,19 +13,15 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class LoaderRollers extends Subsystem {
     
-    // Put methods for controlling this subsystem
-    // here. Call these from Commands.
 	
 	CANTalon loaderMotor;
 
     public void initDefaultCommand() {
-        // Set the default command for a subsystem here.
         setDefaultCommand(new StopRollers());
     }
     
     public LoaderRollers() {
     	super("GrabberIntake");
-    	// This subsystem is for our Grabber's Intake Mechanism.
     	
     	loaderMotor = new CANTalon(RobotMap.loaderTalon);
     	

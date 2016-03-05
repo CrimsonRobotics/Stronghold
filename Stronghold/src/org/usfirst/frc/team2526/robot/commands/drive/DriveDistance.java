@@ -19,7 +19,7 @@ public class DriveDistance extends Command {
 	}
 
     protected void initialize() {
-    	Robot.driveTrain.setDriveStraight(distance, Robot.imu.getAngleZ());
+    	Robot.driveTrain.setDriveStraight(distance, Robot.imu.getAngleY());
     	Robot.driveTrain.enableDrivePIDValues();
     	Robot.driveTrain.enableTurnPIDValues();
     }

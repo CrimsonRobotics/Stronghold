@@ -1,5 +1,7 @@
 package org.usfirst.frc.team2526.robot.commands.loader;
 
+import org.usfirst.frc.team2526.robot.commands.DynamicWait;
+
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
@@ -8,24 +10,11 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class LoadBall extends CommandGroup {
     
     public  LoadBall() {
-        // Add Commands here:
-        // e.g. addSequential(new Command1());
-        //      addSequential(new Command2());
-        // these will run in order.
     	
     	addParallel(new RetractLoader());
-    	addParallel(new RollBallIn());
+    	addParallel(new RollersIn());
+    	addSequential(new DynamicWait("Loader In Delay"));
+    	addSequential(new StopRollers());
 
-        // To run multiple commands at the same time,
-        // use addParallel()
-        // e.g. addParallel(new Command1());
-        //      addSequential(new Command2());
-        // Command1 and Command2 will run in parallel.
-
-        // A command group will require all of the subsystems that each member
-        // would require.
-        // e.g. if Command1 requires chassis, and Command2 requires arm,
-        // a CommandGroup containing them would require both the chassis and the
-        // arm.
     }
 }

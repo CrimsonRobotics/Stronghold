@@ -6,31 +6,26 @@ import org.usfirst.frc.team2526.robot.commands.catapult.StopCatapult;
 
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.CANTalon.TalonControlMode;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
  */
 public class Catapult extends Subsystem {
     
-    // Put methods for controlling this subsystem
-    // here. Call these from Commands.
 	
 	CANTalon catapultMotorOne, catapultMotorTwo;
 	DigitalInput catapultLimit;
 	double goal;
 
     public void initDefaultCommand() {
-        // Set the default command for a subsystem here.
-        //setDefaultCommand(new MySpecialCommand());
     	setDefaultCommand(new StopCatapult());
     }
     
     public Catapult () {
     	super("Catapult");
-    	// This susbsystem is for our catapult.
     	
     	catapultMotorOne = new CANTalon(RobotMap.catapultTalonOne);
     	catapultMotorTwo = new CANTalon(RobotMap.catapultTalonTwo);
@@ -40,6 +35,7 @@ public class Catapult extends Subsystem {
 
     	
     	catapultLimit = new DigitalInput(RobotMap.catapultSensor);
+    	
     	
     }
     
@@ -60,7 +56,9 @@ public class Catapult extends Subsystem {
     	catapultMotorOne.set(0);
     }
 
-    
+    public void update() {
+    	SmartDashboard.putBoolean("Catapult Sensor", catapultLimit.get());
+    }
 
 }
 

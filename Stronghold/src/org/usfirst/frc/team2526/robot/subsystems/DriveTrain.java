@@ -21,8 +21,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class DriveTrain extends Subsystem {
     
-    // Put methods for controlling this subsystem
-    // here. Call these from Commands.
 	
 	public CANTalon lMotor, rMotor, lMotorTwo, rMotorTwo;
 	
@@ -40,7 +38,6 @@ public class DriveTrain extends Subsystem {
 	public static final double pTurn = 0.030, iTurn = 0, dTurn = 0.010;
 	
     public void initDefaultCommand() { 
-        // Set the default command for a subsystem here.
         setDefaultCommand(new Drive());
     }
     
@@ -97,7 +94,7 @@ public class DriveTrain extends Subsystem {
 			}
 
 			public double pidGet() {
-				return Robot.imu.getAngleZ();
+				return Robot.imu.getAngleY();
 			}
     		
     	}, new PIDOutput() {
@@ -164,8 +161,8 @@ public class DriveTrain extends Subsystem {
     	drivePID.setSetpoint(-relativeTicks);
     }
     
-    public void driveConstantBack() {
-    	pidValues.setMagnitudeValue(.4);
+    public void driveConstant(double speed) {
+    	pidValues.setMagnitudeValue(-speed);
     	turnPID.setSetpoint(0);
     }
     
@@ -227,6 +224,11 @@ public class DriveTrain extends Subsystem {
     	pidValues.updateSpeed(drive);
     }
     
+    public void resetEncoders() {
+    	lMotor.setEncPosition(0);
+    	rMotor.setEncPosition(0);
+    }
+    
     public void update() {
     	sumSensor += ultraSonic.getValue();
     	averageCount++; 
@@ -241,8 +243,8 @@ public class DriveTrain extends Subsystem {
     	SmartDashboard.putData("DrivePID", drivePID);
     	SmartDashboard.putData("TurnPID", turnPID);
     	
-    	SmartDashboard.putNumber("Raw Left Encoder", getRawLeftEncoder());
-    	SmartDashboard.putNumber("Raw Right Encoder", getRawRightEncoder());
+    	SmartDashboard.putNumber("Left Encoder", getRawLeftEncoder());
+    	SmartDashboard.putNumber("Right Encoder", getRawRightEncoder());
     	
     	SmartDashboard.putNumber("Angle Y", Robot.imu.getAngleY());
     	SmartDashboard.putNumber("Angle X", Robot.imu.getAngleX());

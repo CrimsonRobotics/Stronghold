@@ -15,47 +15,46 @@ public class RobotMap {
      ** CAN DEVICES ** 
      ******************/  
 	
-	public static int lMotorOne = 1;
-	public static int lMotorTwo = 2;
-	public static int rMotorOne = 3;
-	public static int rMotorTwo = 4;
+	public static int lMotorOne = 2;
+	public static int lMotorTwo = 1;
+	public static int rMotorOne = 4;
+	public static int rMotorTwo = 3;
 	// DriveTrain Motors
 	
-	public static int loaderTalon = 6;
+	public static int loaderTalon = 5;
 	// Loader Talon
 	
-	public static int catapultTalonOne = 8;
-	public static int catapultTalonTwo = 9;
+	public static int catapultTalonOne = 6;
+	public static int catapultTalonTwo = 7;
 	// Catapult Talons
 	
-	public static int climberWinchOne = 10;
-	public static int climberWinchTwo = 11;
+	public static int climberWinchOne = 8;
+	public static int climberWinchTwo = 9;
 	
 	
-	public static int PCM_MAIN = 5;
+	public static int PCM_MAIN = 10;
 	// Pneumatics Controller
 	
 	/*******
 	 *Relay*
 	 *******/
-	public static final int LIGHT_PORT = 7; // dummy value for where the relay for the light will be on PCM
+	public static final int LIGHT_PORT = 8; // dummy value for where the relay for the light will be on PCM
 	
 	/******************
      ** PNEUMATICS ** 
      ******************/  
 	
 	public static int loaderPiston_A = 0;
-	public static int loaderPiston_B = 1;
+	public static int loaderPiston_B = 4;
 	
-	public static int climberPiston = 2;
+	public static int climberPiston = 3;
 	
-	public static int sonic_A = 3;
-	public static int sonic_B = 4;
+	public static int sonicPiston = 2;
+	
 
-	public static int wheelie_A = 5;
-	public static int wheelie_B = 6;
+	public static int wheelie_A = 1;
+	public static int wheelie_B = 5;
 	
-	public static int hookPiston = 7;
 	
 	/******************
    ** CATAPULT CONTROLS ** 
@@ -110,8 +109,8 @@ public class RobotMap {
 	/******************
  ** DIGITAL SENSOR INPUTS ** 
      ******************/  
-	public static int catapultSensor = 0;
-	public static int loaderSensor = 1;
+	public static int catapultSensor = 1;
+	public static int loaderSensor = 0;
 
     
     // If you are using multiple modules, make sure to define both the port
