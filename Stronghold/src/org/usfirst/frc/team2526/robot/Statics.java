@@ -24,7 +24,7 @@ public class Statics {
 		addConstant("Loader Out Delay Second", 1);
 		addConstant("Climber Up Speed", 0.3);
 		addConstant("Climber Extend Loader Delay", 1);
-		addConstant("Loader to Catapult Delay", 2.3);
+		addConstant("Loader to Catapult Delay", 2.4);
 		addConstant("Catapult Hold Delay", 1);
 		addConstant("Catapult Arm Speed", -0.5);
 		addConstant("Straight Auto Distance Inches", 72);

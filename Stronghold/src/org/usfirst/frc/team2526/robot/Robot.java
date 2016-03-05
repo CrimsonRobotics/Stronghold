@@ -4,6 +4,7 @@ package org.usfirst.frc.team2526.robot;
 import org.usfirst.frc.team2526.robot.commands.ResetGyro;
 import org.usfirst.frc.team2526.robot.commands.autonomous.BackUpIncline;
 import org.usfirst.frc.team2526.robot.commands.autonomous.DriveStraightThroughDefense;
+import org.usfirst.frc.team2526.robot.commands.autonomous.LowbarAuto;
 import org.usfirst.frc.team2526.robot.commands.catapult.ArmCatapult;
 import org.usfirst.frc.team2526.robot.commands.catapult.FireCatapult;
 import org.usfirst.frc.team2526.robot.commands.catapult.FireGroup;
@@ -69,6 +70,7 @@ public class Robot extends IterativeRobot {
 //    SendableChooser auto;
     SendableChooser startDefense;
     SendableChooser target;
+    SendableChooser autoType;
     
     /**
      * This function is run when the robot is first started up and should be
@@ -89,6 +91,7 @@ public class Robot extends IterativeRobot {
 		camera = new VisionCamera();
        startDefense = new SendableChooser();
        target = new SendableChooser();
+       autoType = new SendableChooser();
        
        
        oi = new OI();
@@ -125,6 +128,8 @@ public class Robot extends IterativeRobot {
        
        SmartDashboard.putData(new ClimbUp());
        
+
+       
        
 //        auto.addDefault("Shoot Left Goal From 1", new Autonomous(0, true, 0));
 //        auto.addObject("Shoot Left Goal From 2", new Autonomous(1, false, 0));
@@ -137,6 +142,10 @@ public class Robot extends IterativeRobot {
 //        auto.addObject("Shoot Center Goal From 4", new Autonomous(3, false, 0));
 //        auto.addObject("Shoot Center Goal From 5", new Autonomous(4, false, 0));
 //        SmartDashboard.putData("Auto mode", auto);
+       
+       autoType.addDefault("Lowbar Auto", new LowbarAuto());
+       autoType.addObject("Forward", new ConstantDrive(Statics.getDouble("Auto Time")));
+       SmartDashboard.putData("AutoType", autoType);
         
         startDefense.addDefault("1", 1);
         startDefense.addObject("2", 2);
@@ -175,7 +184,10 @@ public class Robot extends IterativeRobot {
 	 */
     public void autonomousInit() {
        // autonomousCommand = new SmartAuto((int)startDefense.getSelected(), (boolean)target.getSelected());
-        autonomousCommand = new ConstantDrive(Statics.getDouble("Auto Time"));
+  //      autonomousCommand = new ConstantDrive(Statics.getDouble("Auto Time"));
+        
+        autonomousCommand = (Command) autoType.getSelected();
+        
 	/*	 String autoSelected = SmartDashboard.getString("Auto Selector", "Default");
 		switch(autoSelected) {
 		case "My Auto":

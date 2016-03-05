@@ -20,7 +20,7 @@ public class ConstantDrive extends Command {
     }
 
     protected void execute() {
-    	Robot.driveTrain.driveConstant(Statics.getDouble("Auto Speed"));
+    	Robot.driveTrain.driveConstant(Statics.getDouble("Auto Speed"), Robot.imu.getAngleY());
     	Robot.driveTrain.updatePIDValues();
     }
 
