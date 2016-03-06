@@ -33,6 +33,7 @@ public class Statics {
 		
 		addConstant("Auto Time", 7);
 		addConstant("Auto Speed", 1);
+		addConstant("Auto Turn Offset", -0.2);
 		
 		addConstant("Camera Angle Offset", 0);
 		addConstant("Distance between defenses", 48);

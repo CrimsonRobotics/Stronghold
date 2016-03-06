@@ -161,9 +161,9 @@ public class DriveTrain extends Subsystem {
     	drivePID.setSetpoint(-relativeTicks);
     }
     
-    public void driveConstant(double speed, double targetAngle) {
+    public void driveConstant(double speed, double turnSpeed) {
     	pidValues.setMagnitudeValue(-speed);
-    	pidValues.setTurnValue(targetAngle % 360 / 360);
+    	pidValues.setTurnValue(turnSpeed);
     }
     
     public void stopDriving() {

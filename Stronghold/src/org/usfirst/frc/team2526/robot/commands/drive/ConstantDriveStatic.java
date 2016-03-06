@@ -8,15 +8,15 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class ConstantDrive extends Command {
+public class ConstantDriveStatic extends Command {
 
-    public ConstantDrive(double time) {
-    	super(time);
+    public ConstantDriveStatic() {
+    	super(Statics.getDouble("Auto Time"));
     	requires(Robot.driveTrain);
-        
     }
 
     protected void initialize() {
+    	this.setTimeout(Statics.getDouble("Auto Time"));
     }
 
     protected void execute() {

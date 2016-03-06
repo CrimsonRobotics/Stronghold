@@ -128,6 +128,8 @@ public class Robot extends IterativeRobot {
        
        SmartDashboard.putData(new ClimbUp());
        
+       SmartDashboard.putData(new LowbarAuto());
+       
 
        
        
@@ -186,8 +188,8 @@ public class Robot extends IterativeRobot {
        // autonomousCommand = new SmartAuto((int)startDefense.getSelected(), (boolean)target.getSelected());
   //      autonomousCommand = new ConstantDrive(Statics.getDouble("Auto Time"));
         
-        autonomousCommand = (Command) autoType.getSelected();
-        
+     //   autonomousCommand = (Command) autoType.getSelected();
+        autonomousCommand = new LowbarAuto();
 	/*	 String autoSelected = SmartDashboard.getString("Auto Selector", "Default");
 		switch(autoSelected) {
 		case "My Auto":
