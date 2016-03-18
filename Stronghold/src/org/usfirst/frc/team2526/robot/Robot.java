@@ -11,10 +11,7 @@ import org.usfirst.frc.team2526.robot.commands.catapult.FireGroup;
 import org.usfirst.frc.team2526.robot.commands.catapult.FireLaunch;
 import org.usfirst.frc.team2526.robot.commands.catapult.FireReset;
 import org.usfirst.frc.team2526.robot.commands.climber.ClimbUp;
-import org.usfirst.frc.team2526.robot.commands.drive.ConstantDrive;
-import org.usfirst.frc.team2526.robot.commands.drive.EnablePID;
 import org.usfirst.frc.team2526.robot.commands.drive.ResetEncoders;
-import org.usfirst.frc.team2526.robot.commands.drive.RotateTo;
 import org.usfirst.frc.team2526.robot.commands.loader.ExtendLoader;
 import org.usfirst.frc.team2526.robot.commands.loader.RetractLoader;
 import org.usfirst.frc.team2526.robot.commands.loader.RollersIn;
@@ -112,7 +109,7 @@ public class Robot extends IterativeRobot {
        SmartDashboard.putData(new CalibrateOffset());
        SmartDashboard.putData(new VisionShoot());
        SmartDashboard.putData(new DriveStraightThroughDefense());
-       SmartDashboard.putData(new RotateTo(90, 2));
+       // TODO Manual Turn
        SmartDashboard.putData(new ExtendLoader());
        SmartDashboard.putData(new RetractLoader());
        SmartDashboard.putData(new FireCatapult());
@@ -123,7 +120,6 @@ public class Robot extends IterativeRobot {
        SmartDashboard.putData(new FireLaunch());
        SmartDashboard.putData(new FireReset());
        
-       SmartDashboard.putData(new EnablePID());
        SmartDashboard.putData(new ResetEncoders());
        
        SmartDashboard.putData(new ClimbUp());
@@ -146,7 +142,8 @@ public class Robot extends IterativeRobot {
 //        SmartDashboard.putData("Auto mode", auto);
        
        autoType.addDefault("Lowbar Auto", new LowbarAuto());
-       autoType.addObject("Forward", new ConstantDrive(Statics.getDouble("Auto Time")));
+       //autoType.addObject("Forward", new ConstantDrive(Statics.getDouble("Auto Time")));
+       // TODO add other auto
        SmartDashboard.putData("AutoType", autoType);
         
         startDefense.addDefault("1", 1);

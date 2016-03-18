@@ -73,31 +73,10 @@ public class RobotMap {
      ******************/  
 	
 	public static boolean primaryControl = true;
-	public static boolean secondaryControl = false;
 	
 	public static double secondaryWeight = .65; // How we weight down the joystick sensitivity
 	
-    
-    // If you are using multiple modules, make sure to define both the port
-    // number and the module. For example you with a rangefinder:
-    // public static int rangefinderPort = 1;
-    // public static int rangefinderModule = 1;
 	
-	public boolean getPrimaryControl() {
-		return primaryControl;
-	}
-	
-	public boolean getSecondaryControl() {
-		return secondaryControl;
-	}
-	
-	public void setPrimaryControl(boolean set) {
-		primaryControl = set;
-	}
-	
-	public void setSecondaryControl(boolean set) {
-		secondaryControl = set;
-	}
 	
 	/******************
 	 ** HOOK BOOLEANS ** 

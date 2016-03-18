@@ -22,21 +22,23 @@ public class VisionRotateTo extends Command {
     	SmartDashboard.putNumber("Abs Target Vision Angle", currentAngle+angle);
     	
     	// Vision uses the right side as negative, Gyro's right side is positive
-    	Robot.driveTrain.setAngle(currentAngle+angle);
-    	Robot.driveTrain.enableTurnPIDValues();
+    	// TODO Robot.driveTrain.setAngle(currentAngle+angle);
+    	// TODO Robot.driveTrain.enableTurnPIDValues();
     }
     
 
     protected void execute() {
-    	Robot.driveTrain.updatePIDValues();
+    	// TODO Robot.driveTrain.updatePIDValues();
     }
 
     protected boolean isFinished() {
-    	return Robot.driveTrain.onTurnTarget() || this.isTimedOut() || !Robot.camera.isUpdating();
+    	// TODO return Robot.driveTrain.onTurnTarget() || this.isTimedOut() || !Robot.camera.isUpdating();
+    	return false;
+    	
     }
 
     protected void end() {
-    	Robot.driveTrain.disableTurnPIDValues();
+    	// TOOD Robot.driveTrain.disableTurnPIDValues();
     }
 
     protected void interrupted() {

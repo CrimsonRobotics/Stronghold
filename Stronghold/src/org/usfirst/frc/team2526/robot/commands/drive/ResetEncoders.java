@@ -17,5 +17,4 @@ public class ResetEncoders extends SimpleCommand {
     	Robot.driveTrain.resetEncoders();
     }
 
-
 }
