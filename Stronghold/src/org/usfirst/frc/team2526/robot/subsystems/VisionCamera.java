@@ -33,10 +33,21 @@ public class VisionCamera extends Subsystem {
     	
     	double midLine = (double)VIDEO_WIDTH/2;
     	double[] midPointObjects = gripTable.getNumberArray("centerX", new double[0]);
-    	//int bestIndex = getLeftMostIndex(midPointObjects);
+    	
+    	double[] objectAreas = gripTable.getNumberArray("area", new double[0]);
+    	
+    	double biggestArea = 0;
+    	int biggestIndex = -1;
+    	
+    	for (int i = 0; i < objectAreas.length; i++) {
+    		if (objectAreas[i] > biggestArea) {
+    			biggestArea = objectAreas[i];
+    			biggestIndex = i;
+    		}
+    	}
     	
     	if (midPointObjects.length >= 1) {
-    		double proportionFromCenter = (midPointObjects[0] - midLine)/midLine;
+    		double proportionFromCenter = (midPointObjects[biggestIndex]/midLine) - 1;
     		raw_angle = (proportionFromCenter * LENS_ANGLE/2);
     	
     		SmartDashboard.putNumber("raw angle", raw_angle);
