@@ -26,15 +26,13 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
  */
 public class OI {
 	
-	Joystick gamePad = new Joystick(0);
-	Joystick secondaryStick = new Joystick(1);
-	Joystick thirdStick = new Joystick(2);
-	
-	// Joysticks
+	CrimsonControlStick driver = new GamePadController(1);
+	Joystick secondaryStick = new Joystick(2);
+	Joystick thirdStick = new Joystick(3);
  
 	
-	public Joystick getGamePad() {
-		return gamePad;
+	public CrimsonControlStick getDriverControls() {
+		return driver;
 	}
 	
 	public Joystick getSecondaryStick() {
@@ -44,18 +42,22 @@ public class OI {
 	public Joystick getThirdStick() {
 		return thirdStick;
 	}
+	
+	public void setDriveControls(CrimsonControlStick drive) {
+		this.driver = drive;
+	}
     
 	
-	Button gamePadA = new JoystickButton(gamePad,1);
-	Button gamePadB = new JoystickButton(gamePad,2);
-	Button gamePadX = new JoystickButton(gamePad,3);
-	Button gamePadY = new JoystickButton(gamePad,4);
-	Button gamePadLB = new JoystickButton(gamePad,5);
-	Button gamePadRB = new JoystickButton(gamePad,6);
-	Button gamePadBack = new JoystickButton(gamePad,7);
-	Button gamePadStart = new JoystickButton(gamePad,8);
-	Button gamePadLeftThumb = new JoystickButton(gamePad,9);
-	Button gamePadRightThumb = new JoystickButton(gamePad,10);
+//	Button gamePadA = new JoystickButton(gamePad,1);
+//	Button gamePadB = new JoystickButton(gamePad,2);
+//	Button gamePadX = new JoystickButton(gamePad,3);
+//	Button gamePadY = new JoystickButton(gamePad,4);
+//	Button gamePadLB = new JoystickButton(gamePad,5);
+//	Button gamePadRB = new JoystickButton(gamePad,6);
+//	Button gamePadBack = new JoystickButton(gamePad,7);
+//	Button gamePadStart = new JoystickButton(gamePad,8);
+//	Button gamePadLeftThumb = new JoystickButton(gamePad,9);
+//	Button gamePadRightThumb = new JoystickButton(gamePad,10);
 	// Gamepad Buttons
 	
 	Button secondaryStickOne = new JoystickButton(secondaryStick,1);
@@ -69,17 +71,7 @@ public class OI {
 	Button thirdStickThree = new JoystickButton(thirdStick, 3);
 	// Third Stick Buttons
 	
-	
-	// Fourth Stick Buttons
-	
-	
-	public double getGamePadLTrigger() {
-		return gamePad.getRawAxis(2);
-	}
-	
-	public double getGamePadRTrigger() {
-		return gamePad.getRawAxis(3);
-	}
+
 	
 
 	
@@ -108,8 +100,8 @@ public class OI {
 		gamePadLB.whenReleased(new LoadBall());
 		// Loader Commands
 		
-		gamePadB.whenPressed(new OpenPortcullis());
-		gamePadB.whenReleased(new StopOpeningPortcullis());
+		driver.getOpenPorcullusButton().whenPressed(new OpenPortcullis());
+		driver.getOpenPorcullusButton().whenReleased(new StopOpeningPortcullis());
 		
 //		gamePadRightThumb.whenPressed(new ExtendWheelie());
 //		gamePadRightThumb.whenReleased(new RetractWheelie());

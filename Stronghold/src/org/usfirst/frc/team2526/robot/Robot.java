@@ -12,7 +12,6 @@ import org.usfirst.frc.team2526.robot.commands.catapult.FireLaunch;
 import org.usfirst.frc.team2526.robot.commands.catapult.FireReset;
 import org.usfirst.frc.team2526.robot.commands.climber.ClimbUp;
 import org.usfirst.frc.team2526.robot.commands.drive.ConstantDrive;
-import org.usfirst.frc.team2526.robot.commands.drive.EnablePID;
 import org.usfirst.frc.team2526.robot.commands.drive.ResetEncoders;
 import org.usfirst.frc.team2526.robot.commands.drive.RotateTo;
 import org.usfirst.frc.team2526.robot.commands.loader.ExtendLoader;
@@ -66,8 +65,9 @@ public class Robot extends IterativeRobot {
 
 
     Command autonomousCommand;
-//    SendableChooser chooser;
-//    SendableChooser auto;
+    SendableChooser driveChooser;
+    
+    
     SendableChooser startDefense;
     SendableChooser target;
     SendableChooser autoType;
@@ -96,10 +96,10 @@ public class Robot extends IterativeRobot {
        
        oi = new OI();
        
-//       chooser = new SendableChooser();
-//       chooser.addDefault("Right", new RotateTo(90, 2));
-//       chooser.addObject("Left", new RotateTo(-90, 2));
-//       SmartDashboard.putData("Auto Direction", chooser);
+       driveChooser = new SendableChooser();
+       driveChooser.addDefault("GamePad", new GamePadController(0));
+       driveChooser.addObject("Joysticks", new TwoStickCraneController(0, 1));
+       SmartDashboard.putData("Drive Mode", driveChooser);
        
        
        SmartDashboard.putNumber("distance-drive", 0);
@@ -123,7 +123,6 @@ public class Robot extends IterativeRobot {
        SmartDashboard.putData(new FireLaunch());
        SmartDashboard.putData(new FireReset());
        
-       SmartDashboard.putData(new EnablePID());
        SmartDashboard.putData(new ResetEncoders());
        
        SmartDashboard.putData(new ClimbUp());
@@ -222,6 +221,8 @@ public class Robot extends IterativeRobot {
         if (autonomousCommand != null){
         	autonomousCommand.cancel();
         }
+        
+        Robot.oi.setDriveControls((CrimsonControlStick) driveChooser.getSelected());
     }
 
     /**
@@ -229,6 +230,9 @@ public class Robot extends IterativeRobot {
      */
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
+        
+        Robot.oi.setDriveControls((CrimsonControlStick) driveChooser.getSelected());
+        
         SmartDashboard.putBoolean("Wheelie Bar State", Robot.wheelieBar.getWheelieState());
         SmartDashboard.putData(new FireCatapult());
         SmartDashboard.putNumber("X-Axis", imu.getAngleX());
