@@ -29,4 +29,24 @@ public class TwoStickCraneController implements CrimsonControlStick {
 		return new JoystickButton(leftStick, 2);
 	}
 
+	public JoystickButton getRetractLoaderButton() {
+		return null;
+	}
+
+	public JoystickButton getExtendLoaderToLoadButton() {
+		return null;
+	}
+
+	public JoystickButton getLoadBallButton() {
+		return null;
+	}
+
+	public JoystickButton getShiftUp() {
+		return null;
+	}
+
+	public JoystickButton getShiftDown() {
+		return null;
+	}
+
 }

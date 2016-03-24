@@ -11,4 +11,14 @@ public interface CrimsonControlStick {
 	public JoystickButton getOpenPorcullusButton();
 	
 	public JoystickButton getUnloadBallButton();
+	
+	public JoystickButton getRetractLoaderButton();
+	
+	public JoystickButton getExtendLoaderToLoadButton();
+	
+	public JoystickButton getLoadBallButton();
+	
+	public JoystickButton getShiftUp();
+	
+	public JoystickButton getShiftDown();
 }

@@ -93,11 +93,11 @@ public class OI {
 //		primaryStickOne.whenPressed(new ExtendLoader());
 //		primaryStickOne.whenReleased(new LoadBall());
 		
-		gamePadRB.whenPressed(new UnloadBall());
-		gamePadRB.whenReleased(new RetractLoader());
+		driver.getUnloadBallButton().whenPressed(new UnloadBall());
+		driver.getRetractLoaderButton().whenReleased(new RetractLoader());
 		
-		gamePadLB.whenPressed(new ExtendLoaderToLoad());
-		gamePadLB.whenReleased(new LoadBall());
+		driver.getExtendLoaderToLoadButton().whenPressed(new ExtendLoaderToLoad());
+		driver.getLoadBallButton().whenReleased(new LoadBall());
 		// Loader Commands
 		
 		driver.getOpenPorcullusButton().whenPressed(new OpenPortcullis());
@@ -118,8 +118,8 @@ public class OI {
 		thirdStickOne.whenPressed(new FireGroup());
 
 		
-		gamePadLeftThumb.whenPressed(new ShiftDown());
-		gamePadLeftThumb.whenReleased(new ShiftUp());
+		driver.getShiftDown().whenPressed(new ShiftDown());
+		driver.getShiftUp().whenReleased(new ShiftUp());
 		
 		
 		
