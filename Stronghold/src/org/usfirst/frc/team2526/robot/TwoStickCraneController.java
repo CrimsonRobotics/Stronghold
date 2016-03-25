@@ -8,6 +8,10 @@ public class TwoStickCraneController implements CrimsonControlStick {
 	Joystick leftStick;
 	Joystick rightStick;
 	
+	public String getName() {
+		return "Two Stick";
+	}
+	
 	public TwoStickCraneController(int leftPort, int rightPort) {
 		leftStick = new Joystick(leftPort);
 		rightStick = new Joystick(rightPort);

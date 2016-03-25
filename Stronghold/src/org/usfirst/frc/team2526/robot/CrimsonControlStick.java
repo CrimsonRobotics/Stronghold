@@ -4,6 +4,8 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 public interface CrimsonControlStick {
 	
+	public String getName();
+	
 	public double getTurnValue();
 
 	public double getMagValue();
@@ -11,8 +13,6 @@ public interface CrimsonControlStick {
 	public JoystickButton getOpenPorcullusButton();
 	
 	public JoystickButton getUnloadBallButton();
-	
-	
 	
 	public JoystickButton getLoadBallButton();
 	

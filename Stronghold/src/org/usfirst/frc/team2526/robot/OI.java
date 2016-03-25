@@ -18,7 +18,8 @@ import org.usfirst.frc.team2526.robot.commands.wheeliebar.RetractWheelie;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-//import edu.wpi.first.wpilibj.buttons.Button;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -26,13 +27,22 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
  */
 public class OI {
 	
-	CrimsonControlStick driver = new GamePadController(0);
+	CrimsonControlStick driver = null;
 	Joystick secondaryStick = new Joystick(2);
 	Joystick thirdStick = new Joystick(3);
  
+	SendableChooser driveChooser;
 	
-	public CrimsonControlStick getDriverControls() {
-		return driver;
+	public void updateDriverControls() {
+		CrimsonControlStick currentDriver = (CrimsonControlStick) driveChooser.getSelected();
+        
+        if (driver == null || !(driver.getName().equals(currentDriver.getName()))) {
+        	if (currentDriver == null) {
+        		setDriveControls(new TwoStickCraneController(0, 1));
+        	} else {
+        		setDriveControls(currentDriver);
+        	}
+        }
 	}
 	
 	public Joystick getSecondaryStick() {
@@ -45,20 +55,13 @@ public class OI {
 	
 	public void setDriveControls(CrimsonControlStick drive) {
 		this.driver = drive;
+		updateDriveButtons();
 	}
-    
 	
-//	Button gamePadA = new JoystickButton(gamePad,1);
-//	Button gamePadB = new JoystickButton(gamePad,2);
-//	Button gamePadX = new JoystickButton(gamePad,3);
-//	Button gamePadY = new JoystickButton(gamePad,4);
-//	Button gamePadLB = new JoystickButton(gamePad,5);
-//	Button gamePadRB = new JoystickButton(gamePad,6);
-//	Button gamePadBack = new JoystickButton(gamePad,7);
-//	Button gamePadStart = new JoystickButton(gamePad,8);
-//	Button gamePadLeftThumb = new JoystickButton(gamePad,9);
-//	Button gamePadRightThumb = new JoystickButton(gamePad,10);
-	// Gamepad Buttons
+	public CrimsonControlStick getDriveControls() {
+		return driver;
+	}
+	
 	
 	Button secondaryStickOne = new JoystickButton(secondaryStick,1);
 	Button secondaryStickTwo = new JoystickButton(secondaryStick,2);
@@ -71,28 +74,30 @@ public class OI {
 	Button thirdStickThree = new JoystickButton(thirdStick, 3);
 	// Third Stick Buttons
 	
-
-	
-
-	
 	public OI() {
-	
+		
+		driveChooser = new SendableChooser();
+	    driveChooser.addDefault("Joysticks", new TwoStickCraneController(0, 1));
+	    driveChooser.addObject("GamePad", new GamePadController(0));
+	    SmartDashboard.putData("Drive Mode", driveChooser);
+		
 		secondaryStickOne.whenPressed(new SwitchDrive());
 		secondaryStickOne.whenReleased(new SwitchDrive());	
+		
 		// Driver Control Commands
+		secondaryStickThree.whenPressed(new ExtendWheelie());
+		secondaryStickThree.whenReleased(new RetractWheelie());
 		
 		secondaryStickThree.whenPressed(new ExtendWheelie());
 		secondaryStickThree.whenReleased(new RetractWheelie());
 		
-//		primaryStickOne.whenPressed(new LoadBall());
-//		primaryStickOne.whenReleased(new RetractLoader());
-//		secondaryStickOne.whenPressed(new LoaderOut());
-//		secondaryStickOne.whenReleased(new RetractLoader());
+		secondaryStickFive.whenPressed(new ShiftUp());
+		secondaryStickFive.whenReleased(new ShiftDown());
 		
-//		primaryStickOne.whileHeld(new RollersIn());
-//		primaryStickOne.whenPressed(new ExtendLoader());
-//		primaryStickOne.whenReleased(new LoadBall());
-		
+		thirdStickOne.whenPressed(new FireGroup());
+	}
+	
+	private void updateDriveButtons() {
 		driver.getUnloadBallButton().whenPressed(new UnloadBall());
 		driver.getUnloadBallButton().whenReleased(new RetractLoader());
 		
@@ -103,39 +108,10 @@ public class OI {
 		driver.getOpenPorcullusButton().whenPressed(new OpenPortcullis());
 		driver.getOpenPorcullusButton().whenReleased(new StopOpeningPortcullis());
 		
-//		gamePadRightThumb.whenPressed(new ExtendWheelie());
-//		gamePadRightThumb.whenReleased(new RetractWheelie());
-		
-//		gamePadY.whenPressed(new FireGroup());
-		// Catapult Commands
-		
-		secondaryStickThree.whenPressed(new ExtendWheelie());
-		secondaryStickThree.whenReleased(new RetractWheelie());
-		
-		secondaryStickFive.whenPressed(new ShiftUp());
-		secondaryStickFive.whenReleased(new ShiftDown());
-		
-		thirdStickOne.whenPressed(new FireGroup());
-
-		
 		driver.getShift().whenPressed(new ShiftDown());
 		driver.getShift().whenReleased(new ShiftUp());
-		
-		
-		
 	}
-    // Start the command when the button is pressed and let it run the command
-    // until it is finished as determined by it's isFinished method.
-    // button.whenPressed(new ExampleCommand());
-	
-	
     
-    // Run the command while the button is being held down and interrupt it once
-    // the button is released.
-    // button.whileHeld(new ExampleCommand());
-    
-    // Start the command when the button is released  and let it run the command
-    // until it is finished as determined by it's isFinished method.
-    // button.whenReleased(new ExampleCommand());
+	
 }
 

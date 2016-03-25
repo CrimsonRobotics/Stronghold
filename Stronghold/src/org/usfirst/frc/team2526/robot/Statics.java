@@ -22,8 +22,6 @@ public class Statics {
 		addConstant("Loader In Delay", 1);
 		addConstant("Loader Out Delay", 1);
 		addConstant("Loader Out Delay Second", 1);
-		addConstant("Climber Up Speed", 0.3);
-		addConstant("Climber Extend Loader Delay", 1);
 		addConstant("Loader to Catapult Delay", 2.4);
 		addConstant("Catapult Hold Delay", 1);
 		addConstant("Catapult Arm Speed", -0.5);
@@ -46,8 +44,6 @@ public class Statics {
 		addConstant("Auto Rotation to Drive to Center", 90);
 		addConstant("Auto Distance to Center", 60);
 		addConstant("Auto Rotation to Center Goal", -90);
-		
-		
 	}
 	/**
 	 * Just making sure we are all on the same page here

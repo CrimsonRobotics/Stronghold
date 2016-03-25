@@ -7,9 +7,9 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class Drive extends Command {
+public class DriveVelocity extends Command {
 
-    public Drive() {
+    public DriveVelocity() {
     	requires(Robot.driveTrain);
     }
 
@@ -17,9 +17,7 @@ public class Drive extends Command {
     }
 
     protected void execute() {
-    	
-    	Robot.driveTrain.freeArcadeDrive();
-    	
+    	Robot.driveTrain.velocityArcadeDrive();
     }
 
     protected boolean isFinished() {

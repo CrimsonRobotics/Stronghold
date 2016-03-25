@@ -7,6 +7,10 @@ public class GamePadController implements CrimsonControlStick {
 
 	Joystick gamePad;
 	
+	public String getName() {
+		return "GamePad";
+	}
+	
 	public GamePadController(int port) {
 		this.gamePad = new Joystick(port);
 	}
@@ -35,6 +39,4 @@ public class GamePadController implements CrimsonControlStick {
 	public JoystickButton getShift() {
 		return new JoystickButton(gamePad,9);
 	}
-
-
 }

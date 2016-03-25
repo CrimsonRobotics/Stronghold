@@ -7,9 +7,9 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class DriveVBus extends Command {
+public class DriveNoSubtract extends Command {
 
-    public DriveVBus() {
+    public DriveNoSubtract() {
     	requires(Robot.driveTrain);
     }
 
@@ -17,7 +17,7 @@ public class DriveVBus extends Command {
     }
 
     protected void execute() {
-    	Robot.driveTrain.freeArcadeDrive();
+    	Robot.driveTrain.noSubtractArcadeDrive();
     }
 
     protected boolean isFinished() {
