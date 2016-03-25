@@ -26,7 +26,7 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
  */
 public class OI {
 	
-	CrimsonControlStick driver = new GamePadController(1);
+	CrimsonControlStick driver = new GamePadController(0);
 	Joystick secondaryStick = new Joystick(2);
 	Joystick thirdStick = new Joystick(3);
  
@@ -94,9 +94,9 @@ public class OI {
 //		primaryStickOne.whenReleased(new LoadBall());
 		
 		driver.getUnloadBallButton().whenPressed(new UnloadBall());
-		driver.getRetractLoaderButton().whenReleased(new RetractLoader());
+		driver.getUnloadBallButton().whenReleased(new RetractLoader());
 		
-		driver.getExtendLoaderToLoadButton().whenPressed(new ExtendLoaderToLoad());
+		driver.getLoadBallButton().whenPressed(new ExtendLoaderToLoad());
 		driver.getLoadBallButton().whenReleased(new LoadBall());
 		// Loader Commands
 		
@@ -118,8 +118,8 @@ public class OI {
 		thirdStickOne.whenPressed(new FireGroup());
 
 		
-		driver.getShiftDown().whenPressed(new ShiftDown());
-		driver.getShiftUp().whenReleased(new ShiftUp());
+		driver.getShift().whenPressed(new ShiftDown());
+		driver.getShift().whenReleased(new ShiftUp());
 		
 		
 		

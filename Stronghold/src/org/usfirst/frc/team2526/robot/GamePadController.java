@@ -27,24 +27,14 @@ public class GamePadController implements CrimsonControlStick {
 		return new JoystickButton(gamePad, 6);
 	}
 
-	public JoystickButton getRetractLoaderButton() {
-		return new JoystickButton(gamePad,6);
-	}
-
-	public JoystickButton getExtendLoaderToLoadButton() {
-		return new JoystickButton(gamePad,5);
-	}
 
 	public JoystickButton getLoadBallButton() {
 		return new JoystickButton(gamePad,5);
 	}
 
-	public JoystickButton getShiftUp() {
+	public JoystickButton getShift() {
 		return new JoystickButton(gamePad,9);
 	}
 
-	public JoystickButton getShiftDown() {
-		return new JoystickButton(gamePad,9);
-	}
 
 }

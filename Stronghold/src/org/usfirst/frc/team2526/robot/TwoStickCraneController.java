@@ -14,39 +14,29 @@ public class TwoStickCraneController implements CrimsonControlStick {
 	}
 
 	public double getTurnValue() {
-		return leftStick.getX();
+		return rightStick.getX();
 	}
 
 	public double getMagValue() {
-		return rightStick.getY() * -1;
+		return leftStick.getY() * -1;
 	}
 
 	public JoystickButton getOpenPorcullusButton() {
-		return null;
+		return new JoystickButton(rightStick, 2);
 	}
 
 	public JoystickButton getUnloadBallButton() {
+		return new JoystickButton(rightStick, 1);
+	}
+
+
+	public JoystickButton getLoadBallButton() {
+		return new JoystickButton(rightStick, 3);
+	}
+
+	public JoystickButton getShift() {
 		return new JoystickButton(leftStick, 2);
 	}
 
-	public JoystickButton getRetractLoaderButton() {
-		return null;
-	}
-
-	public JoystickButton getExtendLoaderToLoadButton() {
-		return null;
-	}
-
-	public JoystickButton getLoadBallButton() {
-		return null;
-	}
-
-	public JoystickButton getShiftUp() {
-		return null;
-	}
-
-	public JoystickButton getShiftDown() {
-		return null;
-	}
 
 }

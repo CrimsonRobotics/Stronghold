@@ -12,6 +12,7 @@ import org.usfirst.frc.team2526.robot.commands.catapult.FireLaunch;
 import org.usfirst.frc.team2526.robot.commands.catapult.FireReset;
 import org.usfirst.frc.team2526.robot.commands.climber.ClimbUp;
 import org.usfirst.frc.team2526.robot.commands.drive.ConstantDrive;
+import org.usfirst.frc.team2526.robot.commands.drive.DriveVBus;
 import org.usfirst.frc.team2526.robot.commands.drive.ResetEncoders;
 import org.usfirst.frc.team2526.robot.commands.drive.RotateTo;
 import org.usfirst.frc.team2526.robot.commands.loader.ExtendLoader;
@@ -33,6 +34,7 @@ import com.analog.adis16448.frc.ADIS16448_IMU;
 
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -122,12 +124,11 @@ public class Robot extends IterativeRobot {
        SmartDashboard.putData(new FireGroup());
        SmartDashboard.putData(new FireLaunch());
        SmartDashboard.putData(new FireReset());
-       
        SmartDashboard.putData(new ResetEncoders());
-       
        SmartDashboard.putData(new ClimbUp());
-       
        SmartDashboard.putData(new LowbarAuto());
+       
+       SmartDashboard.putData(new DriveVBus());
        
 
        
@@ -245,6 +246,9 @@ public class Robot extends IterativeRobot {
         loaderFrame.update();
         driveTrain.update();
         
+
+        
+        SmartDashboard.putNumber("Stick", Robot.oi.driver.getMagValue());
     }
     
     /**

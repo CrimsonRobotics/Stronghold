@@ -44,6 +44,32 @@ public class DriveTrain extends Subsystem {
     	lMotorTwo = new CANTalon(RobotMap.lMotorTwo);
     	rMotorTwo = new CANTalon(RobotMap.rMotorTwo);
     	
+    	rMotor.reverseSensor(true);
+    	lMotor.configEncoderCodesPerRev(360);
+    	rMotor.configEncoderCodesPerRev(360);
+    	
+    	lMotor.configNominalOutputVoltage(+0.0f, -0.0f);
+    	lMotor.configPeakOutputVoltage(+12.0f, -12.0f);
+    	
+    	rMotor.configNominalOutputVoltage(+0.0f, -0.0f);
+    	rMotor.configPeakOutputVoltage(+12.0f, -12.0f);
+    	
+    	lMotor.setProfile(0);
+    	lMotor.setF(0.48346);
+    	lMotor.setP(0);
+    	lMotor.setI(0);
+    	lMotor.setD(0);
+    	
+    	rMotor.setProfile(0);
+    	rMotor.setF(0.44171);
+    	rMotor.setP(0);
+    	rMotor.setI(0);
+    	rMotor.setD(0);
+    	
+    	lMotor.changeControlMode(TalonControlMode.PercentVbus);
+    	rMotor.changeControlMode(TalonControlMode.PercentVbus);
+    	
+    	
     	lMotorTwo.changeControlMode(TalonControlMode.Follower);
     	rMotorTwo.changeControlMode(TalonControlMode.Follower);
     	lMotorTwo.set(RobotMap.lMotorOne);
@@ -78,6 +104,9 @@ public class DriveTrain extends Subsystem {
     	
     	drive = new RobotDrive(lMotor, rMotor);
     	
+    	drive.setSafetyEnabled(false);
+
+    	
     }
     
     
@@ -85,17 +114,81 @@ public class DriveTrain extends Subsystem {
     	return turnPID.onTarget();
     }
     
+    public void freeAcadeDriveVBus() {
+    	
+    	drive.arcadeDrive(Robot.oi.getDriverControls().getMagValue(), Robot.oi.getDriverControls().getTurnValue());
+    }
+    
     public void freeArcadeDrive() {
+//    	lMotor.changeControlMode(TalonControlMode.Speed);
+//    	rMotor.changeControlMode(TalonControlMode.Speed);
     	turnPID.disable();
     	
-    	if (RobotMap.primaryControl) {
-    		// Main driver
-    		drive.arcadeDrive(Robot.oi.getDriverControls().getMagValue(), Robot.oi.getDriverControls().getTurnValue());
-    	} else {
-    		// Co Driver
-        	drive.arcadeDrive(-Robot.oi.getSecondaryStick().getY() * RobotMap.secondaryWeight, Robot.oi.getThirdStick().getX() * RobotMap.secondaryWeight);
-    	}
+//    	double magnitude = Robot.oi.getDriverControls().getMagValue();
+//    	double motorOutputL = lMotor.getOutputVoltage() / lMotor.getBusVoltage();
+//    	double motorOutputR = rMotor.getOutputVoltage() / rMotor.getBusVoltage();
+//    	
+//    	String debug = "\tout L:";
+//    	debug += motorOutputL;
+//    	debug += "\tout R:";
+//    	debug += motorOutputR;
+//    	debug += "\tspd L:";
+//    	debug += lMotor.getSpeed();
+//    	debug += "\tspd R:";
+//    	debug += rMotor.getSpeed();
     	
+/*    	double magValue = Robot.oi.getDriverControls().getMagValue() * 900;
+    	double turnValue = -Robot.oi.getDriverControls().getTurnValue() * 900;
+    	double leftMotorSpeed;
+    	double rightMotorSpeed;
+    	
+    	if (magValue > 0.0) {
+    	      if (turnValue > 0.0) {
+    	        leftMotorSpeed = magValue - turnValue;
+    	        rightMotorSpeed = Math.max(magValue, turnValue);
+    	      } else {
+    	        leftMotorSpeed = Math.max(magValue, -turnValue);
+    	        rightMotorSpeed = magValue + turnValue;
+    	      }
+    	    } else {
+    	      if (turnValue > 0.0) {
+    	        leftMotorSpeed = -Math.max(-magValue, turnValue);
+    	        rightMotorSpeed = magValue + turnValue;
+    	      } else {
+    	        leftMotorSpeed = magValue - turnValue;
+    	        rightMotorSpeed = -Math.max(-magValue, -turnValue);
+    	      }
+    	    }
+    	lMotor.set(-leftMotorSpeed);
+    	rMotor.set(rightMotorSpeed);
+ */   	
+//    	debug += "\terr L:";
+//    	debug += lMotor.getClosedLoopError();
+//    	
+//    	debug += "\terr R:";
+//    	debug += rMotor.getClosedLoopError();
+//    	
+//    	debug += "\trg:";
+//    	debug += targetSpeed;
+//    	
+//    	System.out.println(debug);
+    	
+    	drive.arcadeDrive(-Robot.oi.getDriverControls().getMagValue(), Robot.oi.getDriverControls().getTurnValue());
+
+    	
+//    	if (RobotMap.primaryControl) {
+//    		// Main driver
+//    		drive.arcadeDrive(-Robot.oi.getDriverControls().getMagValue(), Robot.oi.getDriverControls().getTurnValue());
+//    	} else {
+//    		// Co Driver
+//        	drive.arcadeDrive(-Robot.oi.getSecondaryStick().getY() * RobotMap.secondaryWeight, Robot.oi.getThirdStick().getX() * RobotMap.secondaryWeight);
+//    	}
+    		
+    		SmartDashboard.putNumber("L Motor 1 Current", lMotor.getOutputCurrent());
+    		SmartDashboard.putNumber("L Motor 2 Current", lMotorTwo.getOutputCurrent());
+    		SmartDashboard.putNumber("R Motor 1 Current", rMotor.getOutputCurrent());
+    		SmartDashboard.putNumber("R Motor 1 Current", rMotorTwo.getOutputCurrent());
+
     }
     
     

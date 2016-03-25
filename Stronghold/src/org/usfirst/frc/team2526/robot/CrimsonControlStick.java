@@ -12,13 +12,10 @@ public interface CrimsonControlStick {
 	
 	public JoystickButton getUnloadBallButton();
 	
-	public JoystickButton getRetractLoaderButton();
 	
-	public JoystickButton getExtendLoaderToLoadButton();
 	
 	public JoystickButton getLoadBallButton();
 	
-	public JoystickButton getShiftUp();
+	public JoystickButton getShift();
 	
-	public JoystickButton getShiftDown();
 }
