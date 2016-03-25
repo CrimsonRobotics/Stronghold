@@ -54,6 +54,7 @@ public class Robot extends IterativeRobot {
 	public static DriveTrain driveTrain;
 	public static VisionCamera camera;
 	public static ADIS16448_IMU imu;
+	
 	public static Catapult catapult;
 	public static LoaderFrame loaderFrame;
 	public static LoaderRollers loaderRollers;

@@ -188,6 +188,31 @@ public class DriveTrain extends Subsystem {
 
     }
     
+    public void driveWithTurnShift() {
+    	if (RobotMap.primaryControl) {
+    		// Main driver
+    		
+    		double magValue = -Robot.oi.getDriveControls().getMagValue();
+        	double turnValue =  Robot.oi.getDriveControls().getTurnValue();
+    		
+    		drive.arcadeDrive(magValue, turnValue);
+    		
+    		if (Math.abs(magValue) < 0.10) {
+    			if (Math.abs(turnValue) > 0.3) {
+    				Robot.sonic.shiftDown();
+    			} else {
+    				Robot.sonic.shiftUp();
+    			}
+    			
+    		} else {
+    			Robot.sonic.shiftUp();
+    		}
+    	} else {
+    		// Co Driver
+        	drive.arcadeDrive(-Robot.oi.getSecondaryStick().getY() * RobotMap.secondaryWeight, Robot.oi.getThirdStick().getX() * RobotMap.secondaryWeight);
+    	}
+    }
+    
     public void noSubtractArcadeDrive() {
     	turnPID.disable();
     	
