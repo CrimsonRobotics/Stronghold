@@ -113,14 +113,14 @@ public class DriveTrain extends Subsystem {
     	return turnPID.onTarget();
     }
     
-    public double getLeftSpeed() {
-    	return lMotor.get();
+    public boolean isAtSetSpeed(double speed) {
+    	return Math.abs(lMotor.get()) >= Math.abs(speed) 
+    			&& Math.abs(rMotor.get()) >= Math.abs(speed);
     }
     
     public void increaseSpeed() {
-    	double speed = getLeftSpeed() + Statics.getDouble("Auto Speed Increase Rate");
-    	lMotor.set(speed);
-    	rMotor.set(speed);
+    	lMotor.set(lMotor.get() + Statics.getDouble("Auto Speed Increase Rate"));
+    	rMotor.set(rMotor.get() + Statics.getDouble("Auto Speed Increase Rate"));
     }
     
     public void freeArcadeDrive() {
@@ -306,6 +306,23 @@ public class DriveTrain extends Subsystem {
     	SmartDashboard.putNumber("Angle X", Robot.imu.getAngleX());
     	SmartDashboard.putNumber("Angle Z", Robot.imu.getAngleZ());
     	
+    	if (Statics.getDouble("Motor Recovery Enabled") == 1) {
+    		if (lMotor.getFaultHardwareFailure() ==1 || rMotor.getFaultHardwareFailure() == 1) {
+    			lMotor.disable();
+    			rMotor.disable();
+    		} else {
+    			lMotor.enable();
+    			rMotor.enable();
+    		}
+    		
+    		if (lMotorTwo.getFaultHardwareFailure() ==1 || rMotorTwo.getFaultHardwareFailure() == 1) {
+    			lMotorTwo.disable();
+    			rMotorTwo.disable();
+    		} else {
+    			lMotorTwo.enable();
+    			rMotorTwo.enable();
+    		}
+    	}
     }
 }
 

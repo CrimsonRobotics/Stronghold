@@ -48,6 +48,7 @@ public class Statics {
 		
 		addConstant("Auto Speed Target", -1);
 		addConstant("Auto Speed Increase Rate", -0.2);
+		addConstant("Motor Recovery Enabled", 0);
 	}
 	/**
 	 * Just making sure we are all on the same page here

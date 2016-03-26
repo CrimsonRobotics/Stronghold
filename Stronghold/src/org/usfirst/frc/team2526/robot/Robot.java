@@ -97,13 +97,12 @@ public class Robot extends IterativeRobot {
        oi = new OI();
        
        autoType = new SendableChooser();
-     autoType.addDefault("Lowbar Auto", new LowbarAuto());
-     autoType.addObject("Portcullis Auto", new PortcullisAuto());
-     autoType.addObject("Slow Acceleration Auto", new IncreaseSpeedAuto());
-     SmartDashboard.putData("Auto Type", autoType);
+       autoType.addDefault("Lowbar Auto", new LowbarAuto());
+       	autoType.addObject("Portcullis Auto", new PortcullisAuto());
+     	autoType.addObject("Slow Acceleration Auto", new IncreaseSpeedAuto());
+     	SmartDashboard.putData("Auto Type", autoType);
        
        SmartDashboard.putData(new BackUpIncline());
-       SmartDashboard.putData(camera);
        SmartDashboard.putData(new ResetGyro());
        SmartDashboard.putData(new CalibrateOffset());
        SmartDashboard.putData(new VisionShoot());
