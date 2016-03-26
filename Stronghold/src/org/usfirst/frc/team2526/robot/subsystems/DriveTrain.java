@@ -2,6 +2,7 @@ package org.usfirst.frc.team2526.robot.subsystems;
 
 import org.usfirst.frc.team2526.robot.Robot;
 import org.usfirst.frc.team2526.robot.RobotMap;
+import org.usfirst.frc.team2526.robot.Statics;
 import org.usfirst.frc.team2526.robot.commands.drive.DriveVBus;
 
 import edu.wpi.first.wpilibj.CANTalon;
@@ -110,6 +111,16 @@ public class DriveTrain extends Subsystem {
     
     public boolean onTurnTarget() {
     	return turnPID.onTarget();
+    }
+    
+    public double getLeftSpeed() {
+    	return lMotor.get();
+    }
+    
+    public void increaseSpeed() {
+    	double speed = getLeftSpeed() + Statics.getDouble("Auto Speed Increase Rate");
+    	lMotor.set(speed);
+    	rMotor.set(speed);
     }
     
     public void freeArcadeDrive() {

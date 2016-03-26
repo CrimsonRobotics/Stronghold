@@ -45,6 +45,9 @@ public class Statics {
 		addConstant("Auto Rotation to Drive to Center", 90);
 		addConstant("Auto Distance to Center", 60);
 		addConstant("Auto Rotation to Center Goal", -90);
+		
+		addConstant("Auto Speed Target", -1);
+		addConstant("Auto Speed Increase Rate", -0.2);
 	}
 	/**
 	 * Just making sure we are all on the same page here

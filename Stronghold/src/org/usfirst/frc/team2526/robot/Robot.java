@@ -4,6 +4,7 @@ package org.usfirst.frc.team2526.robot;
 import org.usfirst.frc.team2526.robot.commands.ResetGyro;
 import org.usfirst.frc.team2526.robot.commands.autonomous.BackUpIncline;
 import org.usfirst.frc.team2526.robot.commands.autonomous.DriveStraightThroughDefense;
+import org.usfirst.frc.team2526.robot.commands.autonomous.IncreaseSpeedAuto;
 import org.usfirst.frc.team2526.robot.commands.autonomous.LowbarAuto;
 import org.usfirst.frc.team2526.robot.commands.autonomous.PortcullisAuto;
 import org.usfirst.frc.team2526.robot.commands.catapult.ArmCatapult;
@@ -125,6 +126,8 @@ public class Robot extends IterativeRobot {
        SmartDashboard.putData(new DriveVelocity());
        SmartDashboard.putData(new DriveNoSubtract());
        SmartDashboard.putData(new DriveTurnShift());
+       
+       SmartDashboard.putData(new IncreaseSpeedAuto());
        
        SmartDashboard.putData(new CatapultFirePreMatch());
        SmartDashboard.putData(new CatapultArmPreMatch());
