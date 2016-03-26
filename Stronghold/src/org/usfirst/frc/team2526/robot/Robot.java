@@ -99,6 +99,7 @@ public class Robot extends IterativeRobot {
        autoType = new SendableChooser();
      autoType.addDefault("Lowbar Auto", new LowbarAuto());
      autoType.addObject("Portcullis Auto", new PortcullisAuto());
+     autoType.addObject("Slow Acceleration Auto", new IncreaseSpeedAuto());
      SmartDashboard.putData("Auto Type", autoType);
        
        SmartDashboard.putData(new BackUpIncline());
