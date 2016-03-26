@@ -117,7 +117,7 @@ public class DriveTrain extends Subsystem {
     	
     	if (RobotMap.primaryControl) {
     		// Main driver
-    		drive.arcadeDrive(-Robot.oi.getDriveControls().getMagValue(), Robot.oi.getDriveControls().getTurnValue());
+    		drive.arcadeDrive(Robot.oi.getPrimaryDriver().getY(), Robot.oi.getSecondaryDriver().getX());
     	} else {
     		// Co Driver
         	drive.arcadeDrive(-Robot.oi.getSecondaryStick().getY() * RobotMap.secondaryWeight, Robot.oi.getThirdStick().getX() * RobotMap.secondaryWeight);
@@ -143,8 +143,8 @@ public class DriveTrain extends Subsystem {
 //    	debug += "\tspd R:";
 //    	debug += rMotor.getSpeed();
     	
-    	double magValue = Robot.oi.getDriveControls().getMagValue() * 900 * (RobotMap.primaryControl ? 1 : -1);
-    	double turnValue = -Robot.oi.getDriveControls().getTurnValue() * 900;
+    	double magValue = Robot.oi.getPrimaryDriver().getY() * 900 * (RobotMap.primaryControl ? 1 : -1);
+    	double turnValue = -Robot.oi.getSecondaryDriver().getX() * 900;
     	double leftMotorSpeed;
     	double rightMotorSpeed;
     	
@@ -192,8 +192,8 @@ public class DriveTrain extends Subsystem {
     	if (RobotMap.primaryControl) {
     		// Main driver
     		
-    		double magValue = -Robot.oi.getDriveControls().getMagValue();
-        	double turnValue =  Robot.oi.getDriveControls().getTurnValue();
+    		double magValue = -Robot.oi.getPrimaryDriver().getY();
+        	double turnValue =  Robot.oi.getSecondaryDriver().getX();
     		
     		drive.arcadeDrive(magValue, turnValue);
     		
@@ -216,8 +216,8 @@ public class DriveTrain extends Subsystem {
     public void noSubtractArcadeDrive() {
     	turnPID.disable();
     	
-    	double magValue = Robot.oi.getDriveControls().getMagValue() * 900 * (RobotMap.primaryControl ? 1 : -1);
-    	double turnValue = -Robot.oi.getDriveControls().getTurnValue() * 900;
+    	double magValue = Robot.oi.getPrimaryDriver().getY() * 900 * (RobotMap.primaryControl ? 1 : -1);
+    	double turnValue = -Robot.oi.getSecondaryDriver().getX() * 900;
     	double leftMotorSpeed;
     	double rightMotorSpeed;
     	
@@ -245,8 +245,7 @@ public class DriveTrain extends Subsystem {
     }
     
     public void driveConstant(double speed, double turnSpeed) {
-    	pidValues.setMagnitudeValue(-speed);
-    	pidValues.setTurnValue(turnSpeed);
+    	drive.arcadeDrive(speed, turnSpeed);
     }
     
     public void stopDriving() {

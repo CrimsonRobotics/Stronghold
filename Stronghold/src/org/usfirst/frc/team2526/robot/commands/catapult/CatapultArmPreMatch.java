@@ -1,30 +1,22 @@
-package org.usfirst.frc.team2526.robot.commands.autonomous;
+package org.usfirst.frc.team2526.robot.commands.catapult;
 
-import org.usfirst.frc.team2526.robot.commands.drive.DriveForEncoderClicks;
-import org.usfirst.frc.team2526.robot.commands.drive.ResetEncoders;
-import org.usfirst.frc.team2526.robot.commands.drive.ShiftDown;
-import org.usfirst.frc.team2526.robot.commands.wheeliebar.ExtendWheelie;
-import org.usfirst.frc.team2526.robot.commands.wheeliebar.RetractWheelie;
+import org.usfirst.frc.team2526.robot.commands.loader.ExtendLoader;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
  *
  */
-public class LowbarAuto extends CommandGroup {
+public class CatapultArmPreMatch extends CommandGroup {
     
-    public  LowbarAuto() {
+    public  CatapultArmPreMatch() {
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
         // these will run in order.
     	
-    	addSequential(new ExtendWheelie());
-    	addSequential(new ShiftDown());
-    	addSequential(new ResetEncoders());
-    	addSequential(new DriveForEncoderClicks());
-    	
-    	addSequential(new RetractWheelie());
+    	addSequential(new ExtendLoader());
+    	addSequential(new ArmCatapult());
 
         // To run multiple commands at the same time,
         // use addParallel()

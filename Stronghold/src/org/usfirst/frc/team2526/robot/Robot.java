@@ -5,13 +5,17 @@ import org.usfirst.frc.team2526.robot.commands.ResetGyro;
 import org.usfirst.frc.team2526.robot.commands.autonomous.BackUpIncline;
 import org.usfirst.frc.team2526.robot.commands.autonomous.DriveStraightThroughDefense;
 import org.usfirst.frc.team2526.robot.commands.autonomous.LowbarAuto;
+import org.usfirst.frc.team2526.robot.commands.autonomous.PortcullisAuto;
 import org.usfirst.frc.team2526.robot.commands.catapult.ArmCatapult;
+import org.usfirst.frc.team2526.robot.commands.catapult.CatapultArmPreMatch;
+import org.usfirst.frc.team2526.robot.commands.catapult.CatapultFirePreMatch;
 import org.usfirst.frc.team2526.robot.commands.catapult.FireCatapult;
 import org.usfirst.frc.team2526.robot.commands.catapult.FireGroup;
 import org.usfirst.frc.team2526.robot.commands.catapult.FireLaunch;
 import org.usfirst.frc.team2526.robot.commands.catapult.FireReset;
 import org.usfirst.frc.team2526.robot.commands.climber.ClimbUp;
 import org.usfirst.frc.team2526.robot.commands.drive.DriveNoSubtract;
+import org.usfirst.frc.team2526.robot.commands.drive.DriveTurnShift;
 import org.usfirst.frc.team2526.robot.commands.drive.DriveVBus;
 import org.usfirst.frc.team2526.robot.commands.drive.DriveVelocity;
 import org.usfirst.frc.team2526.robot.commands.drive.ResetEncoders;
@@ -38,6 +42,7 @@ import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 //import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -68,6 +73,8 @@ public class Robot extends IterativeRobot {
 
     Command autonomousCommand;
     
+    SendableChooser autoType;
+    
     /**
      * This function is run when the robot is first started up and should be
      * used for any initialization code.
@@ -87,6 +94,11 @@ public class Robot extends IterativeRobot {
        camera = new VisionCamera();
        
        oi = new OI();
+       
+       autoType = new SendableChooser();
+     autoType.addDefault("Lowbar Auto", new LowbarAuto());
+     autoType.addObject("Portcullis Auto", new PortcullisAuto());
+     SmartDashboard.putData("Auto Type", autoType);
        
        SmartDashboard.putData(new BackUpIncline());
        SmartDashboard.putData(camera);
@@ -112,6 +124,10 @@ public class Robot extends IterativeRobot {
        SmartDashboard.putData(new DriveVBus());
        SmartDashboard.putData(new DriveVelocity());
        SmartDashboard.putData(new DriveNoSubtract());
+       SmartDashboard.putData(new DriveTurnShift());
+       
+       SmartDashboard.putData(new CatapultFirePreMatch());
+       SmartDashboard.putData(new CatapultArmPreMatch());
        
     }
 	
@@ -138,7 +154,8 @@ public class Robot extends IterativeRobot {
 	 * or additional comparisons to the switch structure below with additional strings & commands.
 	 */
     public void autonomousInit() {
-        autonomousCommand = new LowbarAuto();
+//        autonomousCommand = new LowbarAuto();
+        autonomousCommand = (Command) autoType.getSelected();
     	// schedule the autonomous command (example)
         if (autonomousCommand != null){
         	autonomousCommand.start();
@@ -157,7 +174,6 @@ public class Robot extends IterativeRobot {
         	autonomousCommand.cancel();
         }
         
-        Robot.oi.updateDriverControls();
     }
 
     /**
@@ -166,7 +182,6 @@ public class Robot extends IterativeRobot {
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
         
-        Robot.oi.updateDriverControls();
         
         SmartDashboard.putBoolean("Wheelie Bar State", Robot.wheelieBar.getWheelieState());
         
@@ -177,7 +192,6 @@ public class Robot extends IterativeRobot {
         loaderFrame.update();
         driveTrain.update();
         
-        SmartDashboard.putNumber("Stick", Robot.oi.driver.getMagValue());
     }
     
     /**

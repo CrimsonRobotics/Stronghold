@@ -26,6 +26,7 @@ public class Statics {
 		addConstant("Catapult Hold Delay", 1);
 		addConstant("Catapult Arm Speed", -0.5);
 		addConstant("Straight Auto Distance Inches", 72);
+		addConstant("AUTO Distance to Drive Encoders", 22000);
 		addConstant("Distance To Shoot Inches", 144);
 		addConstant("Ticks Per Inch", 13.889);
 		

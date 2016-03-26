@@ -27,22 +27,19 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class OI {
 	
-	CrimsonControlStick driver = null;
+	
+	Joystick primaryDriver = new Joystick(0);
+	Joystick secondaryDriver = new Joystick(1);
 	Joystick secondaryStick = new Joystick(2);
 	Joystick thirdStick = new Joystick(3);
  
-	SendableChooser driveChooser;
 	
-	public void updateDriverControls() {
-		CrimsonControlStick currentDriver = (CrimsonControlStick) driveChooser.getSelected();
-        
-        if (driver == null || !(driver.getName().equals(currentDriver.getName()))) {
-        	if (currentDriver == null) {
-        		setDriveControls(new TwoStickCraneController(0, 1));
-        	} else {
-        		setDriveControls(currentDriver);
-        	}
-        }
+	public Joystick getPrimaryDriver() {
+		return primaryDriver;
+	}
+	
+	public Joystick getSecondaryDriver() {
+		return secondaryDriver;
 	}
 	
 	public Joystick getSecondaryStick() {
@@ -53,14 +50,16 @@ public class OI {
 		return thirdStick;
 	}
 	
-	public void setDriveControls(CrimsonControlStick drive) {
-		this.driver = drive;
-		updateDriveButtons();
-	}
+
 	
-	public CrimsonControlStick getDriveControls() {
-		return driver;
-	}
+	Button primaryDriverOne = new JoystickButton(secondaryStick,1);
+	Button primaryDriverTwo = new JoystickButton(primaryDriver,2);
+	
+	Button secondaryDriverOne = new JoystickButton(secondaryDriver,1);
+	Button secondaryDriverTwo = new JoystickButton(secondaryDriver,2);
+	Button secondaryDriverThree = new JoystickButton(secondaryDriver,3);
+
+
 	
 	
 	Button secondaryStickOne = new JoystickButton(secondaryStick,1);
@@ -76,10 +75,6 @@ public class OI {
 	
 	public OI() {
 		
-		driveChooser = new SendableChooser();
-	    driveChooser.addDefault("Joysticks", new TwoStickCraneController(0, 1));
-	    driveChooser.addObject("GamePad", new GamePadController(0));
-	    SmartDashboard.putData("Drive Mode", driveChooser);
 		
 		secondaryStickOne.whenPressed(new SwitchDrive());
 		secondaryStickOne.whenReleased(new SwitchDrive());	
@@ -95,23 +90,23 @@ public class OI {
 		secondaryStickFive.whenReleased(new ShiftDown());
 		
 		thirdStickOne.whenPressed(new FireGroup());
-	}
 	
-	private void updateDriveButtons() {
-		driver.getUnloadBallButton().whenPressed(new UnloadBall());
-		driver.getUnloadBallButton().whenReleased(new RetractLoader());
+	
+
+		secondaryDriverOne.whenPressed(new UnloadBall());
+		secondaryDriverOne.whenReleased(new RetractLoader());
 		
-		driver.getLoadBallButton().whenPressed(new ExtendLoaderToLoad());
-		driver.getLoadBallButton().whenReleased(new LoadBall());
+		secondaryDriverThree.whenPressed(new ExtendLoaderToLoad());
+		secondaryDriverThree.whenReleased(new LoadBall());
 		// Loader Commands
 		
-		driver.getOpenPorcullusButton().whenPressed(new OpenPortcullis());
-		driver.getOpenPorcullusButton().whenReleased(new StopOpeningPortcullis());
+		secondaryDriverTwo.whenPressed(new OpenPortcullis());
+		secondaryDriverTwo.whenReleased(new StopOpeningPortcullis());
 		
-		driver.getShift().whenPressed(new ShiftDown());
-		driver.getShift().whenReleased(new ShiftUp());
-	}
-    
+		primaryDriverTwo.whenPressed(new ShiftUp());
+		primaryDriverTwo.whenReleased(new ShiftDown());
+	
+	} 
 	
 }
 

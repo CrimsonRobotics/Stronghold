@@ -13,8 +13,8 @@ public class OpenPortcullis extends CommandGroup {
     
     public  OpenPortcullis() {
     	
-    	addParallel(new ExtendLoader());
     	addParallel(new ExtendWheelie());
+    	addSequential(new ExtendLoader());
     	addSequential(new RollersOut());
 
     }
