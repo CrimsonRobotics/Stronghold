@@ -1,4 +1,4 @@
-package org.usfirst.frc.team2526.robot.commands.drive;
+package org.usfirst.frc.team2526.robot.commands.loader;
 
 import org.usfirst.frc.team2526.robot.Robot;
 
@@ -7,23 +7,18 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class EnablePID extends Command {
+public class RollersInFire extends Command {
 
-	double distance;
-	
-    public EnablePID() {
-		requires(Robot.driveTrain);
-    	
+    public RollersInFire() {
+    	requires(Robot.loaderRollers);
     }
-    
 
     protected void initialize() {
-    	Robot.driveTrain.enableDrivePIDValues();
-    	Robot.driveTrain.enableTurnPIDValues();
     }
 
     protected void execute() {
-    	Robot.driveTrain.updatePIDValues();
+    	Robot.loaderRollers.rollersInFire();
+
     }
 
     protected boolean isFinished() {

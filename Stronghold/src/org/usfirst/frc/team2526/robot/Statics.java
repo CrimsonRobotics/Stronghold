@@ -17,17 +17,17 @@ public class Statics {
 		constants = new ArrayList<Constant>();
 		
 		// Add the constants here, name followed by its default
-		addConstant("Loader Speed In", 0.5);
+		addConstant("Loader Speed In", 1);
+		addConstant("Loader Speed Fire", 0.3);
 		addConstant("Loader Speed Out", -1);
 		addConstant("Loader In Delay", 1);
 		addConstant("Loader Out Delay", 1);
 		addConstant("Loader Out Delay Second", 1);
-		addConstant("Climber Up Speed", 0.3);
-		addConstant("Climber Extend Loader Delay", 1);
-		addConstant("Loader to Catapult Delay", 2.4);
+		addConstant("Loader to Catapult Delay", 1.9);
 		addConstant("Catapult Hold Delay", 1);
 		addConstant("Catapult Arm Speed", -0.5);
 		addConstant("Straight Auto Distance Inches", 72);
+		addConstant("AUTO Distance to Drive Encoders", 22000);
 		addConstant("Distance To Shoot Inches", 144);
 		addConstant("Ticks Per Inch", 13.889);
 		
@@ -47,7 +47,9 @@ public class Statics {
 		addConstant("Auto Distance to Center", 60);
 		addConstant("Auto Rotation to Center Goal", -90);
 		
-		
+		addConstant("Auto Speed Target", -1);
+		addConstant("Auto Speed Increase Rate", -0.02);
+		addConstant("Motor Recovery Enabled", 0);
 	}
 	/**
 	 * Just making sure we are all on the same page here

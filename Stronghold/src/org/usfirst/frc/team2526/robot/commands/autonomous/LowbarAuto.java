@@ -1,6 +1,8 @@
 package org.usfirst.frc.team2526.robot.commands.autonomous;
 
-import org.usfirst.frc.team2526.robot.commands.drive.ConstantDriveStatic;
+import org.usfirst.frc.team2526.robot.commands.drive.DriveForEncoderClicks;
+import org.usfirst.frc.team2526.robot.commands.drive.ResetEncoders;
+import org.usfirst.frc.team2526.robot.commands.drive.ShiftDown;
 import org.usfirst.frc.team2526.robot.commands.wheeliebar.ExtendWheelie;
 import org.usfirst.frc.team2526.robot.commands.wheeliebar.RetractWheelie;
 
@@ -18,7 +20,10 @@ public class LowbarAuto extends CommandGroup {
         // these will run in order.
     	
     	addSequential(new ExtendWheelie());
-    	addSequential(new ConstantDriveStatic());
+    	addSequential(new ShiftDown());
+    	addSequential(new ResetEncoders());
+    	addSequential(new DriveForEncoderClicks());
+    	
     	addSequential(new RetractWheelie());
 
         // To run multiple commands at the same time,

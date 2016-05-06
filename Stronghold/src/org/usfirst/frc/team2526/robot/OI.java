@@ -11,6 +11,8 @@ import org.usfirst.frc.team2526.robot.commands.drive.SwitchDrive;
 import org.usfirst.frc.team2526.robot.commands.loader.ExtendLoaderToLoad;
 import org.usfirst.frc.team2526.robot.commands.loader.LoadBall;
 import org.usfirst.frc.team2526.robot.commands.loader.RetractLoader;
+import org.usfirst.frc.team2526.robot.commands.loader.RollersIn;
+import org.usfirst.frc.team2526.robot.commands.loader.StopRollers;
 import org.usfirst.frc.team2526.robot.commands.loader.UnloadBall;
 import org.usfirst.frc.team2526.robot.commands.wheeliebar.ExtendWheelie;
 import org.usfirst.frc.team2526.robot.commands.wheeliebar.RetractWheelie;
@@ -18,7 +20,6 @@ import org.usfirst.frc.team2526.robot.commands.wheeliebar.RetractWheelie;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-//import edu.wpi.first.wpilibj.buttons.Button;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -26,15 +27,19 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
  */
 public class OI {
 	
-	Joystick gamePad = new Joystick(0);
-	Joystick secondaryStick = new Joystick(1);
-	Joystick thirdStick = new Joystick(2);
 	
-	// Joysticks
+	Joystick primaryDriver = new Joystick(0);
+	Joystick secondaryDriver = new Joystick(1);
+	Joystick secondaryStick = new Joystick(2);
+	Joystick thirdStick = new Joystick(3);
  
 	
-	public Joystick getGamePad() {
-		return gamePad;
+	public Joystick getPrimaryDriver() {
+		return primaryDriver;
+	}
+	
+	public Joystick getSecondaryDriver() {
+		return secondaryDriver;
 	}
 	
 	public Joystick getSecondaryStick() {
@@ -44,19 +49,22 @@ public class OI {
 	public Joystick getThirdStick() {
 		return thirdStick;
 	}
-    
 	
-	Button gamePadA = new JoystickButton(gamePad,1);
-	Button gamePadB = new JoystickButton(gamePad,2);
-	Button gamePadX = new JoystickButton(gamePad,3);
-	Button gamePadY = new JoystickButton(gamePad,4);
-	Button gamePadLB = new JoystickButton(gamePad,5);
-	Button gamePadRB = new JoystickButton(gamePad,6);
-	Button gamePadBack = new JoystickButton(gamePad,7);
-	Button gamePadStart = new JoystickButton(gamePad,8);
-	Button gamePadLeftThumb = new JoystickButton(gamePad,9);
-	Button gamePadRightThumb = new JoystickButton(gamePad,10);
-	// Gamepad Buttons
+
+	
+	Button primaryDriverOne = new JoystickButton(secondaryStick,1);
+	Button primaryDriverTwo = new JoystickButton(primaryDriver,2);
+	Button primaryDriverFour = new JoystickButton(primaryDriver,4);
+	Button primaryDriverFive = new JoystickButton(primaryDriver,5);
+	Button primaryDriverSix = new JoystickButton(primaryDriver,6);
+	Button primaryDriverNine = new JoystickButton(primaryDriver,9);
+	
+	Button secondaryDriverOne = new JoystickButton(secondaryDriver,1);
+	Button secondaryDriverTwo = new JoystickButton(secondaryDriver,2);
+	Button secondaryDriverThree = new JoystickButton(secondaryDriver,3);
+
+
+	
 	
 	Button secondaryStickOne = new JoystickButton(secondaryStick,1);
 	Button secondaryStickTwo = new JoystickButton(secondaryStick,2);
@@ -69,53 +77,15 @@ public class OI {
 	Button thirdStickThree = new JoystickButton(thirdStick, 3);
 	// Third Stick Buttons
 	
-	
-	// Fourth Stick Buttons
-	
-	
-	public double getGamePadLTrigger() {
-		return gamePad.getRawAxis(2);
-	}
-	
-	public double getGamePadRTrigger() {
-		return gamePad.getRawAxis(3);
-	}
-	
-
-	
 	public OI() {
-	
+		
+		
 		secondaryStickOne.whenPressed(new SwitchDrive());
 		secondaryStickOne.whenReleased(new SwitchDrive());	
-		// Driver Control Commands
 		
+		// Driver Control Commands
 		secondaryStickThree.whenPressed(new ExtendWheelie());
 		secondaryStickThree.whenReleased(new RetractWheelie());
-		
-//		primaryStickOne.whenPressed(new LoadBall());
-//		primaryStickOne.whenReleased(new RetractLoader());
-//		secondaryStickOne.whenPressed(new LoaderOut());
-//		secondaryStickOne.whenReleased(new RetractLoader());
-		
-//		primaryStickOne.whileHeld(new RollersIn());
-//		primaryStickOne.whenPressed(new ExtendLoader());
-//		primaryStickOne.whenReleased(new LoadBall());
-		
-		gamePadRB.whenPressed(new UnloadBall());
-		gamePadRB.whenReleased(new RetractLoader());
-		
-		gamePadLB.whenPressed(new ExtendLoaderToLoad());
-		gamePadLB.whenReleased(new LoadBall());
-		// Loader Commands
-		
-		gamePadB.whenPressed(new OpenPortcullis());
-		gamePadB.whenReleased(new StopOpeningPortcullis());
-		
-//		gamePadRightThumb.whenPressed(new ExtendWheelie());
-//		gamePadRightThumb.whenReleased(new RetractWheelie());
-		
-//		gamePadY.whenPressed(new FireGroup());
-		// Catapult Commands
 		
 		secondaryStickThree.whenPressed(new ExtendWheelie());
 		secondaryStickThree.whenReleased(new RetractWheelie());
@@ -124,26 +94,39 @@ public class OI {
 		secondaryStickFive.whenReleased(new ShiftDown());
 		
 		thirdStickOne.whenPressed(new FireGroup());
+	
+	
+
+//		secondaryDriverTwo.whenPressed(new UnloadBall());
+//		secondaryDriverTwo.whenReleased(new RetractLoader());
+		
+//		secondaryDriverThree.whenPressed(new ExtendLoaderToLoad());
+//		secondaryDriverThree.whenReleased(new LoadBall());
+		// Loader Commands
+		
+//		secondaryDriverOne.whenPressed(new OpenPortcullis());
+//		secondaryDriverOne.whenReleased(new StopOpeningPortcullis());
+		
+//		primaryDriverTwo.whenPressed(new ShiftUp());
+//		primaryDriverTwo.whenReleased(new ShiftDown());
+		
+		primaryDriverFive.whenPressed(new ExtendLoaderToLoad());
+		primaryDriverFive.whenReleased(new LoadBall());
+		
+		primaryDriverTwo.whenPressed(new OpenPortcullis());
+		primaryDriverTwo.whenReleased(new StopOpeningPortcullis());
+		
+		primaryDriverFour.whenPressed(new RollersIn());
+		primaryDriverFour.whenReleased(new StopRollers());
 
 		
-		gamePadLeftThumb.whenPressed(new ShiftDown());
-		gamePadLeftThumb.whenReleased(new ShiftUp());
+		primaryDriverSix.whenPressed(new UnloadBall());
+		primaryDriverSix.whenReleased(new RetractLoader());
 		
-		
-		
-	}
-    // Start the command when the button is pressed and let it run the command
-    // until it is finished as determined by it's isFinished method.
-    // button.whenPressed(new ExampleCommand());
+		primaryDriverNine.whenPressed(new ShiftUp());
+		primaryDriverNine.whenReleased(new ShiftDown());
 	
+	} 
 	
-    
-    // Run the command while the button is being held down and interrupt it once
-    // the button is released.
-    // button.whileHeld(new ExampleCommand());
-    
-    // Start the command when the button is released  and let it run the command
-    // until it is finished as determined by it's isFinished method.
-    // button.whenReleased(new ExampleCommand());
 }
 

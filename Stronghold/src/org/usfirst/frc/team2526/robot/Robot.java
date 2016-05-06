@@ -4,15 +4,24 @@ package org.usfirst.frc.team2526.robot;
 import org.usfirst.frc.team2526.robot.commands.ResetGyro;
 import org.usfirst.frc.team2526.robot.commands.autonomous.BackUpIncline;
 import org.usfirst.frc.team2526.robot.commands.autonomous.DriveStraightThroughDefense;
+import org.usfirst.frc.team2526.robot.commands.autonomous.IncreaseSpeedAuto;
+import org.usfirst.frc.team2526.robot.commands.autonomous.IncreaseSpeedAutoHigh;
+import org.usfirst.frc.team2526.robot.commands.autonomous.IncreaseSpeedAutoPortcullis;
 import org.usfirst.frc.team2526.robot.commands.autonomous.LowbarAuto;
+import org.usfirst.frc.team2526.robot.commands.autonomous.PortcullisAuto;
 import org.usfirst.frc.team2526.robot.commands.catapult.ArmCatapult;
+import org.usfirst.frc.team2526.robot.commands.catapult.CatapultArmPreMatch;
+import org.usfirst.frc.team2526.robot.commands.catapult.CatapultFirePostMatch;
 import org.usfirst.frc.team2526.robot.commands.catapult.FireCatapult;
 import org.usfirst.frc.team2526.robot.commands.catapult.FireGroup;
 import org.usfirst.frc.team2526.robot.commands.catapult.FireLaunch;
 import org.usfirst.frc.team2526.robot.commands.catapult.FireReset;
 import org.usfirst.frc.team2526.robot.commands.climber.ClimbUp;
-import org.usfirst.frc.team2526.robot.commands.drive.ConstantDrive;
-import org.usfirst.frc.team2526.robot.commands.drive.EnablePID;
+import org.usfirst.frc.team2526.robot.commands.drive.DriveNoSubtract;
+import org.usfirst.frc.team2526.robot.commands.drive.DriveTurnShift;
+import org.usfirst.frc.team2526.robot.commands.drive.DriveVBus;
+import org.usfirst.frc.team2526.robot.commands.drive.DriveVelocity;
+import org.usfirst.frc.team2526.robot.commands.drive.IncreaseSpeedToTarget;
 import org.usfirst.frc.team2526.robot.commands.drive.ResetEncoders;
 import org.usfirst.frc.team2526.robot.commands.drive.RotateTo;
 import org.usfirst.frc.team2526.robot.commands.loader.ExtendLoader;
@@ -54,6 +63,7 @@ public class Robot extends IterativeRobot {
 	public static DriveTrain driveTrain;
 	public static VisionCamera camera;
 	public static ADIS16448_IMU imu;
+	
 	public static Catapult catapult;
 	public static LoaderFrame loaderFrame;
 	public static LoaderRollers loaderRollers;
@@ -66,10 +76,7 @@ public class Robot extends IterativeRobot {
 
 
     Command autonomousCommand;
-//    SendableChooser chooser;
-//    SendableChooser auto;
-    SendableChooser startDefense;
-    SendableChooser target;
+    
     SendableChooser autoType;
     
     /**
@@ -79,8 +86,8 @@ public class Robot extends IterativeRobot {
     public void robotInit() {
     	new Compressor(RobotMap.PCM_MAIN).start();
     	Statics.getInstance();
-//       auto = new SendableChooser();
-       imu = new ADIS16448_IMU();
+
+    	imu = new ADIS16448_IMU();
        driveTrain = new DriveTrain();
        catapult = new Catapult();
        loaderFrame = new LoaderFrame();
@@ -88,26 +95,19 @@ public class Robot extends IterativeRobot {
        climber = new Climber();
        sonic = new SonicShifters();
        wheelieBar = new WheelieBar();
-		camera = new VisionCamera();
-       startDefense = new SendableChooser();
-       target = new SendableChooser();
-       autoType = new SendableChooser();
-       
+       camera = new VisionCamera();
        
        oi = new OI();
        
-//       chooser = new SendableChooser();
-//       chooser.addDefault("Right", new RotateTo(90, 2));
-//       chooser.addObject("Left", new RotateTo(-90, 2));
-//       SmartDashboard.putData("Auto Direction", chooser);
-       
-       
-       SmartDashboard.putNumber("distance-drive", 0);
-       SmartDashboard.putNumber("Defense Distance", 84);
-       SmartDashboard.putNumber("After Defense Distance", 96);
+       autoType = new SendableChooser();
+       autoType.addDefault("Lowbar Auto", new LowbarAuto());
+       	autoType.addObject("Portcullis Auto", new PortcullisAuto());
+     	autoType.addObject("Slow Acceleration Auto", new IncreaseSpeedAuto());
+     	autoType.addObject("Slow Acceleration Auto High Gear", new IncreaseSpeedAutoHigh());
+     	autoType.addObject("Slow Acceleration Auto Portcullis", new IncreaseSpeedAutoPortcullis());
+     	SmartDashboard.putData("Auto Type", autoType);
        
        SmartDashboard.putData(new BackUpIncline());
-       SmartDashboard.putData(camera);
        SmartDashboard.putData(new ResetGyro());
        SmartDashboard.putData(new CalibrateOffset());
        SmartDashboard.putData(new VisionShoot());
@@ -121,45 +121,24 @@ public class Robot extends IterativeRobot {
        SmartDashboard.putData(new RollersOut());
        SmartDashboard.putData(new FireGroup());
        SmartDashboard.putData(new FireLaunch());
+       SmartDashboard.putData(new FireCatapult());
        SmartDashboard.putData(new FireReset());
-       
-       SmartDashboard.putData(new EnablePID());
        SmartDashboard.putData(new ResetEncoders());
-       
        SmartDashboard.putData(new ClimbUp());
-       
        SmartDashboard.putData(new LowbarAuto());
        
-
+       SmartDashboard.putData(new DriveVBus());
+       SmartDashboard.putData(new DriveVelocity());
+       SmartDashboard.putData(new DriveNoSubtract());
+       SmartDashboard.putData(new DriveTurnShift());
        
+       SmartDashboard.putData(new IncreaseSpeedAuto());
        
-//        auto.addDefault("Shoot Left Goal From 1", new Autonomous(0, true, 0));
-//        auto.addObject("Shoot Left Goal From 2", new Autonomous(1, false, 0));
-//        auto.addObject("Shoot Left Goal From 3", new Autonomous(2, false, 0));
-//        auto.addObject("Shoot Left Goal From 4", new Autonomous(3, false, 0));
-//        auto.addObject("Shoot Left Goal From 5", new Autonomous(4, false, 0));
-//        auto.addObject("Shoot Center Goal From 1", new Autonomous(0, false, 0));
-//        auto.addObject("Shoot Center Goal From 2", new Autonomous(1, false, 0));
-//        auto.addObject("Shoot Center Goal From 3", new Autonomous(2, false, 0));
-//        auto.addObject("Shoot Center Goal From 4", new Autonomous(3, false, 0));
-//        auto.addObject("Shoot Center Goal From 5", new Autonomous(4, false, 0));
-//        SmartDashboard.putData("Auto mode", auto);
+       SmartDashboard.putData(new IncreaseSpeedToTarget());
        
-       autoType.addDefault("Lowbar Auto", new LowbarAuto());
-       autoType.addObject("Forward", new ConstantDrive(Statics.getDouble("Auto Time")));
-       SmartDashboard.putData("AutoType", autoType);
-        
-        startDefense.addDefault("1", 1);
-        startDefense.addObject("2", 2);
-        startDefense.addObject("3", 3);
-        startDefense.addObject("4", 4);
-        startDefense.addObject("5", 5);
-        
-        SmartDashboard.putData("Defense Number", startDefense);
-        
-        target.addDefault("Center", true); // center goal
-        target.addObject("Left", false); //left goal
-        SmartDashboard.putData("Goal Number", target);
+       SmartDashboard.putData(new CatapultFirePostMatch());
+       SmartDashboard.putData(new CatapultArmPreMatch());
+       
     }
 	
 	/**
@@ -185,22 +164,8 @@ public class Robot extends IterativeRobot {
 	 * or additional comparisons to the switch structure below with additional strings & commands.
 	 */
     public void autonomousInit() {
-       // autonomousCommand = new SmartAuto((int)startDefense.getSelected(), (boolean)target.getSelected());
-  //      autonomousCommand = new ConstantDrive(Statics.getDouble("Auto Time"));
-        
-     //   autonomousCommand = (Command) autoType.getSelected();
-        autonomousCommand = new LowbarAuto();
-	/*	 String autoSelected = SmartDashboard.getString("Auto Selector", "Default");
-		switch(autoSelected) {
-		case "My Auto":
-			autonomousCommand = new MyAutoCommand();
-			break;
-		case "Default Auto":
-		default:
-			autonomousCommand = new DriveStraightThroughLowbar();
-			break;
-		} */
-    	
+//        autonomousCommand = new LowbarAuto();
+        autonomousCommand = (Command) autoType.getSelected();
     	// schedule the autonomous command (example)
         if (autonomousCommand != null){
         	autonomousCommand.start();
@@ -215,13 +180,10 @@ public class Robot extends IterativeRobot {
     }
 
     public void teleopInit() {
-		// This makes sure that the autonomous stops running when
-        // teleop starts running. If you want the autonomous to 
-        // continue until interrupted by another command, remove
-        // this line or comment it out.
         if (autonomousCommand != null){
         	autonomousCommand.cancel();
         }
+        
     }
 
     /**
@@ -229,14 +191,13 @@ public class Robot extends IterativeRobot {
      */
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
+        
+        
         SmartDashboard.putBoolean("Wheelie Bar State", Robot.wheelieBar.getWheelieState());
-        SmartDashboard.putData(new FireCatapult());
+        
         SmartDashboard.putNumber("X-Axis", imu.getAngleX());
         SmartDashboard.putNumber("Y-Axis", imu.getAngleY());
         SmartDashboard.putNumber("Z-Axis", imu.getAngleZ());
-        
-        
-   //     DriverStation.getInstance();
         
         loaderFrame.update();
         driveTrain.update();

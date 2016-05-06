@@ -16,8 +16,10 @@ public class ArmCatapult extends Command {
     protected void initialize() {
     }
 
-    protected void execute() {    	
+    protected void execute() {   
+    	if (!Robot.loaderFrame.getLoaderState()) {
     	Robot.catapult.armCatapult();
+    	}
     }
 
     protected boolean isFinished() {

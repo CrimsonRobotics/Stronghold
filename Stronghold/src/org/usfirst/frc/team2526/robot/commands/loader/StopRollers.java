@@ -14,14 +14,15 @@ public class StopRollers extends Command {
     }
 
     protected void initialize() {
-    }
-
-    protected void execute() {
     	Robot.loaderRollers.rollersStop();
     }
 
+    protected void execute() {
+    	
+    }
+
     protected boolean isFinished() {
-        return false;
+        return true;
     }
 
     protected void end() {
