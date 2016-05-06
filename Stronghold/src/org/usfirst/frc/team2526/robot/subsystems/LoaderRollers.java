@@ -1,5 +1,6 @@
 package org.usfirst.frc.team2526.robot.subsystems;
 
+import org.usfirst.frc.team2526.robot.Robot;
 import org.usfirst.frc.team2526.robot.RobotMap;
 import org.usfirst.frc.team2526.robot.Statics;
 import org.usfirst.frc.team2526.robot.commands.loader.StopRollers;
@@ -30,6 +31,14 @@ public class LoaderRollers extends Subsystem {
     
     public void rollersIn() {
     	loaderMotor.set(Statics.getDouble("Loader Speed In"));
+    }
+    
+    public void rollersInVariable() {
+    	loaderMotor.set(Robot.oi.getPrimaryDriver().getRawAxis(3));
+    }
+    
+    public void rollersInFire() {
+    	loaderMotor.set(Statics.getDouble("Loader Speed Fire"));
     }
     
     public void rollersOut() {

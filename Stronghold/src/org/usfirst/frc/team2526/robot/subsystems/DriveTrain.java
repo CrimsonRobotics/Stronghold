@@ -120,7 +120,7 @@ public class DriveTrain extends Subsystem {
     
     public void increaseSpeed() {
     	lMotor.set(lMotor.get() + Statics.getDouble("Auto Speed Increase Rate"));
-    	rMotor.set(rMotor.get() + Statics.getDouble("Auto Speed Increase Rate"));
+    	rMotor.set(rMotor.get() - Statics.getDouble("Auto Speed Increase Rate"));
     }
     
     public void freeArcadeDrive() {
@@ -128,7 +128,7 @@ public class DriveTrain extends Subsystem {
     	
     	if (RobotMap.primaryControl) {
     		// Main driver
-    		drive.arcadeDrive(Robot.oi.getPrimaryDriver().getY(), Robot.oi.getSecondaryDriver().getX());
+    		drive.arcadeDrive(Robot.oi.getPrimaryDriver().getRawAxis(1), Robot.oi.getPrimaryDriver().getRawAxis(4));
     	} else {
     		// Co Driver
         	drive.arcadeDrive(-Robot.oi.getSecondaryStick().getY() * RobotMap.secondaryWeight, Robot.oi.getThirdStick().getX() * RobotMap.secondaryWeight);

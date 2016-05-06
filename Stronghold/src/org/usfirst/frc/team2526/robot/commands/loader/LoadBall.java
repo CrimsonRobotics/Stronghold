@@ -11,10 +11,11 @@ public class LoadBall extends CommandGroup {
     
     public  LoadBall() {
     	
-    	addParallel(new RetractLoader());
-    	addParallel(new RollersIn());
-    	addSequential(new DynamicWait("Loader In Delay"));
     	addSequential(new StopRollers());
+    	addParallel(new RetractLoader());
+ //   	addParallel(new RollersIn());
+ //   	addSequential(new DynamicWait("Loader In Delay"));
+    	
 
     }
 }

@@ -11,6 +11,8 @@ import org.usfirst.frc.team2526.robot.commands.drive.SwitchDrive;
 import org.usfirst.frc.team2526.robot.commands.loader.ExtendLoaderToLoad;
 import org.usfirst.frc.team2526.robot.commands.loader.LoadBall;
 import org.usfirst.frc.team2526.robot.commands.loader.RetractLoader;
+import org.usfirst.frc.team2526.robot.commands.loader.RollersIn;
+import org.usfirst.frc.team2526.robot.commands.loader.StopRollers;
 import org.usfirst.frc.team2526.robot.commands.loader.UnloadBall;
 import org.usfirst.frc.team2526.robot.commands.wheeliebar.ExtendWheelie;
 import org.usfirst.frc.team2526.robot.commands.wheeliebar.RetractWheelie;
@@ -18,8 +20,6 @@ import org.usfirst.frc.team2526.robot.commands.wheeliebar.RetractWheelie;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -54,6 +54,10 @@ public class OI {
 	
 	Button primaryDriverOne = new JoystickButton(secondaryStick,1);
 	Button primaryDriverTwo = new JoystickButton(primaryDriver,2);
+	Button primaryDriverFour = new JoystickButton(primaryDriver,4);
+	Button primaryDriverFive = new JoystickButton(primaryDriver,5);
+	Button primaryDriverSix = new JoystickButton(primaryDriver,6);
+	Button primaryDriverNine = new JoystickButton(primaryDriver,9);
 	
 	Button secondaryDriverOne = new JoystickButton(secondaryDriver,1);
 	Button secondaryDriverTwo = new JoystickButton(secondaryDriver,2);
@@ -93,18 +97,34 @@ public class OI {
 	
 	
 
-		secondaryDriverOne.whenPressed(new UnloadBall());
-		secondaryDriverOne.whenReleased(new RetractLoader());
+//		secondaryDriverTwo.whenPressed(new UnloadBall());
+//		secondaryDriverTwo.whenReleased(new RetractLoader());
 		
-		secondaryDriverThree.whenPressed(new ExtendLoaderToLoad());
-		secondaryDriverThree.whenReleased(new LoadBall());
+//		secondaryDriverThree.whenPressed(new ExtendLoaderToLoad());
+//		secondaryDriverThree.whenReleased(new LoadBall());
 		// Loader Commands
 		
-		secondaryDriverTwo.whenPressed(new OpenPortcullis());
-		secondaryDriverTwo.whenReleased(new StopOpeningPortcullis());
+//		secondaryDriverOne.whenPressed(new OpenPortcullis());
+//		secondaryDriverOne.whenReleased(new StopOpeningPortcullis());
 		
-		primaryDriverTwo.whenPressed(new ShiftUp());
-		primaryDriverTwo.whenReleased(new ShiftDown());
+//		primaryDriverTwo.whenPressed(new ShiftUp());
+//		primaryDriverTwo.whenReleased(new ShiftDown());
+		
+		primaryDriverFive.whenPressed(new ExtendLoaderToLoad());
+		primaryDriverFive.whenReleased(new LoadBall());
+		
+		primaryDriverTwo.whenPressed(new OpenPortcullis());
+		primaryDriverTwo.whenReleased(new StopOpeningPortcullis());
+		
+		primaryDriverFour.whenPressed(new RollersIn());
+		primaryDriverFour.whenReleased(new StopRollers());
+
+		
+		primaryDriverSix.whenPressed(new UnloadBall());
+		primaryDriverSix.whenReleased(new RetractLoader());
+		
+		primaryDriverNine.whenPressed(new ShiftUp());
+		primaryDriverNine.whenReleased(new ShiftDown());
 	
 	} 
 	

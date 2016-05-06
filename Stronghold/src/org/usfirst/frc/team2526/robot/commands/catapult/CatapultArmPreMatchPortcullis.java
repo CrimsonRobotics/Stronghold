@@ -1,24 +1,23 @@
 package org.usfirst.frc.team2526.robot.commands.catapult;
 
+import org.usfirst.frc.team2526.robot.commands.loader.ExtendLoader;
 import org.usfirst.frc.team2526.robot.commands.loader.RetractLoader;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
-import edu.wpi.first.wpilibj.command.WaitCommand;
 
 /**
  *
  */
-public class CatapultFirePreMatch extends CommandGroup {
+public class CatapultArmPreMatchPortcullis extends CommandGroup {
     
-    public  CatapultFirePreMatch() {
+    public  CatapultArmPreMatchPortcullis() {
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
         // these will run in order.
     	
-    	addSequential(new FireLaunch());
-    	addSequential(new WaitCommand(3));
-    	addSequential(new RetractLoader());
+    	addSequential(new ExtendLoader());
+    	addSequential(new ArmCatapult());
 
         // To run multiple commands at the same time,
         // use addParallel()

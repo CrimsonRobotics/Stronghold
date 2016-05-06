@@ -21,7 +21,7 @@ public class DriveForEncoderClicks extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.driveTrain.driveConstant(-Statics.getDouble("Auto Speed Target"), 0);
+    	Robot.driveTrain.driveConstant(Statics.getDouble("Auto Speed Target"), 0);
     }
 
     // Make this return true when this Command no longer needs to run execute()

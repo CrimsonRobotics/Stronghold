@@ -7,22 +7,22 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class StopRollers extends Command {
+public class RollersInFire extends Command {
 
-    public StopRollers() {
+    public RollersInFire() {
     	requires(Robot.loaderRollers);
     }
 
     protected void initialize() {
-    	Robot.loaderRollers.rollersStop();
     }
 
     protected void execute() {
-    	
+    	Robot.loaderRollers.rollersInFire();
+
     }
 
     protected boolean isFinished() {
-        return true;
+        return false;
     }
 
     protected void end() {

@@ -5,11 +5,13 @@ import org.usfirst.frc.team2526.robot.commands.ResetGyro;
 import org.usfirst.frc.team2526.robot.commands.autonomous.BackUpIncline;
 import org.usfirst.frc.team2526.robot.commands.autonomous.DriveStraightThroughDefense;
 import org.usfirst.frc.team2526.robot.commands.autonomous.IncreaseSpeedAuto;
+import org.usfirst.frc.team2526.robot.commands.autonomous.IncreaseSpeedAutoHigh;
+import org.usfirst.frc.team2526.robot.commands.autonomous.IncreaseSpeedAutoPortcullis;
 import org.usfirst.frc.team2526.robot.commands.autonomous.LowbarAuto;
 import org.usfirst.frc.team2526.robot.commands.autonomous.PortcullisAuto;
 import org.usfirst.frc.team2526.robot.commands.catapult.ArmCatapult;
 import org.usfirst.frc.team2526.robot.commands.catapult.CatapultArmPreMatch;
-import org.usfirst.frc.team2526.robot.commands.catapult.CatapultFirePreMatch;
+import org.usfirst.frc.team2526.robot.commands.catapult.CatapultFirePostMatch;
 import org.usfirst.frc.team2526.robot.commands.catapult.FireCatapult;
 import org.usfirst.frc.team2526.robot.commands.catapult.FireGroup;
 import org.usfirst.frc.team2526.robot.commands.catapult.FireLaunch;
@@ -19,6 +21,7 @@ import org.usfirst.frc.team2526.robot.commands.drive.DriveNoSubtract;
 import org.usfirst.frc.team2526.robot.commands.drive.DriveTurnShift;
 import org.usfirst.frc.team2526.robot.commands.drive.DriveVBus;
 import org.usfirst.frc.team2526.robot.commands.drive.DriveVelocity;
+import org.usfirst.frc.team2526.robot.commands.drive.IncreaseSpeedToTarget;
 import org.usfirst.frc.team2526.robot.commands.drive.ResetEncoders;
 import org.usfirst.frc.team2526.robot.commands.drive.RotateTo;
 import org.usfirst.frc.team2526.robot.commands.loader.ExtendLoader;
@@ -100,6 +103,8 @@ public class Robot extends IterativeRobot {
        autoType.addDefault("Lowbar Auto", new LowbarAuto());
        	autoType.addObject("Portcullis Auto", new PortcullisAuto());
      	autoType.addObject("Slow Acceleration Auto", new IncreaseSpeedAuto());
+     	autoType.addObject("Slow Acceleration Auto High Gear", new IncreaseSpeedAutoHigh());
+     	autoType.addObject("Slow Acceleration Auto Portcullis", new IncreaseSpeedAutoPortcullis());
      	SmartDashboard.putData("Auto Type", autoType);
        
        SmartDashboard.putData(new BackUpIncline());
@@ -129,7 +134,9 @@ public class Robot extends IterativeRobot {
        
        SmartDashboard.putData(new IncreaseSpeedAuto());
        
-       SmartDashboard.putData(new CatapultFirePreMatch());
+       SmartDashboard.putData(new IncreaseSpeedToTarget());
+       
+       SmartDashboard.putData(new CatapultFirePostMatch());
        SmartDashboard.putData(new CatapultArmPreMatch());
        
     }
