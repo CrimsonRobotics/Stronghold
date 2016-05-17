@@ -62,6 +62,7 @@ public class OI {
 	Button secondaryDriverOne = new JoystickButton(secondaryDriver,1);
 	Button secondaryDriverTwo = new JoystickButton(secondaryDriver,2);
 	Button secondaryDriverThree = new JoystickButton(secondaryDriver,3);
+	Button secondaryDriverFour = new JoystickButton(secondaryDriver,4);
 
 
 	
@@ -97,20 +98,27 @@ public class OI {
 	
 	
 
-//		secondaryDriverTwo.whenPressed(new UnloadBall());
-//		secondaryDriverTwo.whenReleased(new RetractLoader());
+		//Joystick Controls
 		
-//		secondaryDriverThree.whenPressed(new ExtendLoaderToLoad());
-//		secondaryDriverThree.whenReleased(new LoadBall());
+		secondaryDriverOne.whenPressed(new UnloadBall());
+		secondaryDriverOne.whenReleased(new RetractLoader());
+		
+		secondaryDriverThree.whenPressed(new ExtendLoaderToLoad());
+		secondaryDriverThree.whenReleased(new LoadBall());
 		// Loader Commands
 		
-//		secondaryDriverOne.whenPressed(new OpenPortcullis());
-//		secondaryDriverOne.whenReleased(new StopOpeningPortcullis());
+		secondaryDriverFour.whenPressed(new RollersIn());
+		secondaryDriverFour.whenReleased(new StopRollers());
 		
-//		primaryDriverTwo.whenPressed(new ShiftUp());
-//		primaryDriverTwo.whenReleased(new ShiftDown());
+		secondaryDriverTwo.whenPressed(new OpenPortcullis());
+		secondaryDriverTwo.whenReleased(new StopOpeningPortcullis());
 		
-		primaryDriverFive.whenPressed(new ExtendLoaderToLoad());
+		primaryDriverTwo.whenPressed(new ShiftUp());
+		primaryDriverTwo.whenReleased(new ShiftDown());
+		
+		//Gamepad Controls
+		
+/*		primaryDriverFive.whenPressed(new ExtendLoaderToLoad());
 		primaryDriverFive.whenReleased(new LoadBall());
 		
 		primaryDriverTwo.whenPressed(new OpenPortcullis());
@@ -125,7 +133,7 @@ public class OI {
 		
 		primaryDriverNine.whenPressed(new ShiftUp());
 		primaryDriverNine.whenReleased(new ShiftDown());
-	
+	*/
 	} 
 	
 }
