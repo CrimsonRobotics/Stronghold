@@ -4,9 +4,11 @@ import org.usfirst.frc.team2526.robot.RobotMap;
 import org.usfirst.frc.team2526.robot.Statics;
 import org.usfirst.frc.team2526.robot.commands.catapult.StopCatapult;
 
-import edu.wpi.first.wpilibj.CANTalon;
+import com.ctre.CANTalon;
+import com.ctre.CANTalon.TalonControlMode;
+
 import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj.CANTalon.TalonControlMode;
+
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
