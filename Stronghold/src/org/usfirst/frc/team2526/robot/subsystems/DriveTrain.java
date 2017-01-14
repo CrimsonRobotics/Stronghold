@@ -130,10 +130,11 @@ public class DriveTrain extends Subsystem {
     		// Main driver
     //		drive.arcadeDrive(Robot.oi.getPrimaryDriver().getRawAxis(1), Robot.oi.getPrimaryDriver().getRawAxis(4));
     		drive.arcadeDrive(Robot.oi.getPrimaryDriver().getY(), Robot.oi.getSecondaryDriver().getX());
-    	} else {
-    		// Co Driver
-        	drive.arcadeDrive(-Robot.oi.getSecondaryStick().getY() * RobotMap.secondaryWeight, Robot.oi.getThirdStick().getX() * RobotMap.secondaryWeight);
-    	}
+    	} 
+//    	else {
+//    		// Co Driver
+//        	drive.arcadeDrive(-Robot.oi.getSecondaryStick().getY() * RobotMap.secondaryWeight, Robot.oi.getThirdStick().getX() * RobotMap.secondaryWeight);
+//    	} Removed for primary driver control only
     	
     }
     

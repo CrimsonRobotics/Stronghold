@@ -28,10 +28,10 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 public class OI {
 	
 	
-	Joystick primaryDriver = new Joystick(0);
-	Joystick secondaryDriver = new Joystick(1);
-	Joystick secondaryStick = new Joystick(2);
-	Joystick thirdStick = new Joystick(3);
+	Joystick primaryDriver = new Joystick(0); //primary
+	Joystick secondaryDriver = new Joystick(1); //primary
+	Joystick secondaryStick = new Joystick(2); //co
+	Joystick thirdStick = new Joystick(3); //co
  
 	
 	public Joystick getPrimaryDriver() {
