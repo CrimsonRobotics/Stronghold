@@ -78,30 +78,11 @@ public class DriveTrain extends Subsystem {
     	
     	
     	
-    	turnPID = new PIDController(pTurn, iTurn, dTurn, new PIDSource() {
-    		PIDSourceType type = PIDSourceType.kDisplacement;
-			public void setPIDSourceType(PIDSourceType pidSource) {
-				type = pidSource;
-			}
-
-			public PIDSourceType getPIDSourceType() {
-				return type;
-			}
-
-			public double pidGet() {
-				return Robot.imu.getAngleY();
-			}
-    		
-    	}, new PIDOutput() {
-
-			public void pidWrite(double output) {
-				pidValues.setTurnValue(output);
-			}
-    		
-    	});
     	
-    	turnPID.setAbsoluteTolerance(3.0);
-    	turnPID.setOutputRange(-0.5, 0.5);
+
+
+
+    	
     	
     	drive = new RobotDrive(lMotor, rMotor);
     	
@@ -305,9 +286,7 @@ public class DriveTrain extends Subsystem {
     	SmartDashboard.putNumber("Left Encoder", getRawLeftEncoder());
     	SmartDashboard.putNumber("Right Encoder", getRawRightEncoder());
     	
-    	SmartDashboard.putNumber("Angle Y", Robot.imu.getAngleY());
-    	SmartDashboard.putNumber("Angle X", Robot.imu.getAngleX());
-    	SmartDashboard.putNumber("Angle Z", Robot.imu.getAngleZ());
+
     	
     	if (Statics.getDouble("Motor Recovery Enabled") == 1) {
     		if (lMotor.getFaultHardwareFailure() ==1 || rMotor.getFaultHardwareFailure() == 1) {

@@ -13,7 +13,7 @@ public class BackUpIncline extends Command {
 	
 	double startAngle;
 	protected void initialize() {
-		startAngle = Robot.imu.getAngleZ();
+		
 		
 //		Robot.driveTrain.driveConstant(-0.4);
 		Robot.driveTrain.enableTurnPIDValues();
@@ -23,11 +23,7 @@ public class BackUpIncline extends Command {
 		Robot.driveTrain.updatePIDValues();
 	}
 
-	protected boolean isFinished() {
-		double angleDifference = Robot.imu.getAngleZ()-startAngle;
-		SmartDashboard.putNumber("angleDifference", angleDifference);
-		return Robot.imu.getAngleZ()-startAngle < -5.0;
-	}
+	
 
 	protected void end() {
 		Robot.driveTrain.stopDriving();
@@ -36,6 +32,12 @@ public class BackUpIncline extends Command {
 
 	protected void interrupted() {
 		end();
+	}
+
+	@Override
+	protected boolean isFinished() {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

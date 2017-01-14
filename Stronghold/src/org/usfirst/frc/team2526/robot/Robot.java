@@ -39,7 +39,7 @@ import org.usfirst.frc.team2526.robot.subsystems.SonicShifters;
 import org.usfirst.frc.team2526.robot.subsystems.VisionCamera;
 import org.usfirst.frc.team2526.robot.subsystems.WheelieBar;
 
-import com.analog.adis16448.frc.ADIS16448_IMU;
+
 
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -62,7 +62,7 @@ public class Robot extends IterativeRobot {
 
 	public static DriveTrain driveTrain;
 	public static VisionCamera camera;
-	public static ADIS16448_IMU imu;
+	
 	
 	public static Catapult catapult;
 	public static LoaderFrame loaderFrame;
@@ -87,7 +87,7 @@ public class Robot extends IterativeRobot {
     	new Compressor(RobotMap.PCM_MAIN).start();
     	Statics.getInstance();
 
-    	imu = new ADIS16448_IMU();
+
        driveTrain = new DriveTrain();
        catapult = new Catapult();
        loaderFrame = new LoaderFrame();
@@ -195,9 +195,7 @@ public class Robot extends IterativeRobot {
         
         SmartDashboard.putBoolean("Wheelie Bar State", Robot.wheelieBar.getWheelieState());
         
-        SmartDashboard.putNumber("X-Axis", imu.getAngleX());
-        SmartDashboard.putNumber("Y-Axis", imu.getAngleY());
-        SmartDashboard.putNumber("Z-Axis", imu.getAngleZ());
+
         
         loaderFrame.update();
         driveTrain.update();

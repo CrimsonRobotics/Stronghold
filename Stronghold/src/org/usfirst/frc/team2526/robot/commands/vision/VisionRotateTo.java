@@ -16,14 +16,9 @@ public class VisionRotateTo extends Command {
     }
 
     protected void initialize() {
-    	double currentAngle = Robot.imu.getAngleZ();
     	
-    	double angle = Robot.camera.getAngle();
-    	SmartDashboard.putNumber("Abs Target Vision Angle", currentAngle+angle);
     	
-    	// Vision uses the right side as negative, Gyro's right side is positive
-    	Robot.driveTrain.setAngle(currentAngle+angle);
-    	Robot.driveTrain.enableTurnPIDValues();
+
     }
     
 

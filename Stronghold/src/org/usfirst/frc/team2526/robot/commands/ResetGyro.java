@@ -12,7 +12,7 @@ public class ResetGyro extends SimpleCommand {
     }
 
     protected void initialize() {
-    	Robot.imu.reset();
+    	
     }
 
 }
